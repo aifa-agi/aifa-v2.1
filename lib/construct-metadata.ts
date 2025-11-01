@@ -1,7 +1,7 @@
 // aifa-v2/lib/construct-metadata.ts
 
-import { appConfig, getOgImagePath } from "@/config/app-config";
-import type { Metadata } from "next";
+import { appConfig, getOgImagePath } from '@/config/app-config';
+import type { Metadata } from 'next';
 
 export type AuthorInfo = {
   name: string;
@@ -24,24 +24,6 @@ type ConstructArgs = {
   noFollow?: boolean;
 };
 
-const DEFAULT_AUTHOR: AuthorInfo = {
-  name: "Roman Bolshiyanov",
-  email: "roman@aifa.dev",
-  twitter: "@aifa_agi",
-  url: "https://github.com/aifa-agi",
-  jobTitle: "Founder & Lead Developer",
-  bio: "Full-stack developer specializing in AI-powered SaaS applications",
-  sameAs: [
-    "https://github.com/aifa-agi",
-    "https://twitter.com/aifa_agi",
-  ],
-};
-
-const DEFAULT_CREATOR = "aifa.dev";
-
-const MAX_DESCRIPTION_LENGTH = 160;
-
-// FIXED: Properly typed icon structure
 type IconConfig = {
   url: string;
   rel?: string;
@@ -49,95 +31,116 @@ type IconConfig = {
   type?: string;
 };
 
+type JsonLdSchema = Record<string, unknown>;
+
+const MAX_DESCRIPTION_LENGTH = 160;
+
+const buildIconUrl = (path?: string): string | null => {
+  if (!path || typeof path !== 'string' || path.length === 0) {
+    return null;
+  }
+  return path.startsWith('/') ? path : `/${path}`;
+};
+
+const buildIconConfig = (
+  url: string,
+  options: { rel?: string; sizes?: string; type?: string } = {}
+): IconConfig => ({
+  url,
+  ...options,
+});
+
 const CACHED_ICONS = (() => {
   const icons: IconConfig[] = [];
 
-  // Favicon (any size)
-  const faviconAny = appConfig.icons?.faviconAny;
-  if (faviconAny && typeof faviconAny === "string" && faviconAny.length > 0) {
-    icons.push({
-      url: faviconAny,
-      rel: "icon",
-      sizes: "any",
-      type: "image/x-icon",
-    });
+  const faviconAny = buildIconUrl(appConfig.icons?.faviconAny);
+  if (faviconAny) {
+    icons.push(
+      buildIconConfig(faviconAny, {
+        rel: 'icon',
+        sizes: 'any',
+        type: 'image/x-icon',
+      })
+    );
   }
 
-  const icon32 = appConfig.icons?.icon32;
-  if (icon32 && typeof icon32 === "string" && icon32.length > 0) {
-    icons.push({
-      url: icon32,
-      type: "image/png",
-      sizes: "32x32",
-      rel: "icon",
-    });
+  const icon32 = buildIconUrl(appConfig.icons?.icon32);
+  if (icon32) {
+    icons.push(
+      buildIconConfig(icon32, {
+        type: 'image/png',
+        sizes: '32x32',
+        rel: 'icon',
+      })
+    );
   }
 
-  const icon48 = appConfig.icons?.icon48;
-  if (icon48 && typeof icon48 === "string" && icon48.length > 0) {
-    icons.push({
-      url: icon48,
-      type: "image/png",
-      sizes: "48x48",
-      rel: "icon",
-    });
+  const icon48 = buildIconUrl(appConfig.icons?.icon48);
+  if (icon48) {
+    icons.push(
+      buildIconConfig(icon48, {
+        type: 'image/png',
+        sizes: '48x48',
+        rel: 'icon',
+      })
+    );
   }
 
-  const icon192 = appConfig.icons?.icon192;
-  if (icon192 && typeof icon192 === "string" && icon192.length > 0) {
-    icons.push({
-      url: icon192,
-      type: "image/png",
-      sizes: "192x192",
-      rel: "icon",
-    });
+  const icon192 = buildIconUrl(appConfig.icons?.icon192);
+  if (icon192) {
+    icons.push(
+      buildIconConfig(icon192, {
+        type: 'image/png',
+        sizes: '192x192',
+        rel: 'icon',
+      })
+    );
   }
 
-  const icon512 = appConfig.icons?.icon512;
-  if (icon512 && typeof icon512 === "string" && icon512.length > 0) {
-    icons.push({
-      url: icon512,
-      type: "image/png",
-      sizes: "512x512",
-      rel: "icon",
-    });
+  const icon512 = buildIconUrl(appConfig.icons?.icon512);
+  if (icon512) {
+    icons.push(
+      buildIconConfig(icon512, {
+        type: 'image/png',
+        sizes: '512x512',
+        rel: 'icon',
+      })
+    );
   }
 
-  const appleTouch = appConfig.icons?.appleTouch;
-  if (appleTouch && typeof appleTouch === "string" && appleTouch.length > 0) {
-    icons.push({
-      url: appleTouch,
-      rel: "apple-touch-icon",
-      sizes: "180x180",
-      type: "image/png",
-    });
+  const appleTouch = buildIconUrl(appConfig.icons?.appleTouch);
+  if (appleTouch) {
+    icons.push(
+      buildIconConfig(appleTouch, {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        type: 'image/png',
+      })
+    );
   }
 
-  return icons as NonNullable<Metadata["icons"]>;
+  return icons as NonNullable<Metadata['icons']>;
 })();
 
-function normalizePath(p?: string): string {
-  if (!p) return "/";
+const normalizePath = (p?: string): string => {
+  if (!p) return '/';
   let s = String(p).trim();
-  if (!s.startsWith("/")) s = `/${s}`;
-  while (s.includes("//")) s = s.replace("//", "/");
+  if (!s.startsWith('/')) s = `/${s}`;
+  while (s.includes('//')) s = s.replace('//', '/');
   return s;
-}
+};
 
-function truncateDescription(
+const truncateDescription = (
   desc: string,
   maxLength: number = MAX_DESCRIPTION_LENGTH
-): string {
+): string => {
   if (desc.length <= maxLength) return desc;
-  return desc.substring(0, maxLength - 3) + "...";
-}
+  return desc.substring(0, maxLength - 3) + '...';
+};
 
-// FIXED: Properly typed schema objects instead of 'any'
-type JsonLdSchema = Record<string, unknown>;
-
-function buildPersonSchema(author: AuthorInfo): JsonLdSchema {
+const buildPersonSchema = (author: AuthorInfo): JsonLdSchema => {
   const person: JsonLdSchema = {
-    "@type": "Person",
+    '@type': 'Person',
     name: author.name,
   };
 
@@ -149,21 +152,49 @@ function buildPersonSchema(author: AuthorInfo): JsonLdSchema {
 
   const sameAsUrls: string[] = [];
   if (author.sameAs) sameAsUrls.push(...author.sameAs);
-  if (author.twitter && !author.twitter.startsWith("http")) {
-    const handle = author.twitter.replace("@", "");
-    sameAsUrls.push(`https://twitter.com/${handle}`);
+  if (author.twitter) {
+    const handle = author.twitter.startsWith('@')
+      ? author.twitter.slice(1)
+      : author.twitter;
+    if (!author.twitter.startsWith('http')) {
+      sameAsUrls.push(`https://twitter.com/${handle}`);
+    }
   }
   if (sameAsUrls.length > 0) person.sameAs = sameAsUrls;
 
   return person;
-}
+};
+
+const buildOrganizationSchema = (): JsonLdSchema => ({
+  '@type': 'Organization',
+  name: appConfig.short_name,
+  url: appConfig.url,
+  logo: new URL(appConfig.logo, appConfig.url).toString(),
+  description: appConfig.description,
+  ...(appConfig.seo?.social && {
+    sameAs: [
+      appConfig.seo.social.twitter
+        ? appConfig.seo.social.twitter.startsWith('http')
+          ? appConfig.seo.social.twitter
+          : `https://twitter.com/${appConfig.seo.social.twitter.replace('@', '')}`
+        : null,
+      appConfig.seo.social.github,
+      appConfig.seo.social.linkedin,
+    ].filter(Boolean),
+  }),
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Customer Support',
+    email: appConfig.mailSupport,
+  },
+});
 
 export function constructMetadata({
   title = appConfig.name,
   description = appConfig.description,
   image = getOgImagePath(),
   pathname,
-  locale = appConfig.seo?.defaultLocale ?? appConfig.lang,
+  locale = (appConfig.seo?.defaultLocale as string) ?? appConfig.lang,
   noIndex = false,
   noFollow = false,
 }: ConstructArgs = {}): Metadata {
@@ -172,18 +203,29 @@ export function constructMetadata({
   const canonical = new URL(path, base).toString();
   const validDescription = truncateDescription(description);
 
+  const verification: Record<string, string> = {};
+  
+  if (process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION?.trim()) {
+    verification.google = process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION;
+  }
+  if (process.env.NEXT_PUBLIC_YANDEX_VERIFICATION?.trim()) {
+    verification.yandex = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION;
+  }
+
   const metadata: Metadata = {
-    title,
+    title: {
+      default: title,
+      template: appConfig.pageDefaults?.titleTemplate || '%s | AIFA',
+    },
     description: validDescription,
     metadataBase: new URL(appConfig.url),
     alternates: { canonical },
-    manifest: "/manifest.webmanifest",
+    manifest: appConfig.manifest,
     icons: CACHED_ICONS,
-    authors: [{ name: DEFAULT_AUTHOR.name, url: DEFAULT_AUTHOR.url }],
-    creator: DEFAULT_CREATOR,
-    publisher: DEFAULT_CREATOR,
+    creator: appConfig.short_name,
+    publisher: appConfig.short_name,
     openGraph: {
-      type: appConfig.og?.type ?? "website",
+      type: (appConfig.og?.type as any) ?? 'website',
       title,
       description: validDescription,
       url: canonical,
@@ -196,10 +238,10 @@ export function constructMetadata({
           alt: validDescription,
         },
       ],
-      locale: appConfig.og?.locale ?? `${locale}_${locale.toUpperCase()}`,
+      locale: appConfig.og?.locale ?? locale,
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title,
       description: validDescription,
       images: [image],
@@ -209,6 +251,7 @@ export function constructMetadata({
       index: !noIndex && (appConfig.pageDefaults?.robotsIndex ?? true),
       follow: !noFollow && (appConfig.pageDefaults?.robotsFollow ?? true),
     },
+    ...(Object.keys(verification).length > 0 && { verification }),
   };
 
   return metadata;
@@ -229,30 +272,22 @@ export function buildArticleSchema({
   image?: string;
   description?: string;
 }): JsonLdSchema {
-  // FIXED: Properly typed author schema
   const authorSchema = Array.isArray(author)
     ? author.map((a) => buildPersonSchema(a))
     : buildPersonSchema(author);
 
   return {
-    "@context": "https://schema.org",
-    "@type": "Article",
+    '@context': 'https://schema.org',
+    '@type': 'Article',
     headline,
     datePublished,
     dateModified: dateModified || datePublished,
     author: authorSchema,
+    publisher: buildOrganizationSchema(),
     ...(description && { description }),
-    publisher: {
-      "@type": "Organization",
-      name: DEFAULT_CREATOR,
-      logo: {
-        "@type": "ImageObject",
-        url: new URL(appConfig.logo, appConfig.url).toString(),
-      },
-    },
     ...(image && {
       image: {
-        "@type": "ImageObject",
+        '@type': 'ImageObject',
         url: image,
       },
     }),
@@ -263,13 +298,13 @@ export function buildFAQSchema(
   faqs: Array<{ question: string; answer: string }>
 ): JsonLdSchema {
   return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
     mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
+      '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
-        "@type": "Answer",
+        '@type': 'Answer',
         text: faq.answer,
       },
     })),
@@ -296,22 +331,22 @@ export function buildProductSchema({
   brand?: string;
 }): JsonLdSchema {
   return {
-    "@context": "https://schema.org",
-    "@type": "Product",
+    '@context': 'https://schema.org',
+    '@type': 'Product',
     name,
     ...(description && { description }),
     ...(image && { image }),
-    ...(brand && { brand: { "@type": "Brand", name: brand } }),
+    ...(brand && { brand: { '@type': 'Brand', name: brand } }),
     offers: {
-      "@type": "Offer",
+      '@type': 'Offer',
       price: price.toFixed(2),
       priceCurrency: currency,
-      availability: "https://schema.org/InStock",
+      availability: 'https://schema.org/InStock',
     },
     ...(rating &&
       reviewCount && {
         aggregateRating: {
-          "@type": "AggregateRating",
+          '@type': 'AggregateRating',
           ratingValue: rating,
           reviewCount,
         },
@@ -323,13 +358,17 @@ export function buildBreadcrumbSchema(
   breadcrumbs: Array<{ name: string; url: string }>
 ): JsonLdSchema {
   return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: breadcrumbs.map((item, index) => ({
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: index + 1,
       name: item.name,
       item: new URL(item.url, appConfig.url).toString(),
     })),
   };
+}
+
+export function buildOrganizationSchemaWithDefaults(): JsonLdSchema {
+  return buildOrganizationSchema();
 }

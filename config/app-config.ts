@@ -1,186 +1,186 @@
 // aifa-v2/config/app-config.ts
 
-import { SupportedLanguage } from "./translations.config";
+import { SupportedLanguage } from './translations.config';
 
-const site_url =  "https://aifa.dev";
+const getSiteUrl = (): string => {
+  if (typeof window === 'undefined') {
+    return (
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://aifa.dev')
+    );
+  }
+  return window.location.origin;
+};
+
+const SITE_URL = getSiteUrl();
 
 export const appConfig: AppConfig = {
-    name: "Enterprise-Grade AI Next.js starter",
-  short_name: "AIFA",
-  description:
-    "Free Open-Source starter kit to build, deploy, and scale intelligent AI applications. Artifacts Feature, features secure multi-provider auth, Stripe payments, vector knowledge bases, deep-research agents, and a unique fractal architecture designed for the future of AI.",
-  url: site_url,
-  manifest: "/manifest.webmanifest",
+  name: process.env.NEXT_PUBLIC_APP_NAME || 'AIFA',
+  short_name: process.env.NEXT_PUBLIC_APP_SHORT_NAME || 'AIFA',
+  description: process.env.NEXT_PUBLIC_APP_DESCRIPTION || '',
+  url: SITE_URL,
+  manifest: '/manifest.webmanifest',
 
-  lang: "en",
-  mailSupport: "support@aifa.dev",
-  chatBrand: "Chat GPT",
+  lang: (process.env.NEXT_PUBLIC_DEFAULT_LOCALE as SupportedLanguage) || 'en',
+  mailSupport: process.env.NEXT_PUBLIC_MAIL_SUPPORT || 'support@aifa.dev',
+  chatBrand: process.env.NEXT_PUBLIC_CHAT_BRAND || 'ChatGPT',
 
   images: {
-    "ogImage": {
-      path: "/app-config-images/og-image.jpg",
-      format: "jpeg",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    ogImage: {
+      path: '/app-config-images/og-image.jpg',
+      format: 'jpeg',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "loading-dark": {
-      path: "/app-config-images/loading-dark.svg",
-      format: "svg",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'loading-dark': {
+      path: '/app-config-images/loading-dark.svg',
+      format: 'svg',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "loading-light": {
-      path: "/app-config-images/loading-light.svg",
-      format: "svg",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'loading-light': {
+      path: '/app-config-images/loading-light.svg',
+      format: 'svg',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "notFound-dark": {
-      path: "/app-config-images/not-found-dark.svg",
-      format: "svg",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'notFound-dark': {
+      path: '/app-config-images/not-found-dark.svg',
+      format: 'svg',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "notFound-light": {
-      path: "/app-config-images/not-found-light.svg",
-      format: "svg",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'notFound-light': {
+      path: '/app-config-images/not-found-light.svg',
+      format: 'svg',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "error500-dark": {
-      path: "/app-config-images/error500-dark.svg",
-      format: "svg",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'error500-dark': {
+      path: '/app-config-images/error500-dark.svg',
+      format: 'svg',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "error500-light": {
-      path: "/app-config-images/error500-light.svg",
-      format: "svg",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'error500-light': {
+      path: '/app-config-images/error500-light.svg',
+      format: 'svg',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "homePage-dark": {
-      path: "/app-config-images/homepage-dark.png",
-      format: "png",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'homePage-dark': {
+      path: '/app-config-images/homepage-dark.png',
+      format: 'png',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "homePage-light": {
-      path: "/app-config-images/homepage-light.png",
-      format: "png",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'homePage-light': {
+      path: '/app-config-images/homepage-light.png',
+      format: 'png',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "chatbot-dark": {
-      path: "/app-config-images/chatbot-dark.png",
-      format: "png",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'chatbot-dark': {
+      path: '/app-config-images/chatbot-dark.png',
+      format: 'png',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
-    "chatbot-light": {
-      path: "/app-config-images/chatbot-light.png",
-      format: "png",
-      uploadedAt: "2025-10-16T18:48:01.446Z",
+    'chatbot-light': {
+      path: '/app-config-images/chatbot-light.png',
+      format: 'png',
+      uploadedAt: '2025-10-16T18:48:01.446Z',
     },
   },
 
-  // Logo field - handled by separate upload flow with icon generation
-  logo: "/app-config-images/logo.png",
+  logo: '/app-config-images/logo.png',
 
-  // Icons set for Metadata API and PWA (generated by logo upload)
   icons: {
-    icon32: "/app-config-images/icons/icon-32.png",
-    icon48: "/app-config-images/icons/icon-48.png",
-    icon192: "/app-config-images/icons/icon-192.png",
-    icon512: "/app-config-images/icons/icon-512.png",
-    appleTouch: "/app-config-images/icons/apple-touch-icon.png",
+    faviconAny: '/favicon.ico',
+    icon32: '/app-config-images/icons/icon-32.png',
+    icon48: '/app-config-images/icons/icon-48.png',
+    icon192: '/app-config-images/icons/icon-192.png',
+    icon512: '/app-config-images/icons/icon-512.png',
+    appleTouch: '/app-config-images/icons/apple-touch-icon.png',
   },
 
-  // PWA defaults
   pwa: {
-    themeColor: "#ffffff",
-    backgroundColor: "#ffffff",
-    startUrl: "/",
-    display: "standalone",
-    scope: "/",
-    orientation: "any",
+    themeColor: process.env.NEXT_PUBLIC_PWA_THEME_COLOR || '#ffffff',
+    backgroundColor: process.env.NEXT_PUBLIC_PWA_BACKGROUND_COLOR || '#ffffff',
+    startUrl: '/',
+    display: 'standalone',
+    scope: '/',
+    orientation: 'portrait-primary',
   },
 
-  // SEO and crawling
   seo: {
-    indexing: "allow",
-    sitemapUrl: `${site_url}/sitemap.xml`,
-    disallowPaths: ["/admin", "/auth", "/login", "/register", "/chat", "/api", "/_next"],
-    canonicalBase: site_url,
-    locales: ["ru"],
-    defaultLocale: "ru",
+    indexing: (process.env.NEXT_PUBLIC_SEO_INDEXING as 'allow' | 'disallow') || 'allow',
+    sitemapUrl: `${SITE_URL}/sitemap.xml`,
+    disallowPaths: [
+      '/admin',
+      '/admin/*',
+      '/auth',
+      '/auth/*',
+      '/login',
+      '/register',
+      '/chat',
+      '/chat/*',
+      '/api',
+      '/api/*',
+      '/_next',
+      '/_next/*',
+    ],
+    canonicalBase: SITE_URL,
+    locales: ['en', 'es', 'de', 'fr', 'it', 'ru'],
+    defaultLocale: (process.env.NEXT_PUBLIC_DEFAULT_LOCALE as SupportedLanguage) || 'en',
     social: {
-      twitter: "@aifa_agi",
-      github: "https://github.com/aifa-agi/aifa",
+      twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE,
+      github: process.env.NEXT_PUBLIC_GITHUB_URL,
+      linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL,
+      facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL,
     },
   },
 
-  // Open Graph / Twitter defaults
   og: {
-    type: "website",
-    locale: "ru_RU",
-    siteName: "USAUTO",
-    imageWidth: 1200,
-    imageHeight: 630,
+    type: 'website',
+    locale: process.env.NEXT_PUBLIC_OG_LOCALE || 'en_US',
+    siteName: process.env.NEXT_PUBLIC_APP_NAME || 'AIFA',
+    imageWidth: parseInt(process.env.NEXT_PUBLIC_OG_IMAGE_WIDTH || '1200', 10),
+    imageHeight: parseInt(process.env.NEXT_PUBLIC_OG_IMAGE_HEIGHT || '630', 10),
   },
 
-  // Per-page defaults (can be overridden by constructMetadata arguments)
   pageDefaults: {
-    titleTemplate: "%s | USAUTO",
-    robotsIndex: true,
-    robotsFollow: true,
+    titleTemplate: `%s | ${process.env.NEXT_PUBLIC_APP_NAME || 'AIFA'}`,
+    robotsIndex: process.env.NEXT_PUBLIC_ROBOTS_INDEX !== 'false',
+    robotsFollow: process.env.NEXT_PUBLIC_ROBOTS_FOLLOW !== 'false',
   },
 
   messages: {
     loading: {
-      title: "Loading...",
-      subtitle: "Please wait",
+      title: 'Loading...',
+      subtitle: 'Please wait',
     },
   },
 };
 
-// ============================================
-// TYPE DEFINITIONS
-// ============================================
+export type ImageFormat = 'png' | 'jpg' | 'jpeg' | 'webp' | 'avif' | 'svg' | 'gif';
 
+export type RegularImageType =
+  | 'ogImage'
+  | 'loading-dark'
+  | 'loading-light'
+  | 'notFound-dark'
+  | 'notFound-light'
+  | 'error500-dark'
+  | 'error500-light'
+  | 'homePage-dark'
+  | 'homePage-light'
+  | 'chatbot-dark'
+  | 'chatbot-light';
 
-export type ImageFormat = "png" | "jpg" | "jpeg" | "webp" | "avif" | "svg" | "gif";
+export type AllImageTypes = RegularImageType | 'logo';
 
-export type RegularImageType = 
-  | "ogImage" 
-  | "loading-dark" 
-  | "loading-light"
-  | "notFound-dark"
-  | "notFound-light"
-  | "error500-dark"
-  | "error500-light"
-  | "homePage-dark"
-  | "homePage-light"
-  | "chatbot-dark"
-  | "chatbot-light";
-
-/**
- * Comments in English: All image types including logo (for type checking)
- */
-export type AllImageTypes = RegularImageType | "logo";
-
-/**
- * Comments in English: Metadata stored for each uploaded image
- */
 export interface ImageMetadata {
-  /** Full path with extension: "/app-config-images/og-image.jpg" */
   path: string;
-  /** File format/extension without dot: "jpg", "png", "svg" */
   format: ImageFormat;
-  /** ISO 8601 timestamp of last upload */
   uploadedAt: string;
-  /** Optional: File size in bytes */
   size?: number;
-  /** Optional: Image dimensions in pixels */
   dimensions?: {
     width: number;
     height: number;
   };
 }
 
-/**
- * Comments in English: Main application configuration interface
- */
 export interface AppConfig {
   name: string;
   short_name: string;
@@ -206,13 +206,13 @@ export interface AppConfig {
     themeColor: string;
     backgroundColor: string;
     startUrl: string;
-    display: "fullscreen" | "standalone" | "minimal-ui" | "browser";
+    display: 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser';
     scope?: string;
-    orientation?: "any" | "portrait" | "landscape";
+    orientation?: 'any' | 'portrait-primary' | 'landscape-primary';
   };
 
   seo: {
-    indexing: "allow" | "disallow";
+    indexing: 'allow' | 'disallow';
     sitemapUrl?: string;
     disallowPaths?: string[];
     canonicalBase?: string;
@@ -227,7 +227,7 @@ export interface AppConfig {
   };
 
   og?: {
-    type?: "website" | "article" | "profile" | "video.other";
+    type?: 'website' | 'article' | 'profile' | 'video.other';
     locale?: string;
     siteName?: string;
     imageWidth?: number;
@@ -248,177 +248,78 @@ export interface AppConfig {
   };
 }
 
-// ============================================
-// HELPER FUNCTIONS
-// ============================================
-
-/**
- * Comments in English: Get image path for regular (non-logo) images
- * Returns path from images metadata with proper extension
- * 
- * @param imageType - Type of regular image (e.g., "ogImage", "loading-dark")
- * @returns Full path to image file (e.g., "/app-config-images/og-image.jpg")
- * 
- * @example
- * const path = getImagePath("error500-dark");
- * // Returns: "/app-config-images/error500-dark.svg" or "/app-config-images/error500-dark.png"
- */
 export function getImagePath(imageType: RegularImageType): string {
   const metadata = appConfig.images[imageType];
   if (!metadata?.path) {
-    console.error(`[appConfig] Image metadata not found for type: ${imageType}`);
-    // Fallback to default path with .svg extension
     return `/app-config-images/${imageType}.svg`;
   }
   return metadata.path;
 }
 
-/**
- * Comments in English: Get image format/extension without dot
- * 
- * @param imageType - Type of regular image
- * @returns File format (e.g., "png", "svg", "jpg")
- */
 export function getImageFormat(imageType: RegularImageType): ImageFormat {
   const metadata = appConfig.images[imageType];
-  if (!metadata?.format) {
-    console.warn(`[appConfig] Format not found for ${imageType}, defaulting to svg`);
-    return "svg";
-  }
-  return metadata.format;
+  return metadata?.format || 'svg';
 }
 
-/**
- * Comments in English: Get logo path
- * Logo is NOT part of images - handled by separate upload flow
- * 
- * @returns Logo file path
- */
 export function getLogoPath(): string {
   return appConfig.logo;
 }
 
-/**
- * Comments in English: Get OG image path (from images metadata)
- * 
- * @returns OG image path for social media sharing
- */
 export function getOgImagePath(): string {
-  return getImagePath("ogImage");
+  return getImagePath('ogImage');
 }
 
-/**
- * Comments in English: Get loading illustration by theme
- * 
- * @param theme - "dark" or "light" theme
- * @returns Path to loading illustration
- * 
- * @example
- * const darkLoading = getLoadingIllustration("dark");
- * // Returns: "/app-config-images/loading-dark.svg" (or .png if uploaded as PNG)
- */
-export function getLoadingIllustration(theme: "dark" | "light"): string {
-  const imageType: RegularImageType = theme === "dark" ? "loading-dark" : "loading-light";
+export function getLoadingIllustration(theme: 'dark' | 'light'): string {
+  const imageType: RegularImageType =
+    theme === 'dark' ? 'loading-dark' : 'loading-light';
   return getImagePath(imageType);
 }
 
-/**
- * Comments in English: Get start chat illustration (uses logo)
- * 
- * @returns Path to start chat illustration (same as logo)
- */
 export function getStartChatIllustration(): string {
   return appConfig.logo;
 }
 
-/**
- * Comments in English: Get error page illustration by type and theme
- * 
- * @param errorType - "404" or "500"
- * @param theme - "dark" or "light"
- * @returns Path to error page illustration
- * 
- * @example
- * const error404Dark = getErrorIllustration("404", "dark");
- * // Returns: "/app-config-images/not-found-dark.svg"
- */
 export function getErrorIllustration(
-  errorType: "404" | "500", 
-  theme: "dark" | "light"
+  errorType: '404' | '500',
+  theme: 'dark' | 'light'
 ): string {
   let imageType: RegularImageType;
-  
-  if (errorType === "404") {
-    imageType = theme === "dark" ? "notFound-dark" : "notFound-light";
+
+  if (errorType === '404') {
+    imageType = theme === 'dark' ? 'notFound-dark' : 'notFound-light';
   } else {
-    imageType = theme === "dark" ? "error500-dark" : "error500-light";
+    imageType = theme === 'dark' ? 'error500-dark' : 'error500-light';
   }
-  
+
   return getImagePath(imageType);
 }
 
-/**
- * Comments in English: Get home page illustration by theme
- * 
- * @param theme - "dark" or "light"
- * @returns Path to home page illustration
- */
-export function getHomePageIllustration(theme: "dark" | "light"): string {
-  const imageType: RegularImageType = theme === "dark" ? "homePage-dark" : "homePage-light";
+export function getHomePageIllustration(theme: 'dark' | 'light'): string {
+  const imageType: RegularImageType =
+    theme === 'dark' ? 'homePage-dark' : 'homePage-light';
   return getImagePath(imageType);
 }
 
-/**
- * Comments in English: Get chatbot illustration by theme
- * 
- * @param theme - "dark" or "light"
- * @returns Path to chatbot illustration
- */
-export function getChatbotIllustration(theme: "dark" | "light"): string {
-  const imageType: RegularImageType = theme === "dark" ? "chatbot-dark" : "chatbot-light";
+export function getChatbotIllustration(theme: 'dark' | 'light'): string {
+  const imageType: RegularImageType =
+    theme === 'dark' ? 'chatbot-dark' : 'chatbot-light';
   return getImagePath(imageType);
 }
 
-/**
- * Comments in English: Get full image metadata object
- * 
- * @param imageType - Type of regular image
- * @returns Complete metadata object or null if not found
- */
 export function getImageMetadata(imageType: RegularImageType): ImageMetadata | null {
   return appConfig.images[imageType] || null;
 }
 
-/**
- * Comments in English: Check if image has metadata (was uploaded via admin panel)
- * 
- * @param imageType - Type of regular image
- * @returns true if metadata exists with valid path
- */
 export function hasImageMetadata(imageType: RegularImageType): boolean {
   return !!appConfig.images[imageType]?.path;
 }
 
-/**
- * Comments in English: Get all image types that have been uploaded
- * 
- * @returns Array of image types with valid metadata
- */
 export function getUploadedImageTypes(): RegularImageType[] {
   return (Object.keys(appConfig.images) as RegularImageType[]).filter(
     (key) => appConfig.images[key]?.path
   );
 }
 
-/**
- * Comments in English: Get image upload timestamp
- * 
- * @param imageType - Type of regular image
- * @returns ISO 8601 timestamp string or null
- */
 export function getImageUploadDate(imageType: RegularImageType): string | null {
   return appConfig.images[imageType]?.uploadedAt || null;
 }
-
-// Last updated: 2025-10-16T18:48:01.446Z
-// Generated by: app-config-persist-api
