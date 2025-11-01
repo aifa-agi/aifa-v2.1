@@ -3,6 +3,7 @@
 
 import Link from 'next/link';
 import { ClientTabs } from '@/components/client/tabs';
+import Image from 'next/image';
 
 function Pill({ text }: { text: string }) {
   return (
@@ -41,23 +42,19 @@ function Hint({ title, lines }: { title: string; lines: string[] }) {
   );
 }
 
-// Заменяем только иллюстрацию, остальной файл без изменений.
-
 function LoadingIllustrationSSR() {
   const srcLight = '/app-images/app-config-images/loading-light.svg';
-  const srcDark = '/app-images/app-config-images/loading-dark.svg';
   return (
     <div className="relative h-full w-full">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcSet={srcDark} />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={srcLight} alt="Loading" className="h-full w-full object-contain" />
-      </picture>
-      <noscript>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={srcLight} alt="Loading" className="h-full w-full object-contain" />
-      </noscript>
+      <Image
+        src={srcLight}
+        alt="Loading"
+        width={800}
+        height={600}
+        className="h-full w-full object-contain"
+        priority
+        unoptimized
+      />
     </div>
   );
 }

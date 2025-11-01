@@ -1,4 +1,8 @@
 // aifa-v2/lib/construct-metadata.ts
+// Комментарии по задаче:
+// 1) Убираем (appConfig.og?.type as any) → строгая типизация OpenGraphType + normalizeOgType().
+// 2) Сохраняем все текущие соглашения по Metadata, иконкам и JSON-LD.
+// 3) Не используем any — только unknown/узкие объединения и проверка значений.
 
 import { appConfig, getOgImagePath } from '@/config/app-config';
 import type { Metadata } from 'next';
@@ -189,6 +193,42 @@ const buildOrganizationSchema = (): JsonLdSchema => ({
   },
 });
 
+// Допустимые Open Graph типы (расширяйте при необходимости)
+type OpenGraphType =
+  | 'website'
+  | 'article'
+  | 'book'
+  | 'profile'
+  | 'music.song'
+  | 'music.album'
+  | 'music.playlist'
+  | 'music.radio_station'
+  | 'video.movie'
+  | 'video.episode'
+  | 'video.tv_show'
+  | 'video.other';
+
+function normalizeOgType(input: unknown): OpenGraphType {
+  const fallback: OpenGraphType = 'website';
+  if (typeof input !== 'string') return fallback;
+  const value = input as OpenGraphType;
+  const allowed: Set<OpenGraphType> = new Set([
+    'website',
+    'article',
+    'book',
+    'profile',
+    'music.song',
+    'music.album',
+    'music.playlist',
+    'music.radio_station',
+    'video.movie',
+    'video.episode',
+    'video.tv_show',
+    'video.other',
+  ]);
+  return allowed.has(value) ? value : fallback;
+}
+
 export function constructMetadata({
   title = appConfig.name,
   description = appConfig.description,
@@ -204,7 +244,6 @@ export function constructMetadata({
   const validDescription = truncateDescription(description);
 
   const verification: Record<string, string> = {};
-  
   if (process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION?.trim()) {
     verification.google = process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION;
   }
@@ -225,7 +264,7 @@ export function constructMetadata({
     creator: appConfig.short_name,
     publisher: appConfig.short_name,
     openGraph: {
-      type: (appConfig.og?.type as any) ?? 'website',
+      type: normalizeOgType(appConfig.og?.type),
       title,
       description: validDescription,
       url: canonical,
