@@ -1,22 +1,8 @@
-// aifa-v2/lib/construct-metadata.ts
-// Комментарии по задаче:
-// 1) Убираем (appConfig.og?.type as any) → строгая типизация OpenGraphType + normalizeOgType().
-// 2) Сохраняем все текущие соглашения по Metadata, иконкам и JSON-LD.
-// 3) Не используем any — только unknown/узкие объединения и проверка значений.
-
 import { appConfig, getOgImagePath } from '@/config/app-config';
 import type { Metadata } from 'next';
+import type { ContentType, AuthorConfig } from '@/config/app-config';
 
-export type AuthorInfo = {
-  name: string;
-  email?: string;
-  twitter?: string;
-  url?: string;
-  jobTitle?: string;
-  bio?: string;
-  image?: string;
-  sameAs?: string[];
-};
+export type { AuthorConfig } from '@/config/app-config';
 
 type ConstructArgs = {
   title?: string;
@@ -24,8 +10,10 @@ type ConstructArgs = {
   image?: string;
   pathname?: string;
   locale?: string;
+  contentType?: ContentType;
   noIndex?: boolean;
   noFollow?: boolean;
+  author?: AuthorConfig;
 };
 
 type IconConfig = {
@@ -36,6 +24,8 @@ type IconConfig = {
 };
 
 type JsonLdSchema = Record<string, unknown>;
+
+type OpenGraphType = 'website' | 'article' | undefined;
 
 const MAX_DESCRIPTION_LENGTH = 160;
 
@@ -54,74 +44,68 @@ const buildIconConfig = (
   ...options,
 });
 
+const getDefaultAuthor = (): AuthorConfig => {
+  return {
+    name: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_NAME || appConfig.short_name,
+    email: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_EMAIL,
+    twitter: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_TWITTER,
+    linkedin: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_LINKEDIN,
+    facebook: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_FACEBOOK,
+    bio: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_BIO,
+    image: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_IMAGE,
+    url: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_URL,
+    jobTitle: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_JOB_TITLE,
+  };
+};
+
 const CACHED_ICONS = (() => {
   const icons: IconConfig[] = [];
 
-  const faviconAny = buildIconUrl(appConfig.icons?.faviconAny);
-  if (faviconAny) {
-    icons.push(
-      buildIconConfig(faviconAny, {
-        rel: 'icon',
-        sizes: 'any',
-        type: 'image/x-icon',
-      })
-    );
-  }
+  const iconConfigs = [
+    {
+      path: appConfig.icons?.faviconAny,
+      rel: 'icon',
+      sizes: 'any',
+      type: 'image/x-icon',
+    },
+    {
+      path: appConfig.icons?.icon32,
+      rel: 'icon',
+      sizes: '32x32',
+      type: 'image/png',
+    },
+    {
+      path: appConfig.icons?.icon48,
+      rel: 'icon',
+      sizes: '48x48',
+      type: 'image/png',
+    },
+    {
+      path: appConfig.icons?.icon192,
+      rel: 'icon',
+      sizes: '192x192',
+      type: 'image/png',
+    },
+    {
+      path: appConfig.icons?.icon512,
+      rel: 'icon',
+      sizes: '512x512',
+      type: 'image/png',
+    },
+    {
+      path: appConfig.icons?.appleTouch,
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      type: 'image/png',
+    },
+  ];
 
-  const icon32 = buildIconUrl(appConfig.icons?.icon32);
-  if (icon32) {
-    icons.push(
-      buildIconConfig(icon32, {
-        type: 'image/png',
-        sizes: '32x32',
-        rel: 'icon',
-      })
-    );
-  }
-
-  const icon48 = buildIconUrl(appConfig.icons?.icon48);
-  if (icon48) {
-    icons.push(
-      buildIconConfig(icon48, {
-        type: 'image/png',
-        sizes: '48x48',
-        rel: 'icon',
-      })
-    );
-  }
-
-  const icon192 = buildIconUrl(appConfig.icons?.icon192);
-  if (icon192) {
-    icons.push(
-      buildIconConfig(icon192, {
-        type: 'image/png',
-        sizes: '192x192',
-        rel: 'icon',
-      })
-    );
-  }
-
-  const icon512 = buildIconUrl(appConfig.icons?.icon512);
-  if (icon512) {
-    icons.push(
-      buildIconConfig(icon512, {
-        type: 'image/png',
-        sizes: '512x512',
-        rel: 'icon',
-      })
-    );
-  }
-
-  const appleTouch = buildIconUrl(appConfig.icons?.appleTouch);
-  if (appleTouch) {
-    icons.push(
-      buildIconConfig(appleTouch, {
-        rel: 'apple-touch-icon',
-        sizes: '180x180',
-        type: 'image/png',
-      })
-    );
-  }
+  iconConfigs.forEach(({ path, rel, sizes, type }) => {
+    const url = buildIconUrl(path);
+    if (url) {
+      icons.push(buildIconConfig(url, { rel, sizes, type }));
+    }
+  });
 
   return icons as NonNullable<Metadata['icons']>;
 })();
@@ -142,7 +126,64 @@ const truncateDescription = (
   return desc.substring(0, maxLength - 3) + '...';
 };
 
-const buildPersonSchema = (author: AuthorInfo): JsonLdSchema => {
+const normalizeOpenGraphType = (contentType: ContentType): OpenGraphType => {
+  if (contentType === 'article' || contentType === 'blog') {
+    return 'article';
+  }
+  return 'website';
+};
+
+const resolveContentType = (explicitType?: ContentType): ContentType => {
+  if (explicitType) {
+    return explicitType;
+  }
+
+  const configType = appConfig.og?.type;
+  if (configType && ['website', 'article', 'blog', 'product', 'documentation'].includes(configType)) {
+    return configType as ContentType;
+  }
+
+  return 'website';
+};
+
+const buildSocialUrls = (author: AuthorConfig): string[] => {
+  const urls: string[] = [];
+
+  if (author.twitter) {
+    const handle = author.twitter.startsWith('@')
+      ? author.twitter.slice(1)
+      : author.twitter;
+    if (!author.twitter.startsWith('http')) {
+      urls.push(`https://twitter.com/${handle}`);
+    } else {
+      urls.push(author.twitter);
+    }
+  }
+
+  if (author.linkedin) {
+    if (author.linkedin.startsWith('http')) {
+      urls.push(author.linkedin);
+    } else {
+      urls.push(`https://linkedin.com/in/${author.linkedin}`);
+    }
+  }
+
+  if (author.facebook) {
+    if (author.facebook.startsWith('http')) {
+      urls.push(author.facebook);
+    } else {
+      urls.push(`https://facebook.com/${author.facebook}`);
+    }
+  }
+
+  if (author.url && !urls.includes(author.url)) {
+    urls.push(author.url);
+  }
+
+  return urls.filter((url, index, array) => array.indexOf(url) === index);
+};
+
+const buildPersonSchema = (author: AuthorConfig): JsonLdSchema => {
   const person: JsonLdSchema = {
     '@type': 'Person',
     name: author.name,
@@ -154,80 +195,61 @@ const buildPersonSchema = (author: AuthorInfo): JsonLdSchema => {
   if (author.bio) person.description = author.bio;
   if (author.jobTitle) person.jobTitle = author.jobTitle;
 
-  const sameAsUrls: string[] = [];
-  if (author.sameAs) sameAsUrls.push(...author.sameAs);
-  if (author.twitter) {
-    const handle = author.twitter.startsWith('@')
-      ? author.twitter.slice(1)
-      : author.twitter;
-    if (!author.twitter.startsWith('http')) {
-      sameAsUrls.push(`https://twitter.com/${handle}`);
-    }
+  const sameAsUrls = buildSocialUrls(author);
+  if (sameAsUrls.length > 0) {
+    person.sameAs = sameAsUrls;
   }
-  if (sameAsUrls.length > 0) person.sameAs = sameAsUrls;
 
   return person;
 };
 
-const buildOrganizationSchema = (): JsonLdSchema => ({
-  '@type': 'Organization',
-  name: appConfig.short_name,
-  url: appConfig.url,
-  logo: new URL(appConfig.logo, appConfig.url).toString(),
-  description: appConfig.description,
-  ...(appConfig.seo?.social && {
-    sameAs: [
-      appConfig.seo.social.twitter
-        ? appConfig.seo.social.twitter.startsWith('http')
-          ? appConfig.seo.social.twitter
-          : `https://twitter.com/${appConfig.seo.social.twitter.replace('@', '')}`
-        : null,
-      appConfig.seo.social.github,
-      appConfig.seo.social.linkedin,
-    ].filter(Boolean),
-  }),
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'Customer Support',
-    email: appConfig.mailSupport,
-  },
-});
+const buildOrganizationSchema = (): JsonLdSchema => {
+  const socialUrls: string[] = [];
 
-// Допустимые Open Graph типы (расширяйте при необходимости)
-type OpenGraphType =
-  | 'website'
-  | 'article'
-  | 'book'
-  | 'profile'
-  | 'music.song'
-  | 'music.album'
-  | 'music.playlist'
-  | 'music.radio_station'
-  | 'video.movie'
-  | 'video.episode'
-  | 'video.tv_show'
-  | 'video.other';
+  if (appConfig.seo?.social?.twitter) {
+    const twitterUrl = appConfig.seo.social.twitter.startsWith('http')
+      ? appConfig.seo.social.twitter
+      : `https://twitter.com/${appConfig.seo.social.twitter.replace('@', '')}`;
+    socialUrls.push(twitterUrl);
+  }
 
-function normalizeOgType(input: unknown): OpenGraphType {
-  const fallback: OpenGraphType = 'website';
-  if (typeof input !== 'string') return fallback;
-  const value = input as OpenGraphType;
-  const allowed: Set<OpenGraphType> = new Set([
-    'website',
-    'article',
-    'book',
-    'profile',
-    'music.song',
-    'music.album',
-    'music.playlist',
-    'music.radio_station',
-    'video.movie',
-    'video.episode',
-    'video.tv_show',
-    'video.other',
-  ]);
-  return allowed.has(value) ? value : fallback;
-}
+  if (appConfig.seo?.social?.github) {
+    socialUrls.push(appConfig.seo.social.github);
+  }
+
+  if (appConfig.seo?.social?.linkedin) {
+    const linkedinUrl = appConfig.seo.social.linkedin.startsWith('http')
+      ? appConfig.seo.social.linkedin
+      : `https://linkedin.com/company/${appConfig.seo.social.linkedin}`;
+    socialUrls.push(linkedinUrl);
+  }
+
+  if (appConfig.seo?.social?.facebook) {
+    const facebookUrl = appConfig.seo.social.facebook.startsWith('http')
+      ? appConfig.seo.social.facebook
+      : `https://facebook.com/${appConfig.seo.social.facebook}`;
+    socialUrls.push(facebookUrl);
+  }
+
+  const schema: JsonLdSchema = {
+    '@type': 'Organization',
+    name: appConfig.short_name,
+    url: appConfig.url,
+    logo: new URL(appConfig.logo, appConfig.url).toString(),
+    description: appConfig.description,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Support',
+      email: appConfig.mailSupport,
+    },
+  };
+
+  if (socialUrls.length > 0) {
+    schema.sameAs = socialUrls;
+  }
+
+  return schema;
+};
 
 export function constructMetadata({
   title = appConfig.name,
@@ -235,8 +257,10 @@ export function constructMetadata({
   image = getOgImagePath(),
   pathname,
   locale = (appConfig.seo?.defaultLocale as string) ?? appConfig.lang,
+  contentType,
   noIndex = false,
   noFollow = false,
+  author,
 }: ConstructArgs = {}): Metadata {
   const base = appConfig.seo?.canonicalBase ?? appConfig.url;
   const path = normalizePath(pathname);
@@ -244,17 +268,30 @@ export function constructMetadata({
   const validDescription = truncateDescription(description);
 
   const verification: Record<string, string> = {};
-  if (process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION?.trim()) {
-    verification.google = process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION;
+  const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION?.trim();
+  const yandexVerification = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION?.trim();
+
+  if (googleVerification && googleVerification.length > 0) {
+    verification.google = googleVerification;
   }
-  if (process.env.NEXT_PUBLIC_YANDEX_VERIFICATION?.trim()) {
-    verification.yandex = process.env.NEXT_PUBLIC_YANDEX_VERIFICATION;
+  if (yandexVerification && yandexVerification.length > 0) {
+    verification.yandex = yandexVerification;
   }
+
+  const titleTemplate =
+    appConfig.pageDefaults?.titleTemplate || '%s | AIFA';
+
+  const resolvedContentType = resolveContentType(contentType);
+  const openGraphType = normalizeOpenGraphType(resolvedContentType);
+
+  const otherMeta: Record<string, string> = {
+    'content-type': resolvedContentType,
+  };
 
   const metadata: Metadata = {
     title: {
       default: title,
-      template: appConfig.pageDefaults?.titleTemplate || '%s | AIFA',
+      template: titleTemplate,
     },
     description: validDescription,
     metadataBase: new URL(appConfig.url),
@@ -263,8 +300,21 @@ export function constructMetadata({
     icons: CACHED_ICONS,
     creator: appConfig.short_name,
     publisher: appConfig.short_name,
+    authors: author
+      ? [
+          {
+            name: author.name,
+            url: author.url,
+          },
+        ]
+      : [
+          {
+            name: getDefaultAuthor().name,
+            url: getDefaultAuthor().url,
+          },
+        ],
     openGraph: {
-      type: normalizeOgType(appConfig.og?.type),
+      type: openGraphType,
       title,
       description: validDescription,
       url: canonical,
@@ -285,11 +335,20 @@ export function constructMetadata({
       description: validDescription,
       images: [image],
       creator: appConfig.seo?.social?.twitter,
+      site: appConfig.seo?.social?.twitter,
     },
     robots: {
       index: !noIndex && (appConfig.pageDefaults?.robotsIndex ?? true),
       follow: !noFollow && (appConfig.pageDefaults?.robotsFollow ?? true),
+      googleBot: {
+        index: !noIndex,
+        follow: !noFollow,
+        'max-snippet': -1,
+        'max-image-preview': 'large',
+        'max-video-preview': -1,
+      },
     },
+    other: otherMeta,
     ...(Object.keys(verification).length > 0 && { verification }),
   };
 
@@ -307,7 +366,7 @@ export function buildArticleSchema({
   headline: string;
   datePublished: string;
   dateModified?: string;
-  author: AuthorInfo | AuthorInfo[];
+  author: AuthorConfig | AuthorConfig[];
   image?: string;
   description?: string;
 }): JsonLdSchema {
@@ -317,7 +376,7 @@ export function buildArticleSchema({
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline,
     datePublished,
     dateModified: dateModified || datePublished,
@@ -359,6 +418,7 @@ export function buildProductSchema({
   reviewCount,
   image,
   brand,
+  url,
 }: {
   name: string;
   description?: string;
@@ -368,12 +428,14 @@ export function buildProductSchema({
   reviewCount?: number;
   image?: string;
   brand?: string;
+  url?: string;
 }): JsonLdSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name,
     ...(description && { description }),
+    ...(url && { url }),
     ...(image && { image }),
     ...(brand && { brand: { '@type': 'Brand', name: brand } }),
     offers: {
@@ -381,6 +443,7 @@ export function buildProductSchema({
       price: price.toFixed(2),
       priceCurrency: currency,
       availability: 'https://schema.org/InStock',
+      url: url,
     },
     ...(rating &&
       reviewCount && {
@@ -408,6 +471,40 @@ export function buildBreadcrumbSchema(
   };
 }
 
+export function buildCollectionSchema({
+  name,
+  description,
+  image,
+  itemListElement,
+}: {
+  name: string;
+  description?: string;
+  image?: string;
+  itemListElement: Array<{ name: string; url: string; image?: string }>;
+}): JsonLdSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name,
+    ...(description && { description }),
+    ...(image && { image }),
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: itemListElement.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        url: new URL(item.url, appConfig.url).toString(),
+        ...(item.image && { image: item.image }),
+      })),
+    },
+  };
+}
+
 export function buildOrganizationSchemaWithDefaults(): JsonLdSchema {
   return buildOrganizationSchema();
+}
+
+export function getDefaultAuthorInfo(): AuthorConfig {
+  return getDefaultAuthor();
 }

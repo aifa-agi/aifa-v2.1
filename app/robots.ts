@@ -1,10 +1,8 @@
-// aifa-v2/app/robots.ts
-
 import type { MetadataRoute } from 'next';
 import { appConfig } from '@/config/app-config';
 
 export const dynamic = 'force-static';
-export const revalidate = 86400;
+export const revalidate = 86400; // 24 hours
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = appConfig.seo?.canonicalBase ?? appConfig.url;
@@ -29,7 +27,6 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Googlebot',
         allow: '/',
         disallow: disallowPaths,
-        crawlDelay: 0,
       },
       {
         userAgent: 'Bingbot',
@@ -48,8 +45,42 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
       {
+        userAgent: 'AdsBot-Google-Mobile',
+        allow: '/',
+      },
+      {
         userAgent: 'MJ12bot',
         crawlDelay: 2,
+      },
+      {
+        userAgent: 'DuckDuckBot',
+        allow: '/',
+        disallow: disallowPaths,
+        crawlDelay: 1,
+      },
+      {
+        userAgent: 'Slurp',
+        allow: '/',
+        disallow: disallowPaths,
+        crawlDelay: 1,
+      },
+      {
+        userAgent: 'Baiduspider',
+        allow: '/',
+        disallow: disallowPaths,
+        crawlDelay: 1,
+      },
+      {
+        userAgent: 'facebookexternalhit',
+        allow: '/',
+      },
+      {
+        userAgent: 'Twitterbot',
+        allow: '/',
+      },
+      {
+        userAgent: 'LinkedInBot',
+        allow: '/',
       },
       {
         userAgent: 'GPTBot',
@@ -94,28 +125,6 @@ export default function robots(): MetadataRoute.Robots {
         crawlDelay: 1,
       },
       {
-        userAgent: 'facebookexternalhit',
-        allow: '/',
-      },
-      {
-        userAgent: 'Slurp',
-        allow: '/',
-        disallow: disallowPaths,
-        crawlDelay: 1,
-      },
-      {
-        userAgent: 'DuckDuckBot',
-        allow: '/',
-        disallow: disallowPaths,
-        crawlDelay: 1,
-      },
-      {
-        userAgent: 'Baiduspider',
-        allow: '/',
-        disallow: disallowPaths,
-        crawlDelay: 1,
-      },
-      {
         userAgent: '*',
         allow: '/',
         disallow: disallowPaths,
@@ -128,43 +137,55 @@ export default function robots(): MetadataRoute.Robots {
 }
 
 /*
- * SEARCH ENGINE & AI CRAWLERS CONFIGURATION
- * 
- * Current Bot Rules:
- * 
- * Googlebot: No crawl delay (maximum crawling speed)
- * Bingbot: 1 second delay
- * Yandexbot: 1 second delay (Russia, CIS markets)
- * AdsBot-Google: No restrictions (required for Google Ads)
- * MJ12bot: 2 second delay (SEO analysis tool)
- * 
- * AI TRAINING BOTS (All Allow by Default):
+ * ROBOTS.TXT CONFIGURATION GUIDE
+ *
+ * SEARCH ENGINES:
+ * - Googlebot: No crawl delay (uses crawl budget optimization)
+ * - Bingbot: 1 second delay
+ * - Yandexbot: 1 second delay (Russia, CIS markets)
+ * - DuckDuckBot: 1 second delay
+ * - Slurp (Yahoo): 1 second delay
+ * - Baiduspider: 1 second delay (Baidu, Chinese search)
+ *
+ * ADVERTISING & SOCIAL:
+ * - AdsBot-Google: No restrictions (required for Google Ads)
+ * - facebookexternalhit: Allowed (for URL preview scraping)
+ * - Twitterbot: Allowed (for tweet preview cards)
+ * - LinkedInBot: Allowed (for LinkedIn preview cards)
+ *
+ * SEO & ANALYSIS:
+ * - MJ12bot: 2 second delay (SEO analysis bot)
+ *
+ * AI TRAINING BOTS (Allowed by default):
  * - GPTBot (OpenAI/ChatGPT)
  * - CCBot (Common Crawl)
  * - anthropic-ai (Anthropic/Claude)
  * - Claude-Web (Claude Web)
  * - PerplexityBot (Perplexity AI)
  * - omgilibot, omgili (Various AI training)
- * - Slurp (Yahoo)
- * - DuckDuckBot (DuckDuckGo)
- * - Baiduspider (Baidu/Chinese search)
- * 
+ *
+ * ALL OTHER BOTS:
+ * - Catch-all rule (*): 1 second delay
+ *
  * TO BLOCK SPECIFIC AI BOTS:
  * Replace allow: '/' with disallow: '/'
- * 
+ *
  * Example to block ChatGPT:
  * {
  *   userAgent: 'GPTBot',
  *   disallow: '/',
  * }
- * 
+ *
  * TO BLOCK ALL AI BOTS:
  * {
  *   userAgent: ['GPTBot', 'CCBot', 'anthropic-ai', 'Claude-Web', 'PerplexityBot', 'omgilibot', 'omgili'],
  *   disallow: '/',
  * }
- * 
- * Note: crawlDelay is specified in seconds.
- * Some bots may not respect crawlDelay,
- * use rate limiting in next.config.mjs if needed.
+ *
+ * NOTE:
+ * - crawlDelay is in seconds (supported by Bing, Yandex, Yahoo, Baidu)
+ * - Google doesn't support crawlDelay; manage crawl rate in Google Search Console
+ * - disallowPaths come from appConfig.seo.disallowPaths
+ * - More specific rules take precedence over general ones
+ * - Query parameters can be added to disallowPaths (e.g., '/?s=*')
  */

@@ -1,5 +1,3 @@
-// aifa-v2/config/app-config.ts
-
 import { SupportedLanguage } from './translations.config';
 
 const getSiteUrl = (): string => {
@@ -14,6 +12,73 @@ const getSiteUrl = (): string => {
 
 const SITE_URL = getSiteUrl();
 
+export type OpenGraphTypeConfig =
+  | 'website'
+  | 'article'
+  | 'blog'
+  | 'product'
+  | 'documentation'
+  | 'profile'
+  | 'video.other';
+
+export type ContentType = 'website' | 'article' | 'blog' | 'product' | 'documentation';
+
+export interface AuthorConfig {
+  name: string;
+  email?: string;
+  twitter?: string;
+  linkedin?: string;
+  facebook?: string;
+  url?: string;
+  jobTitle?: string;
+  bio?: string;
+  image?: string;
+}
+
+export interface SocialConfig {
+  twitter?: string;
+  github?: string;
+  linkedin?: string;
+  facebook?: string;
+}
+
+export interface ContentTypeDefaults {
+  blog: ContentType;
+  product: ContentType;
+  documentation: ContentType;
+}
+
+const getDefaultAuthorConfig = (): AuthorConfig => {
+  return {
+    name: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_NAME || process.env.NEXT_PUBLIC_APP_NAME || 'AIFA',
+    email: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_EMAIL,
+    twitter: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_TWITTER,
+    linkedin: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_LINKEDIN,
+    facebook: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_FACEBOOK,
+    bio: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_BIO,
+    image: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_IMAGE,
+    url: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_URL,
+    jobTitle: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_JOB_TITLE,
+  };
+};
+
+const getSocialConfig = (): SocialConfig => {
+  return {
+    twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE,
+    github: process.env.NEXT_PUBLIC_GITHUB_URL,
+    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL,
+    facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL,
+  };
+};
+
+const getContentTypeDefaults = (): ContentTypeDefaults => {
+  return {
+    blog: (process.env.NEXT_PUBLIC_BLOG_CONTENT_TYPE as ContentType) || 'blog',
+    product: (process.env.NEXT_PUBLIC_PRODUCT_CONTENT_TYPE as ContentType) || 'product',
+    documentation: (process.env.NEXT_PUBLIC_DOC_CONTENT_TYPE as ContentType) || 'documentation',
+  };
+};
+
 export const appConfig: AppConfig = {
   name: process.env.NEXT_PUBLIC_APP_NAME || 'AIFA',
   short_name: process.env.NEXT_PUBLIC_APP_SHORT_NAME || 'AIFA',
@@ -26,73 +91,75 @@ export const appConfig: AppConfig = {
   chatBrand: process.env.NEXT_PUBLIC_CHAT_BRAND || 'ChatGPT',
 
   images: {
-    ogImage: {
-      path: '/app-config-images/og-image.jpg',
-      format: 'jpeg',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'loading-dark': {
-      path: '/app-config-images/loading-dark.svg',
-      format: 'svg',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'loading-light': {
-      path: '/app-config-images/loading-light.svg',
-      format: 'svg',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'notFound-dark': {
-      path: '/app-config-images/not-found-dark.svg',
-      format: 'svg',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'notFound-light': {
-      path: '/app-config-images/not-found-light.svg',
-      format: 'svg',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'error500-dark': {
-      path: '/app-config-images/error500-dark.svg',
-      format: 'svg',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'error500-light': {
-      path: '/app-config-images/error500-light.svg',
-      format: 'svg',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'homePage-dark': {
-      path: '/app-config-images/homepage-dark.png',
-      format: 'png',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'homePage-light': {
-      path: '/app-config-images/homepage-light.png',
-      format: 'png',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'chatbot-dark': {
-      path: '/app-config-images/chatbot-dark.png',
-      format: 'png',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
-    'chatbot-light': {
-      path: '/app-config-images/chatbot-light.png',
-      format: 'png',
-      uploadedAt: '2025-10-16T18:48:01.446Z',
-    },
+  ogImage: {
+    path: '/app-images/app-config-images/og-image.jpg',
+    format: 'jpeg',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
   },
-
-  logo: '/app-config-images/logo.png',
-
-  icons: {
-    faviconAny: '/favicon.ico',
-    icon32: '/app-config-images/icons/icon-32.png',
-    icon48: '/app-config-images/icons/icon-48.png',
-    icon192: '/app-config-images/icons/icon-192.png',
-    icon512: '/app-config-images/icons/icon-512.png',
-    appleTouch: '/app-config-images/icons/apple-touch-icon.png',
+  'loading-dark': {
+    path: '/app-images/app-config-images/loading-dark.svg',
+    format: 'svg',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
   },
+  'loading-light': {
+    path: '/app-images/app-config-images/loading-light.svg',
+    format: 'svg',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'notFound-dark': {
+    path: '/app-images/app-config-images/not-found-dark.svg',
+    format: 'svg',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'notFound-light': {
+    path: '/app-images/app-config-images/not-found-light.svg',
+    format: 'svg',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'error500-dark': {
+    path: '/app-images/app-config-images/error500-dark.svg',
+    format: 'svg',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'error500-light': {
+    path: '/app-images/app-config-images/error500-light.svg',
+    format: 'svg',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'homePage-dark': {
+    path: '/app-images/app-config-images/homepage-dark.png',
+    format: 'png',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'homePage-light': {
+    path: '/app-images/app-config-images/homepage-light.png',
+    format: 'png',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'chatbot-dark': {
+    path: '/app-images/app-config-images/chatbot-dark.png',
+    format: 'png',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+  'chatbot-light': {
+    path: '/app-images/app-config-images/chatbot-light.png',
+    format: 'png',
+    uploadedAt: '2025-10-16T18:48:01.446Z',
+  },
+},
+
+logo: '/app-images/app-config-images/logo.png',
+
+icons: {
+  faviconAny: '/favicon.ico',
+  icon32: '/app-images/app-config-images/icons/icon-32.png',
+  icon48: '/app-images/app-config-images/icons/icon-48.png',
+  icon192: '/app-images/app-config-images/icons/icon-192.png',
+  icon512: '/app-images/app-config-images/icons/icon-512.png',
+  icon512Maskable: '/app-images/app-config-images/icons/icon-512-maskable.png', // ← НОВОЕ
+  appleTouch: '/app-images/app-config-images/icons/apple-touch-icon.png',
+},
+
 
   pwa: {
     themeColor: process.env.NEXT_PUBLIC_PWA_THEME_COLOR || '#ffffff',
@@ -123,16 +190,11 @@ export const appConfig: AppConfig = {
     canonicalBase: SITE_URL,
     locales: ['en', 'es', 'de', 'fr', 'it', 'ru'],
     defaultLocale: (process.env.NEXT_PUBLIC_DEFAULT_LOCALE as SupportedLanguage) || 'en',
-    social: {
-      twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE,
-      github: process.env.NEXT_PUBLIC_GITHUB_URL,
-      linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL,
-      facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL,
-    },
+    social: getSocialConfig(),
   },
 
   og: {
-    type: 'website',
+    type: (process.env.NEXT_PUBLIC_OG_TYPE as OpenGraphTypeConfig) || 'website',
     locale: process.env.NEXT_PUBLIC_OG_LOCALE || 'en_US',
     siteName: process.env.NEXT_PUBLIC_APP_NAME || 'AIFA',
     imageWidth: parseInt(process.env.NEXT_PUBLIC_OG_IMAGE_WIDTH || '1200', 10),
@@ -144,6 +206,10 @@ export const appConfig: AppConfig = {
     robotsIndex: process.env.NEXT_PUBLIC_ROBOTS_INDEX !== 'false',
     robotsFollow: process.env.NEXT_PUBLIC_ROBOTS_FOLLOW !== 'false',
   },
+
+  author: getDefaultAuthorConfig(),
+
+  contentTypeDefaults: getContentTypeDefaults(),
 
   messages: {
     loading: {
@@ -199,6 +265,7 @@ export interface AppConfig {
     icon48?: string;
     icon192: string;
     icon512: string;
+    icon512Maskable?: string; 
     appleTouch?: string;
   };
 
@@ -218,16 +285,11 @@ export interface AppConfig {
     canonicalBase?: string;
     locales?: string[];
     defaultLocale?: string;
-    social?: {
-      twitter?: string;
-      github?: string;
-      linkedin?: string;
-      facebook?: string;
-    };
+    social?: SocialConfig;
   };
 
   og?: {
-    type?: 'website' | 'article' | 'profile' | 'video.other';
+    type?: OpenGraphTypeConfig;
     locale?: string;
     siteName?: string;
     imageWidth?: number;
@@ -239,6 +301,10 @@ export interface AppConfig {
     robotsIndex?: boolean;
     robotsFollow?: boolean;
   };
+
+  author?: AuthorConfig;
+
+  contentTypeDefaults?: ContentTypeDefaults;
 
   messages?: {
     loading?: {
@@ -322,4 +388,36 @@ export function getUploadedImageTypes(): RegularImageType[] {
 
 export function getImageUploadDate(imageType: RegularImageType): string | null {
   return appConfig.images[imageType]?.uploadedAt || null;
+}
+
+export function getAuthorConfig(): AuthorConfig {
+  return appConfig.author || getDefaultAuthorConfig();
+}
+
+export function getContentTypeForSection(section: 'blog' | 'product' | 'documentation'): ContentType {
+  return appConfig.contentTypeDefaults?.[section] || section;
+}
+
+export function getSocialUrls(): Record<string, string | undefined> {
+  const social = appConfig.seo?.social;
+  if (!social) return {};
+
+  return {
+    twitter: social.twitter
+      ? social.twitter.startsWith('http')
+        ? social.twitter
+        : `https://twitter.com/${social.twitter.replace('@', '')}`
+      : undefined,
+    github: social.github,
+    linkedin: social.linkedin
+      ? social.linkedin.startsWith('http')
+        ? social.linkedin
+        : `https://linkedin.com/company/${social.linkedin}`
+      : undefined,
+    facebook: social.facebook
+      ? social.facebook.startsWith('http')
+        ? social.facebook
+        : `https://facebook.com/${social.facebook}`
+      : undefined,
+  };
 }
