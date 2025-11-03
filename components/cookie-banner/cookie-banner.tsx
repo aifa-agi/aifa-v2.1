@@ -234,7 +234,6 @@ export function CookieBanner() {
                   variant="outline"
                   size="sm"
                   onClick={() => setShowDetails(true)}
-                  className="text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800"
                 >
                   <Settings className="w-4 h-4 mr-2" />
                   {t("Manage Preferences") || "Manage Preferences"}
@@ -243,7 +242,6 @@ export function CookieBanner() {
                   variant="outline"
                   size="sm"
                   onClick={handleRejectAll}
-                  className="text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 font-medium"
                 >
                   {t("Reject All Cookies") || "Reject All"}
                 </Button>
