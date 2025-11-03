@@ -3,7 +3,7 @@
 "use client";
 
 
-import { OfflinePlaceholder } from "@/components/offline-placeholder";
+import { OfflinePlaceholder } from "@/components/offline-placeholder/offline-placeholder";
 import { useOnlineStatus } from "@/hooks/use-online-status";
 import React from "react";
 
