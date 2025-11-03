@@ -1,26 +1,27 @@
-import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import Script from 'next/script';
-import { constructMetadata } from '@/lib/construct-metadata';
-import { appConfig } from '@/config/app-config';
-import './globals.css';
-import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
+// app/layout.tsx
+import type { Metadata, Viewport } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import Script from 'next/script'
+import { constructMetadata } from '@/lib/construct-metadata'
+import { appConfig } from '@/config/app-config'
+import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
+import './globals.css'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
   display: 'swap',
-});
+})
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
   display: 'swap',
-});
+})
 
 export const metadata: Metadata = constructMetadata({
   pathname: '/',
-});
+})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -33,7 +34,7 @@ export const viewport: Viewport = {
     { media: '(prefers-color-scheme: light)', color: appConfig.pwa.backgroundColor },
     { media: '(prefers-color-scheme: dark)', color: appConfig.pwa.themeColor },
   ],
-};
+}
 
 const jsonLdWebSite = {
   '@context': 'https://schema.org',
@@ -50,7 +51,7 @@ const jsonLdWebSite = {
     },
     'query-input': 'required name=search_term_string',
   },
-};
+}
 
 const jsonLdOrganization = {
   '@context': 'https://schema.org',
@@ -62,7 +63,9 @@ const jsonLdOrganization = {
   email: appConfig.mailSupport,
   sameAs: [
     appConfig.seo?.social?.github,
-    appConfig.seo?.social?.twitter ? `https://twitter.com/${appConfig.seo.social.twitter}` : null,
+    appConfig.seo?.social?.twitter
+      ? `https://twitter.com/${appConfig.seo.social.twitter}`
+      : null,
     appConfig.seo?.social?.linkedin,
     appConfig.seo?.social?.facebook,
   ].filter(Boolean),
@@ -72,58 +75,33 @@ const jsonLdOrganization = {
     contactType: 'Customer Support',
     availableLanguage: appConfig.seo?.locales || [appConfig.lang],
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html
-      lang={appConfig.lang}
-      suppressHydrationWarning
-      className="scroll-smooth"
-    >
+    <html lang={appConfig.lang} suppressHydrationWarning className="scroll-smooth">
       <head>
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
 
+        {/* PWA-related meta tags */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent"
-        />
-        <meta
-          name="apple-mobile-web-app-title"
-          content={appConfig.short_name}
-        />
-        <meta
-          name="application-name"
-          content={appConfig.short_name}
-        />
-        <meta
-          name="msapplication-TileColor"
-          content={appConfig.pwa.themeColor}
-        />
-        <meta
-          name="msapplication-config"
-          content="/browserconfig.xml"
-        />
-        <meta
-          name="format-detection"
-          content="telephone=no, date=no, email=no, address=no"
-        />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content={appConfig.short_name} />
+        <meta name="application-name" content={appConfig.short_name} />
+        <meta name="msapplication-TileColor" content={appConfig.pwa.themeColor} />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
 
         {/* Service Worker Registration - Static file approach */}
-        <Script
-          src="/register-sw.js"
-          strategy="beforeInteractive"
-          async={false}
-        />
+        <Script src="/register-sw.js" strategy="beforeInteractive" async={false} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overscroll-x-none`}
       >
         {/* JSON-LD schemas for SEO */}
         <Script
@@ -142,27 +120,26 @@ export default function RootLayout({
           }}
           strategy="beforeInteractive"
         />
-<PWAInstallPrompt />
+
+        {/* PWA Install Prompt - Client Component */}
+        <PWAInstallPrompt />
+
+        {/* Main content */}
         {children}
 
         {/* Fallback for users with JavaScript disabled */}
         <noscript>
-          <div
-            style={{
-              padding: '20px',
-              backgroundColor: '#fff3cd',
-              borderRadius: '4px',
-              marginTop: '20px',
-              color: '#856404',
-              textAlign: 'center',
-            }}
-          >
-            <strong>JavaScript is disabled</strong>
-            <p>Core content is available, but some features may be limited.</p>
-            <p>We recommend enabling JavaScript for the best experience.</p>
+          <div className="mx-auto mt-5 max-w-prose rounded border border-amber-200 bg-amber-50 p-5 text-center text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100">
+            <strong className="block text-lg font-semibold">JavaScript is disabled</strong>
+            <p className="mt-2 text-sm">
+              Core content is available, but some features may be limited.
+            </p>
+            <p className="mt-1 text-sm">
+              We recommend enabling JavaScript for the best experience.
+            </p>
           </div>
         </noscript>
       </body>
     </html>
-  );
+  )
 }

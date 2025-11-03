@@ -1,3 +1,5 @@
+// /public/register-sw.js
+
 // Service Worker Registration - Static JavaScript
 // Pure vanilla JS, no dependencies, works without other scripts
 // Falls back gracefully when Service Workers are not supported

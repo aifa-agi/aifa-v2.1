@@ -1,3 +1,5 @@
+// /lib/seo-generators.ts
+
 import { appConfig, type AuthorConfig, type ContentType } from '@/config/app-config';
 
 export type JsonLdType =

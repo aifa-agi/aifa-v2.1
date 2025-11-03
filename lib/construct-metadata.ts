@@ -1,3 +1,5 @@
+// /lib/construct-metadata.ts
+
 import { appConfig, getOgImagePath } from '@/config/app-config';
 import type { Metadata } from 'next';
 import type { ContentType, AuthorConfig } from '@/config/app-config';

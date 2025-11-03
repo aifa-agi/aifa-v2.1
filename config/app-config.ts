@@ -1,3 +1,4 @@
+// /config/app-config.ts
 import { SupportedLanguage } from './translations.config';
 
 const getSiteUrl = (): string => {
@@ -108,12 +109,12 @@ export const appConfig: AppConfig = {
   },
   'notFound-dark': {
     path: '/app-images/app-config-images/not-found-dark.svg',
-    format: 'svg',
+    format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'notFound-light': {
     path: '/app-images/app-config-images/not-found-light.svg',
-    format: 'svg',
+    format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'error500-dark': {

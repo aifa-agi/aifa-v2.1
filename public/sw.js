@@ -1,3 +1,4 @@
+// /public/sw.js
 // Service Worker for Progressive Web App (PWA)
 // Handles offline functionality, caching strategies, and push notifications
 
