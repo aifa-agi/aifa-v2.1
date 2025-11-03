@@ -1,0 +1,18 @@
+{
+  "Offline Message": {
+    "ru": "Вы не в сети",
+    "en": "You're offline",
+    "es": "Estás sin conexión",
+    "de": "Du bist offline",
+    "fr": "Vous êtes hors ligne",
+    "it": "Sei offline"
+  },
+  "Offline Description": {
+    "ru": "Проверьте подключение к интернету и попробуйте снова.",
+    "en": "Please check your internet connection and try again.",
+    "es": "Verifique su conexión a Internet y vuelva a intentarlo.",
+    "de": "Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+    "fr": "Veuillez vérifier votre connexion Internet et réessayer.",
+    "it": "Controlla la tua connessione Internet e riprova."
+  }
+}
