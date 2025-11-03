@@ -1,0 +1,178 @@
+{
+  "Cookie Banner Title": {
+    "ru": "Мы используем файлы cookie",
+    "en": "We use cookies",
+    "es": "Utilizamos cookies",
+    "de": "Wir verwenden Cookies",
+    "fr": "Nous utilisons des cookies",
+    "it": "Utilizziamo i cookie"
+  },
+  "Cookie Banner Description": {
+    "ru": "Мы используем файлы cookie для улучшения работы сайта, анализа трафика и персонализации контента. Вы можете управлять своими предпочтениями или принять все.",
+    "en": "We use cookies to enhance site functionality, analyze traffic, and personalize content. You can manage your preferences or accept all.",
+    "es": "Utilizamos cookies para mejorar la funcionalidad del sitio, analizar el tráfico y personalizar el contenido. Puede gestionar sus preferencias o aceptar todas.",
+    "de": "Wir verwenden Cookies, um die Funktionalität der Website zu verbessern, den Traffic zu analysieren und Inhalte zu personalisieren. Sie können Ihre Einstellungen verwalten oder alle akzeptieren.",
+    "fr": "Nous utilisons des cookies pour améliorer les fonctionnalités du site, analyser le trafic et personnaliser le contenu. Vous pouvez gérer vos préférences ou tout accepter.",
+    "it": "Utilizziamo i cookie per migliorare la funzionalità del sito, analizzare il traffico e personalizzare i contenuti. Puoi gestire le tue preferenze o accettare tutto."
+  },
+  "Accept All Cookies": {
+    "ru": "Принять все",
+    "en": "Accept All",
+    "es": "Aceptar todo",
+    "de": "Alle akzeptieren",
+    "fr": "Tout accepter",
+    "it": "Accetta tutto"
+  },
+  "Reject All Cookies": {
+    "ru": "Отклонить все",
+    "en": "Reject All",
+    "es": "Rechazar todo",
+    "de": "Alle ablehnen",
+    "fr": "Tout refuser",
+    "it": "Rifiuta tutto"
+  },
+  "Manage Preferences": {
+    "ru": "Настроить",
+    "en": "Manage Preferences",
+    "es": "Gestionar preferencias",
+    "de": "Einstellungen verwalten",
+    "fr": "Gérer les préférences",
+    "it": "Gestisci preferenze"
+  },
+  "Essential Cookies": {
+    "ru": "Необходимые",
+    "en": "Essential",
+    "es": "Esenciales",
+    "de": "Erforderlich",
+    "fr": "Essentiels",
+    "it": "Essenziali"
+  },
+  "Analytics Cookies": {
+    "ru": "Аналитика",
+    "en": "Analytics",
+    "es": "Analíticas",
+    "de": "Analytik",
+    "fr": "Analytiques",
+    "it": "Analitici"
+  },
+  "Marketing Cookies": {
+    "ru": "Маркетинг",
+    "en": "Marketing",
+    "es": "Marketing",
+    "de": "Marketing",
+    "fr": "Marketing",
+    "it": "Marketing"
+  },
+  "Essential Cookies Description": {
+    "ru": "Необходимы для базовой работы сайта и не могут быть отключены",
+    "en": "Required for basic site functionality and cannot be disabled",
+    "es": "Necesarias para la funcionalidad básica del sitio y no se pueden desactivar",
+    "de": "Für die grundlegende Funktionalität der Website erforderlich und können nicht deaktiviert werden",
+    "fr": "Nécessaires au fonctionnement de base du site et ne peuvent pas être désactivés",
+    "it": "Necessari per il funzionamento di base del sito e non possono essere disabilitati"
+  },
+  "Analytics Cookies Description": {
+    "ru": "Помогают понять, как посетители взаимодействуют с сайтом",
+    "en": "Help us understand how visitors interact with the site",
+    "es": "Nos ayudan a entender cómo los visitantes interactúan con el sitio",
+    "de": "Helfen uns zu verstehen, wie Besucher mit der Website interagieren",
+    "fr": "Nous aident à comprendre comment les visiteurs interagissent avec le site",
+    "it": "Ci aiutano a capire come i visitatori interagiscono con il sito"
+  },
+  "Marketing Cookies Description": {
+    "ru": "Используются для показа релевантной рекламы и измерения эффективности кампаний",
+    "en": "Used to show relevant advertising and measure campaign effectiveness",
+    "es": "Se utilizan para mostrar publicidad relevante y medir la efectividad de las campañas",
+    "de": "Werden verwendet, um relevante Werbung zu zeigen und die Kampagneneffektivität zu messen",
+    "fr": "Utilisés pour afficher des publicités pertinentes et mesurer l'efficacité des campagnes",
+    "it": "Utilizzati per mostrare pubblicità pertinente e misurare l'efficacia delle campagne"
+  },
+  "Privacy Policy": {
+    "ru": "Политика конфиденциальности",
+    "en": "Privacy Policy",
+    "es": "Política de privacidad",
+    "de": "Datenschutzrichtlinie",
+    "fr": "Politique de confidentialité",
+    "it": "Privacy Policy"
+  },
+  "Save Preferences": {
+    "ru": "Сохранить настройки",
+    "en": "Save Preferences",
+    "es": "Guardar preferencias",
+    "de": "Einstellungen speichern",
+    "fr": "Enregistrer les préférences",
+    "it": "Salva preferenze"
+  },
+  "Cookie Settings": {
+    "ru": "Настройки cookie",
+    "en": "Cookie Settings",
+    "es": "Configuración de cookies",
+    "de": "Cookie-Einstellungen",
+    "fr": "Paramètres des cookies",
+    "it": "Impostazioni cookie"
+  },
+  "Contact Support": {
+    "ru": "Связаться с поддержкой",
+    "en": "Contact Support",
+    "es": "Contactar soporte",
+    "de": "Support kontaktieren",
+    "fr": "Contacter l'assistance",
+    "it": "Contatta il supporto"
+  },
+  "Support": {
+    "ru": "Поддержка",
+    "en": "Support",
+    "es": "Soporte",
+    "de": "Support",
+    "fr": "Assistance",
+    "it": "Supporto"
+  },
+  "Consent Expiry Template": {
+    "ru": "Срок действия согласия истекает через {days} дней",
+    "en": "Consent expires in {days} days",
+    "es": "El consentimiento vence en {days} días",
+    "de": "Die Einwilligung läuft in {days} Tagen ab",
+    "fr": "Le consentement expire dans {days} jours",
+    "it": "Il consenso scade tra {days} giorni"
+  },
+  "Consent Expired": {
+    "ru": "Срок действия согласия истёк",
+    "en": "Consent has expired",
+    "es": "El consentimiento ha vencido",
+    "de": "Die Einwilligung ist abgelaufen",
+    "fr": "Le consentement a expiré",
+    "it": "Il consenso è scaduto"
+  },
+  "Cookie Info Lead": {
+    "ru": "Мы используем файлы cookie и аналогичные технологии",
+    "en": "We use cookies and similar technologies",
+    "es": "Usamos cookies y tecnologías similares",
+    "de": "Wir verwenden Cookies und ähnliche Technologien",
+    "fr": "Nous utilisons des cookies et des technologies similaires",
+    "it": "Utilizziamo cookie e tecnologie simili"
+  },
+  "Cookie Info Body": {
+    "ru": "Мы и выбранные партнёры используем cookie на {site} для анализа, улучшения функций, персонализации и рекламы. Можно принять, отклонить или настроить категории.",
+    "en": "We and selected partners use cookies on {site} to analyze usage, enhance features, personalize experiences, and tailor advertising. You can accept, reject, or manage categories.",
+    "es": "Nosotros y socios seleccionados usamos cookies en {site} para analizar el uso, mejorar funciones, personalizar la experiencia y adaptar la publicidad. Puedes aceptar, rechazar o gestionar categorías.",
+    "de": "Wir und ausgewählte Partner verwenden auf {site} Cookies, um Nutzung zu analysieren, Funktionen zu verbessern, Erlebnisse zu personalisieren und Werbung anzupassen. Sie können akzeptieren, ablehnen oder Kategorien verwalten.",
+    "fr": "Nous et des partenaires sélectionnés utilisons des cookies sur {site} pour analyser l’utilisation, améliorer les fonctionnalités, personnaliser l’expérience et adapter la publicité. Vous pouvez accepter, refuser ou gérer les catégories.",
+    "it": "Noi e partner selezionati utilizziamo cookie su {site} per analizzare l’uso, migliorare le funzionalità, personalizzare l’esperienza e adattare la pubblicità. Puoi accettare, rifiutare o gestire le categorie."
+  },
+  "Customize Privacy Preferences": {
+    "ru": "{brand} — настройте предпочтения конфиденциальности",
+    "en": "{brand} — customize your privacy preferences",
+    "es": "{brand} — personaliza tus preferencias de privacidad",
+    "de": "{brand} — passen Sie Ihre Datenschutzeinstellungen an",
+    "fr": "{brand} — personnalisez vos préférences de confidentialité",
+    "it": "{brand} — personalizza le tue preferenze sulla privacy"
+  },
+  "Always On": {
+    "ru": "Всегда включено",
+    "en": "Always On",
+    "es": "Siempre activado",
+    "de": "Immer aktiviert",
+    "fr": "Toujours activé",
+    "it": "Sempre attivo"
+  }
+}

@@ -7,6 +7,8 @@ import { appConfig } from '@/config/app-config'
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
 import './globals.css'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
+import { Toaster } from "sonner";
+import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -103,7 +105,7 @@ export default async function RootLayout({
         {/* Service Worker Registration */}
         <Script src="/register-sw.js" strategy="beforeInteractive" async={false} />
       </head>
-      <body 
+      <body
       // className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         {/* JSON-LD schemas for SEO */}
@@ -126,27 +128,27 @@ export default async function RootLayout({
 
         {/* PWA Install Prompt - Client Component */}
         <PWAInstallPrompt />
-        
-                    <div className="hidden md:block h-screen w-screen">
-                      <ResizablePanelGroup direction="horizontal">
-                        <ResizablePanel defaultSize={40} minSize={35}>
-                          <div className="overflow-hidden h-full">{left}</div>
-                        </ResizablePanel>
-                        <ResizableHandle withHandle />
-                        <ResizablePanel defaultSize={60} minSize={35}>
-                         
-                             
-                              <main className="flex-1 overflow-y-auto hide-scrollbar">
-                                {right}
-                              </main>
-                           
-                       
-                        </ResizablePanel>
-                      </ResizablePanelGroup>
-                    </div>
+
+        <div className="hidden md:block h-screen w-screen">
+          <ResizablePanelGroup direction="horizontal">
+            <ResizablePanel defaultSize={40} minSize={35}>
+              <div className="overflow-hidden h-full">{left}</div>
+            </ResizablePanel>
+            <ResizableHandle withHandle />
+            <ResizablePanel defaultSize={60} minSize={35}>
+
+
+              <main className="flex-1 overflow-y-auto hide-scrollbar">
+                {right}
+              </main>
+
+
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </div>
 
         {/* Fallback for users with JavaScript disabled */}
-         <noscript>
+        <noscript>
           <div className="mx-auto mt-5 max-w-prose rounded border border-amber-200 bg-amber-50 p-5 text-center text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100">
             <strong className="block text-lg font-semibold">JavaScript is disabled</strong>
             <p className="mt-2 text-sm">
@@ -156,7 +158,9 @@ export default async function RootLayout({
               We recommend enabling JavaScript for the best experience.
             </p>
           </div>
-        </noscript> 
+        </noscript>
+        <CookieBanner />
+        <Toaster position="top-center" />
       </body>
     </html>
   )
