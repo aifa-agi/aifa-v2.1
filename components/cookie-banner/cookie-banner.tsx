@@ -5,15 +5,15 @@
 
 /*
 Understanding (step-by-step):
-1) This component must run in the browser; it shows the consent UI and writes cookies via js-cookie.
-2) The '"use client"' directive is required at the very top so the module graph places js-cookie in the client bundle.
-3) No server-only imports or re-exports should appear here. Keep window/gtag/fbq guarded.
-4) For server-side cookie access, use next/headers cookies() in server actions/route handlers, not here.
+1) This component runs only in the browser; it shows consent UI and writes cookies via js-cookie.
+2) The '"use client"' directive at the very top forces a client bundle for browser-only deps.
+3) No server-only imports/re-exports; guard window-based analytics calls.
+4) For server-side cookie access, use next/headers cookies() outside this component.
 */
 
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import Cookies from "js-cookie"; // client-only dependency; safe because this file is a Client Component
+import Cookies from "js-cookie"; // client-only dependency
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { X, Settings, BarChart3, Target, Shield } from "lucide-react";
@@ -85,24 +85,24 @@ export function CookieBanner() {
 
     // Analytics consent (Google)
     if (consentData.analytics) {
-      if ((window as any).gtag && process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID) {
-        (window as any).gtag("consent", "update", { analytics_storage: "granted" });
-        (window as any).gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID);
+      if (window.gtag && process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID) {
+        window.gtag("consent", "update", { analytics_storage: "granted" });
+        window.gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID);
       }
     } else {
-      if ((window as any).gtag) {
-        (window as any).gtag("consent", "update", { analytics_storage: "denied" });
+      if (window.gtag) {
+        window.gtag("consent", "update", { analytics_storage: "denied" });
       }
     }
 
     // Marketing consent (Facebook Pixel)
     if (consentData.marketing) {
-      if ((window as any).fbq && process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID) {
-        (window as any).fbq("consent", "grant");
+      if (window.fbq && process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID) {
+        window.fbq("consent", "grant");
       }
     } else {
-      if ((window as any).fbq) {
-        (window as any).fbq("consent", "revoke");
+      if (window.fbq) {
+        window.fbq("consent", "revoke");
       }
     }
   };
@@ -117,8 +117,8 @@ export function CookieBanner() {
     applyConsent(consentData);
     setIsVisible(false);
 
-    if (typeof window !== "undefined" && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
+    if (typeof window !== "undefined" && window.dataLayer) {
+      window.dataLayer.push({
         event: "cookie_consent_updated",
         consent_analytics: consentData.analytics,
         consent_marketing: consentData.marketing,
@@ -171,7 +171,6 @@ export function CookieBanner() {
     t("Customize Privacy Preferences") || "{brand} — customize your privacy preferences",
     { brand: brandName }
   );
-  const alwaysOn = t("Always On") || "Always On";
 
   return (
     <>
