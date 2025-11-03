@@ -9,6 +9,7 @@ import './globals.css'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { Toaster } from "sonner";
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -181,6 +182,11 @@ export default async function RootLayout({
 
         <CookieBanner />
         <Toaster position="top-center" />
+        {process.env.NODE_ENV === "production" && (
+          <GoogleAnalytics
+            gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!}
+          />
+        )}
       </body>
     </html>
   )
