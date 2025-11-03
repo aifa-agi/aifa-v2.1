@@ -6,6 +6,7 @@ import { constructMetadata } from '@/lib/construct-metadata'
 import { appConfig } from '@/config/app-config'
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
 import './globals.css'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -77,11 +78,13 @@ const jsonLdOrganization = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default async function RootLayout({
+  left,
+  right,
+}: {
+  left: React.ReactNode;
+  right: React.ReactNode;
+}) {
   return (
     <html lang={appConfig.lang} suppressHydrationWarning className="scroll-smooth">
       <head>
@@ -100,8 +103,8 @@ export default function RootLayout({
         {/* Service Worker Registration */}
         <Script src="/register-sw.js" strategy="beforeInteractive" async={false} />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overscroll-x-none`}
+      <body 
+      // className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         {/* JSON-LD schemas for SEO */}
         <Script
@@ -123,12 +126,27 @@ export default function RootLayout({
 
         {/* PWA Install Prompt - Client Component */}
         <PWAInstallPrompt />
-
-        {/* Main content */}
-        {children}
+        
+                    <div className="hidden md:block h-screen w-screen">
+                      <ResizablePanelGroup direction="horizontal">
+                        <ResizablePanel defaultSize={40} minSize={35}>
+                          <div className="overflow-hidden h-full">{left}</div>
+                        </ResizablePanel>
+                        <ResizableHandle withHandle />
+                        <ResizablePanel defaultSize={60} minSize={35}>
+                         
+                             
+                              <main className="flex-1 overflow-y-auto hide-scrollbar">
+                                {right}
+                              </main>
+                           
+                       
+                        </ResizablePanel>
+                      </ResizablePanelGroup>
+                    </div>
 
         {/* Fallback for users with JavaScript disabled */}
-        <noscript>
+         <noscript>
           <div className="mx-auto mt-5 max-w-prose rounded border border-amber-200 bg-amber-50 p-5 text-center text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100">
             <strong className="block text-lg font-semibold">JavaScript is disabled</strong>
             <p className="mt-2 text-sm">
@@ -138,7 +156,7 @@ export default function RootLayout({
               We recommend enabling JavaScript for the best experience.
             </p>
           </div>
-        </noscript>
+        </noscript> 
       </body>
     </html>
   )
