@@ -10,6 +10,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 import { Toaster } from "sonner";
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { OnlineStatusProvider } from '@/providers/online-status-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -129,25 +130,25 @@ export default async function RootLayout({
 
         {/* PWA Install Prompt - Client Component */}
         <PWAInstallPrompt />
-
-        <div className="hidden md:block h-screen w-screen">
-          <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel defaultSize={40} minSize={35}>
-              <div className="overflow-hidden h-full">{left}</div>
-            </ResizablePanel>
-            <ResizableHandle withHandle />
-            <ResizablePanel defaultSize={60} minSize={35}>
-
-
-              <main className="flex-1 overflow-y-auto hide-scrollbar">
-                {right}
-              </main>
+        <OnlineStatusProvider>
+          <div className="hidden md:block h-screen w-screen">
+            <ResizablePanelGroup direction="horizontal">
+              <ResizablePanel defaultSize={40} minSize={35}>
+                <div className="overflow-hidden h-full">{left}</div>
+              </ResizablePanel>
+              <ResizableHandle withHandle />
+              <ResizablePanel defaultSize={60} minSize={35}>
 
 
-            </ResizablePanel>
-          </ResizablePanelGroup>
-        </div>
+                <main className="flex-1 overflow-y-auto hide-scrollbar">
+                  {right}
+                </main>
 
+
+              </ResizablePanel>
+            </ResizablePanelGroup>
+          </div>
+        </OnlineStatusProvider>
         {/* Fallback for users with JavaScript disabled */}
         <noscript>
           <div
