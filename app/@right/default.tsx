@@ -1,148 +1,62 @@
 // @/app/@right/default.tsx
-
-import Link from 'next/link';
-import { Metadata } from 'next';
-import { constructMetadata } from '@/lib/construct-metadata';
-import { appConfig, getHomePageIllustration } from '@/config/app-config';
-import Image from 'next/image';
-import { Card } from '@/components/ui/card';
-
+import { Metadata } from 'next'
+import { constructMetadata } from '@/lib/construct-metadata'
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Advanced Routing Patterns in Next.js 15',
-  description: 'Production-ready Next.js 15 starter with parallel routes, intercepting routes, and complex UI patterns. Build modal dialogs, sidebars, and multi-panel layouts without route changes.',
+  title: 'Default Page — Placeholder',
+  description: 'This is the default placeholder page for the @right slot.',
   pathname: '/',
   contentType: 'website',
-});
+})
 
-interface PillProps {
-  text: string;
-}
+export const dynamic = 'force-static'
+export const revalidate = 3600
 
-function Pill({ text }: PillProps) {
-  return (
-    <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-      {text}
-    </span>
-  );
-}
-
+/**
+ * Default Page для @right слота
+ * Это placeholder страница, которая отображается когда нет реального контента
+ */
 export default function RightDefaultPage() {
-  function LoadingIllustrationSSR() {
-  const src = getHomePageIllustration('light');
   return (
-    <div className="relative h-full w-full">
-      <Image
-        src={src}
-        alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
-        width={800}
-        height={600}
-        className="h-full w-full object-contain"
-        priority
-        unoptimized
-      />
-    </div>
-  );
-}
-  return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 py-12 sm:py-16">
-      {/* Hero Section */}
-      <section className="grid items-center gap-8 sm:grid-cols-2" aria-labelledby="hero-title">
-        <div className="space-y-5">
-          {/* Feature pills */}
-          <div className="flex flex-wrap gap-2">
-            <Pill text="Parallel Routes" />
-            <Pill text="Intercepting Routes" />
-            <Pill text="Next.js 15" />
-            <Pill text="React 19" />
-            <Pill text="Advanced Routing" />
-          </div>
+    <main className="flex items-center justify-center min-h-svh">
+      <div className="text-center space-y-6 p-6">
+        {/* Визуальный указатель что это default */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border">
+          <span className="text-xs font-mono text-muted-foreground">
+            @right/default.tsx
+          </span>
+        </div>
 
-          {/* Hero heading */}
-          <h1
-            id="hero-title"
-            className="text-4xl font-bold leading-tight tracking-[-0.02em] text-foreground sm:text-5xl"
-          >
-            Advanced Routing Patterns — {appConfig.name}
+        {/* Основной текст */}
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-foreground">
+            Default Page
           </h1>
-
-          {/* Hero description */}
-          <p className="text-base text-muted-foreground sm:text-lg">
-            Production-ready Next.js 15 starter with parallel routes, intercepting routes, and complex UI patterns. Build modal dialogs, sidebars, and multi-panel layouts without route changes — fully SEO-optimized.
+          <p className="text-muted-foreground max-w-sm mx-auto">
+            Это placeholder страница для слота <code className="bg-muted px-2 py-1 rounded text-xs">@right</code>
           </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="https://github.com/aifa-agi/aifa-v2.1"
-              className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Get Starter
-            </Link>
-            <Link
-              href="/docs/parallel-routes"
-              className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-            >
-              Read Docs
-            </Link>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">8+</div>
-              <div className="text-xs text-muted-foreground">Route patterns</div>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">Zero</div>
-              <div className="text-xs text-muted-foreground">Route reloads</div>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">A+</div>
-              <div className="text-xs text-muted-foreground">SEO optimized</div>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">Type</div>
-              <div className="text-xs text-muted-foreground">Safe routing</div>
-            </div>
-          </div>
         </div>
 
-        {/* Hero Image */}
-        <div className="relative">
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-lg">
-            <LoadingIllustrationSSR />
-          </div>
+        {/* Описание */}
+        <div className="text-sm text-muted-foreground space-y-2">
+          <p>
+            Вы видите эту страницу, потому что:
+          </p>
+          <ul className="text-left inline-block space-y-1">
+            <li>✓ Это файл <code className="bg-muted px-1.5 py-0.5 rounded text-xs">app/@right/default.tsx</code></li>
+            <li>✓ Он полностью статический (SSG)</li>
+            <li>✓ Работает без JavaScript</li>
+            <li>✓ Это просто placeholder</li>
+          </ul>
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="grid gap-8 sm:grid-cols-3" aria-labelledby="features-title">
-        <h2 id="features-title" className="sr-only">Core Features</h2>
-        
-        <Card className="rounded-lg border border-border bg-card px-6 space-y-3">
-          <h3 className="text-lg font-bold text-foreground">Parallel Routes</h3>
-          <p className="text-sm text-muted-foreground">
-            Render multiple segments independently within the same layout. Perfect for dashboards, sidebars, and multi-panel UIs.
+        {/* Уведомление */}
+        <div className="mt-8 p-4 rounded-lg bg-primary/5 border border-primary/20">
+          <p className="text-sm text-foreground font-medium">
+            Замените этот файл на реальный контент для @right слота
           </p>
-        </Card>
-
-        <Card className="rounded-lg border border-border bg-card px-6 space-y-3">
-          <h3 className="text-lg font-bold text-foreground">Intercepting Routes</h3>
-          <p className="text-sm text-muted-foreground">
-            Intercept and reuse routes in different contexts. Create modals, preview panels, and complex workflows seamlessly.
-          </p>
-        </Card>
-
-        <Card className="rounded-lg border border-border bg-card px-6 space-y-3">
-          <h3 className="text-lg font-bold text-foreground">Type-Safe Navigation</h3>
-          <p className="text-sm text-muted-foreground">
-            Full TypeScript support with type-safe routing. Catch errors at compile time, not runtime.
-          </p>
-        </Card>
-      </section>
+        </div>
+      </div>
     </main>
-  );
+  )
 }
