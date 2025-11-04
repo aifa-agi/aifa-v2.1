@@ -5,7 +5,7 @@ import { constructMetadata } from '@/lib/construct-metadata'
 import { META_THEME_COLORS, appConfig } from '@/config/app-config'
 import { fontVariables } from "@/lib/fonts"
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
-import './globals.css'
+import './styles/globals.css'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { Toaster } from "sonner";
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
@@ -16,6 +16,8 @@ import { cn } from '@/lib/utils'
 import { ActiveThemeProvider } from '@/providers/active-theme'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutProvider } from '@/hooks/use-layout'
+import { Analytics } from '@vercel/analytics/next'
+import { SiteHeader } from '@/components/site-header'
 
 
 
@@ -147,25 +149,33 @@ export default async function RootLayout({
 
         <ThemeProvider>
           <LayoutProvider>
-          <ActiveThemeProvider>
-            <div className="hidden md:block h-screen w-screen">
-              <ResizablePanelGroup direction="horizontal">
-                <ResizablePanel defaultSize={40} minSize={35}>
-                  <OnlineStatusProvider><div className="overflow-hidden h-full">{left}</div> </OnlineStatusProvider>
-                </ResizablePanel>
-                <ResizableHandle withHandle />
-                <ResizablePanel defaultSize={60} minSize={35}>
+            <ActiveThemeProvider>
+              <div className="bg-background relative z-10 flex min-h-svh flex-col ">
+                <SiteHeader />
+                <div className="hidden md:block ">
+                  <ResizablePanelGroup direction="horizontal">
+                    <ResizablePanel defaultSize={40} minSize={35}>
+                      <OnlineStatusProvider>
+                        <div className="overflow-hidden max-h-full">
+                          {left}
+                        </div>
+                      </OnlineStatusProvider>
+                    </ResizablePanel>
+                    <ResizableHandle withHandle />
+                    <ResizablePanel defaultSize={60} minSize={35}>
 
-                  
-                    <main className="flex-1 overflow-y-auto hide-scrollbar">
-                      {right}
-                    </main>
-                 
 
-                </ResizablePanel>
-              </ResizablePanelGroup>
-            </div>
-          </ActiveThemeProvider>
+                      <main className="flex-1 overflow-y-auto hide-scrollbar">
+                        {right}
+                      </main>
+
+
+                    </ResizablePanel>
+                  </ResizablePanelGroup>
+                </div></div>
+
+              <Analytics />
+            </ActiveThemeProvider>
           </LayoutProvider>
         </ThemeProvider>
         <noscript>

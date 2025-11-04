@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 import { useLayout } from "@/hooks/use-layout"
 import { Button } from "./ui/button"
 
-export function SiteConfig({ className }: React.ComponentProps<typeof Button>) {
+export function LeftSlotHidden({ className }: React.ComponentProps<typeof Button>) {
   const { layout, setLayout } = useLayout()
 
   return (
@@ -25,10 +25,11 @@ export function SiteConfig({ className }: React.ComponentProps<typeof Button>) {
           properties: { layout: newLayout },
         })
       }}
-      className={cn("size-8", className)}
-      title="Toggle layout"
+      className="group/toggle extend-touch-target size-8 text-white/70 hover:bg-white/10 hover:text-white"
+      
+      title="Hide chat"
     >
-      <span className="sr-only">Toggle layout</span>
+      <span className="sr-only">Hide chat</span>
       <GalleryHorizontalIcon />
     </Button>
   )
