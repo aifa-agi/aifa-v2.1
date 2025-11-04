@@ -2,12 +2,14 @@
   "compilerOptions": {
     // Language and libs
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     // Module system
     "module": "esnext",
     "moduleResolution": "bundler",
-
     // Strictness and DX
     "strict": true,
     "skipLibCheck": true,
@@ -19,13 +21,17 @@
     "jsx": "preserve",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-
     // Next.js plugin
-    "plugins": [{ "name": "next" }],
-
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     // Paths / Aliases
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -35,7 +41,10 @@
     "**/*.tsx",
     "next.config.js",
     "next.config.mjs",
-    "types/global.d.ts"
+    "types/global.d.ts",
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

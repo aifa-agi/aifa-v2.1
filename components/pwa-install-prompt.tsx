@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { X, Download, Bell } from 'lucide-react';
 import { appConfig } from '@/config/app-config';
-import { getCSSVariable } from '@/lib/theme-colors';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -25,7 +24,7 @@ export function PWAInstallPrompt({ dismissDuration = 86400000 }: PWAInstallPromp
 
   useEffect(() => {
     // Set primary color from CSS variables
-    const color = getCSSVariable('primary');
+    const color = 'primary' 
     setPrimaryColor(color);
 
     // Detect platform

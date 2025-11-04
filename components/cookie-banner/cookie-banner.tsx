@@ -1,15 +1,9 @@
 // components/cookie-banner/cookie-banner.tsx
-// use client
+
 
 "use client";
 
-/*
-Understanding (step-by-step):
-1) This component runs only in the browser; it shows consent UI and writes cookies via js-cookie.
-2) The '"use client"' directive at the very top forces a client bundle for browser-only deps.
-3) No server-only imports/re-exports; guard window-based analytics calls.
-4) For server-side cookie access, use next/headers cookies() outside this component.
-*/
+
 
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";

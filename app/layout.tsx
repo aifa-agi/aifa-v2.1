@@ -1,9 +1,9 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { constructMetadata } from '@/lib/construct-metadata'
-import { appConfig } from '@/config/app-config'
+import { META_THEME_COLORS, appConfig } from '@/config/app-config'
+import { fontVariables } from "@/lib/fonts"
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
 import './globals.css'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
@@ -11,18 +11,13 @@ import { Toaster } from "sonner";
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { OnlineStatusProvider } from '@/providers/online-status-provider'
+import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { cn } from '@/lib/utils'
+import { ActiveThemeProvider } from '@/providers/active-theme'
+import { ThemeProvider } from '@/providers/theme-provider'
+import { LayoutProvider } from '@/hooks/use-layout'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  display: 'swap',
-})
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-})
 
 export const metadata: Metadata = constructMetadata({
   pathname: '/',
@@ -90,7 +85,7 @@ export default async function RootLayout({
   right: React.ReactNode;
 }) {
   return (
-    <html lang={appConfig.lang} suppressHydrationWarning className="scroll-smooth">
+    <html lang={appConfig.lang} suppressHydrationWarning >
       <head>
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
 
@@ -103,12 +98,31 @@ export default async function RootLayout({
         <meta name="msapplication-TileColor" content={appConfig.pwa.themeColor} />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+        <meta name="theme-color" content={META_THEME_COLORS.light} />
 
-        {/* Service Worker Registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
+                }
+                if (localStorage.layout) {
+                  document.documentElement.classList.add('layout-' + localStorage.layout)
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
         <Script src="/register-sw.js" strategy="beforeInteractive" async={false} />
+
+
       </head>
       <body
-      // className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+        className={cn(
+          "text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]",
+          fontVariables
+        )}
       >
         {/* JSON-LD schemas for SEO */}
         <Script
@@ -130,26 +144,30 @@ export default async function RootLayout({
 
         {/* PWA Install Prompt - Client Component */}
         <PWAInstallPrompt />
-        <OnlineStatusProvider>
-          <div className="hidden md:block h-screen w-screen">
-            <ResizablePanelGroup direction="horizontal">
-              <ResizablePanel defaultSize={40} minSize={35}>
-                <div className="overflow-hidden h-full">{left}</div>
-              </ResizablePanel>
-              <ResizableHandle withHandle />
-              <ResizablePanel defaultSize={60} minSize={35}>
 
+        <ThemeProvider>
+          <LayoutProvider>
+          <ActiveThemeProvider>
+            <div className="hidden md:block h-screen w-screen">
+              <ResizablePanelGroup direction="horizontal">
+                <ResizablePanel defaultSize={40} minSize={35}>
+                  <OnlineStatusProvider><div className="overflow-hidden h-full">{left}</div> </OnlineStatusProvider>
+                </ResizablePanel>
+                <ResizableHandle withHandle />
+                <ResizablePanel defaultSize={60} minSize={35}>
 
-                <main className="flex-1 overflow-y-auto hide-scrollbar">
-                  {right}
-                </main>
+                  
+                    <main className="flex-1 overflow-y-auto hide-scrollbar">
+                      {right}
+                    </main>
+                 
 
-
-              </ResizablePanel>
-            </ResizablePanelGroup>
-          </div>
-        </OnlineStatusProvider>
-        {/* Fallback for users with JavaScript disabled */}
+                </ResizablePanel>
+              </ResizablePanelGroup>
+            </div>
+          </ActiveThemeProvider>
+          </LayoutProvider>
+        </ThemeProvider>
         <noscript>
           <div
             className="fixed inset-x-0 bottom-0 z-50 w-full bg-neutral-900 text-white border-t border-white/20 shadow-[0_-8px_24px_rgba(0,0,0,0.25)]"
@@ -182,6 +200,7 @@ export default async function RootLayout({
         </noscript>
 
         <CookieBanner />
+        <TailwindIndicator />
         <Toaster position="top-center" />
         {process.env.NODE_ENV === "production" && (
           <GoogleAnalytics

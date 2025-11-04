@@ -235,6 +235,10 @@ export type RegularImageType =
   | 'chatbot-dark'
   | 'chatbot-light';
 
+  export const META_THEME_COLORS = {
+  light: process.env.NEXT_PUBLICTHEME_COLORS_LIGHT || "#ffffff",
+  dark: process.env.NEXT_PUBLIC_THEME_COLORS_DARK || "#09090b",
+}
 export type AllImageTypes = RegularImageType | 'logo';
 
 export interface ImageMetadata {
