@@ -452,4 +452,5 @@ export default withPWA({
     // Debug IDs для лучшей отладки (опционально)
     // debugIds: true,
   },
+   serverComponentsHmrCache: false,
 });

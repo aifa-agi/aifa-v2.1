@@ -17,8 +17,7 @@ import { ActiveThemeProvider } from '@/providers/active-theme'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutProvider } from '@/hooks/use-layout'
 import { Analytics } from '@vercel/analytics/next'
-import { SiteHeader } from '@/components/site-header'
-
+import { SiteHeader } from '@/components/site-header/(_server)/site-header-wrapper'
 
 
 export const metadata: Metadata = constructMetadata({
@@ -144,8 +143,8 @@ export default async function RootLayout({
           strategy="beforeInteractive"
         />
 
-        {/* PWA Install Prompt - Client Component */}
-        <PWAInstallPrompt />
+       {process.env.NODE_ENV === "production" && (
+        <PWAInstallPrompt />)}
 
         <ThemeProvider>
           <LayoutProvider>

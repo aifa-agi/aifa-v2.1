@@ -6,6 +6,7 @@ import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig, getHomePageIllustration } from '@/config/app-config';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
 
 export const metadata: Metadata = constructMetadata({
@@ -29,25 +30,26 @@ function Pill({ text }: PillProps) {
 
 export default function RightPage() {
   function LoadingIllustrationSSR() {
-  const src = getHomePageIllustration('light');
-  return (
-    <div className="relative h-full w-full">
-      <Image
-        src={src}
-        alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
-        width={800}
-        height={600}
-        className="h-full w-full object-contain"
-        priority
-        unoptimized
-      />
-    </div>
-  );
-}
+    const src = getHomePageIllustration('light');
+    return (
+      <div className="relative h-full w-full">
+        <Image
+          src={src}
+          alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
+          width={800}
+          height={600}
+          className="h-full w-full object-contain"
+          priority
+          unoptimized
+        />
+      </div>
+    );
+  }
   return (
     <>
-    
-      <section className="grid items-center gap-8 sm:grid-cols-2" aria-labelledby="hero-title">
+      <div className='h-20' />
+      <section className="grid items-center gap-8 sm:grid-cols-2 px-4" aria-labelledby="hero-title">
+
         <div className="space-y-5">
           {/* Feature pills */}
           <div className="flex flex-wrap gap-2">
@@ -89,25 +91,7 @@ export default function RightPage() {
             </Link>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">8+</div>
-              <div className="text-xs text-muted-foreground">Route patterns</div>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">Zero</div>
-              <div className="text-xs text-muted-foreground">Route reloads</div>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">A+</div>
-              <div className="text-xs text-muted-foreground">SEO optimized</div>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">Type</div>
-              <div className="text-xs text-muted-foreground">Safe routing</div>
-            </div>
-          </div>
+
         </div>
 
         {/* Hero Image */}
@@ -116,12 +100,33 @@ export default function RightPage() {
             <LoadingIllustrationSSR />
           </div>
         </div>
-      </section>
 
+      </section>
+      {/* Stats Grid */}
+      <section className='w-full px-4' aria-labelledby="Stats Grid">
+        <div className="flex flex-row flex-wrap justify-start gap-4 my-4">
+          <div className="rounded-lg border border-border bg-card p-4 text-center w-24">
+            <div className="text-2xl font-bold text-foreground">8+</div>
+            <div className="text-xs text-muted-foreground">Route patterns</div>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4 text-center w-24">
+            <div className="text-2xl font-bold text-foreground">Zero</div>
+            <div className="text-xs text-muted-foreground">Route reloads</div>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4 text-center w-24">
+            <div className="text-2xl font-bold text-foreground">A+</div>
+            <div className="text-xs text-muted-foreground">SEO optimized</div>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4 text-center w-24">
+            <div className="text-2xl font-bold text-foreground">Type</div>
+            <div className="text-xs text-muted-foreground">Safe routing</div>
+          </div>
+        </div>
+      </section>
       {/* Features Section */}
-      <section className="grid gap-8 sm:grid-cols-3" aria-labelledby="features-title">
+      <section className="grid gap-8 sm:grid-cols-3 px-4" aria-labelledby="features-title">
         <h2 id="features-title" className="sr-only">Core Features</h2>
-        
+
         <Card className="rounded-lg border border-border bg-card px-6 space-y-3">
           <h3 className="text-lg font-bold text-foreground">Parallel Routes</h3>
           <p className="text-sm text-muted-foreground">
@@ -143,6 +148,6 @@ export default function RightPage() {
           </p>
         </Card>
       </section>
- </>
+    </>
   );
 }

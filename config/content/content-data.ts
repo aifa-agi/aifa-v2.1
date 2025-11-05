@@ -37,7 +37,6 @@ export const contentData = {
   {
     "title": "Blog",
     "href": "/blog",
-    
     "order": 2
   },
   {
