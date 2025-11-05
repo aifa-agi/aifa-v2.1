@@ -108,12 +108,12 @@ export const appConfig: AppConfig = {
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'notFound-dark': {
-    path: '/app-images/app-config-images/not-found-dark.svg',
+    path: '/app-images/app-config-images/not-found-dark.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'notFound-light': {
-    path: '/app-images/app-config-images/not-found-light.svg',
+    path: '/app-images/app-config-images/not-found-light.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },

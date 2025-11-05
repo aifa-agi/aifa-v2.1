@@ -16,9 +16,9 @@ export default function DefaultPage() {
   const lightSrc = lightPath && typeof lightPath === 'string' && lightPath.length > 0 ? lightPath : null;
 
   return (
-    <div className="flex flex-col min-h-svh items-center justify-center p-6">
-      {/* App title */}
-      <p className="text-foreground text-6xl font-semibold whitespace-pre-wrap m-2 text-center">
+    <div className="flex flex-col min-h-svh items-center justify-center p-6 ">
+      <div className="h-20"/>
+      <p className="text-foreground text-4xl font-semibold whitespace-pre-wrap m-2 text-center">
         {appConfig.short_name}
       </p>
 

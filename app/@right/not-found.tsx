@@ -1,25 +1,29 @@
-// @/app/not-found.tsx
+// app/@right/not-found.tsx
 import { Button } from "@/components/ui/button";
 import { appConfig, getErrorIllustration } from "@/config/app-config";
 import Image from "next/image";
 import Link from "next/link";
 
-export const dynamic = 'force-static';
-export const revalidate = false;
-
 /**
- * Comments in English: 404 Not Found page with theme-aware illustration
- * Uses notFound-dark.svg and notFound-light.svg
- * ✅ ИСПРАВЛЕНИЕ: Uses explicit validation to prevent empty src errors during builds
+ * Comments in English:
+ * 404 Not Found page for RIGHT slot
+ * Triggered when notFound() is called in @right routes
+ * Renders with theme-aware illustrations
  */
-export default function NotFoundPage() {
+export default function RightNotFoundPage() {
   // Get illustration paths for 404 error
   const darkPath = getErrorIllustration("404", "dark");
   const lightPath = getErrorIllustration("404", "light");
 
   // ✅ Validate paths before rendering
-  const darkSrc = darkPath && typeof darkPath === 'string' && darkPath.length > 0 ? darkPath : null;
-  const lightSrc = lightPath && typeof lightPath === 'string' && lightPath.length > 0 ? lightPath : null;
+  const darkSrc =
+    darkPath && typeof darkPath === "string" && darkPath.length > 0
+      ? darkPath
+      : null;
+  const lightSrc =
+    lightPath && typeof lightPath === "string" && lightPath.length > 0
+      ? lightPath
+      : null;
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center p-6">
@@ -59,7 +63,8 @@ export default function NotFoundPage() {
 
         {/* Error description */}
         <p className="text-muted-foreground text-lg text-center mb-8 max-w-md">
-          Could not find the requested resource. The page you are looking for might have been removed or is temporarily unavailable.
+          Could not find the requested resource. The page you are looking for
+          might have been removed or is temporarily unavailable.
         </p>
 
         {/* Action buttons */}
