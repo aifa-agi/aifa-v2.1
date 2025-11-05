@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 import { appConfig } from "@/config/app-config"
 import { cn } from "@/lib/utils"
@@ -12,9 +13,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { MenuCategory } from "@/types/menu-types"
+import Image from "next/image"
 
 interface MainNavProps {
   items: MenuCategory[]
@@ -22,92 +23,84 @@ interface MainNavProps {
 }
 
 export function MainNav({ items, className }: MainNavProps) {
+  const pathname = usePathname()
+
   return (
     <NavigationMenu className={className}>
       <NavigationMenuList>
         {items.map((category) => {
           const lowerCaseTitle = category.title.toLowerCase()
+          const isActive = category.href ? pathname === category.href : false
 
-          // 1. Правило для 'home'
-          if (lowerCaseTitle === "home" && category.pages?.length) {
+          // Проверяем есть ли страницы
+          if (!category.pages || category.pages.length === 0) {
+            return null
+          }
+
+          // Логика для "Home" категории
+          if (lowerCaseTitle === "home") {
             return (
               <NavigationMenuItem key={category.title}>
-                <NavigationMenuTrigger>{category.title}</NavigationMenuTrigger>
+                <NavigationMenuTrigger
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-white bg-transparent hover:bg-transparent",
+                    isActive ? "text-white" : "text-white/70"
+                  )}
+                >
+                  {category.title}
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
-                        <a
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        <Link
+                          className="flex h-auto w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none transition-colors hover:bg-accent focus:shadow-md"
                           href="/"
                         >
-                          <img
-                            src={appConfig.logo}
-                            alt={appConfig.name}
-                            className="h-8 w-8 rounded-full"
-                          />
-                          <div className="mb-2 mt-4 text-lg font-medium">
+                          <div className="mb-4 flex justify-center">
+                            <Image
+                              src={appConfig.logo}
+                              alt={appConfig.name}
+                              width={128}
+                              height={128}
+                              className="h-[128px] w-[128px] object-cover"
+                            />
+                          </div>
+                          <div className="mb-2 text-lg font-medium text-left capitalize">
                             {appConfig.name}
                           </div>
-                          <p className="text-sm leading-tight text-muted-foreground">
+                          <p className="text-sm leading-tight text-muted-foreground line-clamp-6">
                             {appConfig.description}
                           </p>
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                     </li>
-                    {category.pages.map(
+
+                    {/* Показываем максимум 10 страниц */}
+                    {category.pages.slice(0, 10).map(
                       (page) =>
                         page.href && (
                           <ListItem
                             key={page.id}
                             href={page.href}
                             title={page.title ?? ""}
+                            isActive={pathname === page.href}
                           >
                             {page.description}
                           </ListItem>
                         )
                     )}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            )
-          }
 
-          // 2. Правило для 'blog', 'news', 'docs'
-          if (
-            ["blog", "news", "docs"].includes(lowerCaseTitle) &&
-            category.href
-          ) {
-            return (
-              <NavigationMenuItem key={category.title}>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href={category.href}
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    {category.title}
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            )
-          }
-
-          // 4. Правило для 'admin'
-          if (lowerCaseTitle === "admin" && category.pages?.length) {
-            return (
-              <NavigationMenuItem key={category.title}>
-                <NavigationMenuTrigger>{category.title}</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[200px] gap-3 p-4">
-                    {category.pages.map(
-                      (page) =>
-                        page.href && (
-                          <li key={page.id}>
-                            <NavigationMenuLink asChild>
-                              <Link href={page.href}>{page.title}</Link>
-                            </NavigationMenuLink>
-                          </li>
-                        )
+                    {/* Если больше 10 страниц, показываем "View All" */}
+                    {category.pages.length > 10 && category.href && (
+                      <li className="col-span-1">
+                        <Link
+                          href={category.href}
+                          className="block p-3 text-sm font-medium text-primary hover:text-primary/80 underline transition-colors"
+                        >
+                          View All
+                        </Link>
+                      </li>
                     )}
                   </ul>
                 </NavigationMenuContent>
@@ -115,42 +108,64 @@ export function MainNav({ items, className }: MainNavProps) {
             )
           }
 
-          // 3. Правило для остальных категорий
-          if (category.pages && category.pages.length > 0) {
-            return (
-              <NavigationMenuItem key={category.title}>
-                <NavigationMenuTrigger>{category.title}</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-full gap-3 p-4 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {category.pages.map(
-                      (page) =>
-                        page.href && (
-                          <ListItem
-                            key={page.id}
-                            title={page.title ?? ""}
-                            href={page.href}
-                          >
-                            {page.description}
-                          </ListItem>
-                        )
-                    )}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            )
-          }
+          // Логика для остальных категорий
+          return (
+            <NavigationMenuItem key={category.title}>
+              <NavigationMenuTrigger
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-white bg-transparent hover:bg-transparent",
+                  isActive ? "text-white" : "text-white/70"
+                )}
+              >
+                {category.title}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-full gap-3 p-4 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                  {/* Показываем максимум 10 страниц */}
+                  {category.pages.slice(0, 10).map(
+                    (page) =>
+                      page.href && (
+                        <ListItem
+                          key={page.id}
+                          title={page.title ?? ""}
+                          href={page.href}
+                          isActive={pathname === page.href}
+                        >
+                          {page.description}
+                        </ListItem>
+                      )
+                  )}
 
-          return null
+                  {/* Если больше 10 страниц, показываем "View All" */}
+                  {category.pages.length > 10 && category.href && (
+                    <li className="col-span-full">
+                      <Link
+                        href={category.href}
+                        className="block p-3 text-sm font-medium text-primary hover:text-primary/80 underline transition-colors"
+                      >
+                        View All
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          )
         })}
       </NavigationMenuList>
     </NavigationMenu>
   )
 }
 
+interface ListItemProps extends React.ComponentPropsWithoutRef<"a"> {
+  title: string
+  isActive?: boolean
+}
+
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { title: string }
->(({ className, title, children, href, ...props }, ref) => {
+  ListItemProps
+>(({ className, title, children, href, isActive = false, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -159,11 +174,12 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            isActive && "bg-accent text-accent-foreground",
             className
           )}
           {...props}
         >
-          <div className="line-clamp-1 text-sm font-medium leading-none">
+          <div className="line-clamp-1 text-sm font-medium leading-none capitalize">
             {title}
           </div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">

@@ -410,6 +410,15 @@ export default withPWA({
     serverMinification: true,
     staticGenerationRetryCount: 3,
   },
+  transpilePackages: [
+    'ai',
+    '@ai-sdk/core',
+    '@ai-sdk/react',
+    '@ai-sdk/openai',
+    '@ai-sdk/anthropic',
+    '@ai-sdk/google',
+    'ai-elements',
+  ],
 
   // On-demand entries для лучшего опыта разработки
   onDemandEntries: {
@@ -430,7 +439,7 @@ export default withPWA({
   turbopack: {
     // Оптимизация разрешения модулей
     resolveAlias: {},
-    
+    memoryLimit: 3000,
     // Настройки расширений
     resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
 
@@ -452,5 +461,4 @@ export default withPWA({
     // Debug IDs для лучшей отладки (опционально)
     // debugIds: true,
   },
-   serverComponentsHmrCache: false,
 });

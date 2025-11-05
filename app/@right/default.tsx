@@ -13,47 +13,47 @@ export const dynamic = 'force-static'
 export const revalidate = 3600
 
 /**
- * Default Page для @right слота
- * Это placeholder страница, которая отображается когда нет реального контента
+ * Default Page for @right slot
+ * This is a placeholder page that displays when there is no real content
  */
 export default function RightDefaultPage() {
   return (
     <main className="flex items-center justify-center min-h-svh">
       <div className="text-center space-y-6 p-6">
-        {/* Визуальный указатель что это default */}
+        {/* Visual indicator that this is default */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted border border-border">
           <span className="text-xs font-mono text-muted-foreground">
             @right/default.tsx
           </span>
         </div>
 
-        {/* Основной текст */}
+        {/* Main text */}
         <div className="space-y-2">
           <h1 className="text-3xl font-bold text-foreground">
             Default Page
           </h1>
           <p className="text-muted-foreground max-w-sm mx-auto">
-            Это placeholder страница для слота <code className="bg-muted px-2 py-1 rounded text-xs">@right</code>
+            This is a placeholder page for the <code className="bg-muted px-2 py-1 rounded text-xs">@right</code> slot
           </p>
         </div>
 
-        {/* Описание */}
+        {/* Description */}
         <div className="text-sm text-muted-foreground space-y-2">
           <p>
-            Вы видите эту страницу, потому что:
+            You are seeing this page because:
           </p>
           <ul className="text-left inline-block space-y-1">
-            <li>✓ Это файл <code className="bg-muted px-1.5 py-0.5 rounded text-xs">app/@right/default.tsx</code></li>
-            <li>✓ Он полностью статический (SSG)</li>
-            <li>✓ Работает без JavaScript</li>
-            <li>✓ Это просто placeholder</li>
+            <li>✓ This is the file <code className="bg-muted px-1.5 py-0.5 rounded text-xs">app/@right/default.tsx</code></li>
+            <li>✓ It is completely static (SSG)</li>
+            <li>✓ Works without JavaScript</li>
+            <li>✓ This is just a placeholder</li>
           </ul>
         </div>
 
-        {/* Уведомление */}
+        {/* Notification */}
         <div className="mt-8 p-4 rounded-lg bg-primary/5 border border-primary/20">
           <p className="text-sm text-foreground font-medium">
-            Замените этот файл на реальный контент для @right слота
+            Replace this file with real content for the @right slot
           </p>
         </div>
       </div>

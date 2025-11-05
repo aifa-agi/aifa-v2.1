@@ -1,4 +1,4 @@
-
+"use client"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -26,7 +26,7 @@ export function SiteHeaderClient({
       <div className="container px-6 mt-4">
         <div className="mx-auto rounded-full border border-white/10 bg-black/80 backdrop-blur-sm">
           <div className="flex h-12 items-center justify-between px-2">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 ">
               <Link href="/" className="flex items-center gap-2">
                 <img
                   src={appLogo}
