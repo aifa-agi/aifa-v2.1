@@ -150,22 +150,21 @@ export default async function RootLayout({
         <ThemeProvider>
           <LayoutProvider>
             <ActiveThemeProvider>
-              <div className="bg-background relative z-10 flex min-h-svh flex-col ">
+              <div className="bg-background fixed inset-0 flex flex-col overflow-hidden">
                 <SiteHeader />
-                <div className="hidden md:block ">
-                  <ResizablePanelGroup direction="horizontal">
-                    <ResizablePanel defaultSize={40} minSize={35}>
+                <div className="hidden md:block flex-1 min-h-0 ">
+                  <ResizablePanelGroup direction="horizontal" className="h-full">
+                    <ResizablePanel defaultSize={40} minSize={35} className="relative">
                       <OnlineStatusProvider>
-                        <div className="overflow-hidden max-h-full">
+                        <div className="absolute inset-0 overflow-hidden">
                           {left}
-                        </div>
-                      </OnlineStatusProvider>
+                          </div> </OnlineStatusProvider>
                     </ResizablePanel>
                     <ResizableHandle withHandle />
-                    <ResizablePanel defaultSize={60} minSize={35}>
+                    <ResizablePanel defaultSize={60} minSize={35} className="relative">
 
 
-                      <main className="flex-1 overflow-y-auto hide-scrollbar">
+                      <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
                         {right}
                       </main>
 

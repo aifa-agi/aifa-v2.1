@@ -1,11 +1,11 @@
-// aifa-v2/next.config.mjs
+// next.config.mjs
 import withPWAInit from 'next-pwa';
 
 const isDev = process.env.NODE_ENV === 'development';
 const isVercel = process.env.VERCEL === '1';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aifa.dev';
 
-// PWA Configuration с оптимизированными настройками Workbox
+// PWA Configuration
 const withPWA = withPWAInit({
   dest: 'public',
   register: true,
@@ -145,8 +145,7 @@ const withPWA = withPWAInit({
 });
 
 /**
- * Content Security Policy - Расслаблены ограничения для встроенных скриптов
- * Разрешены встроенные стили и скрипты для удобства разработки
+ * Content Security Policy
  */
 const cspHeader = [
   "default-src 'self'",
@@ -303,7 +302,6 @@ const cacheHeaders = [
 export default withPWA({
   // Основные параметры оптимизации
   reactStrictMode: true,
-  swcMinify: true,
   compress: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
@@ -393,42 +391,13 @@ export default withPWA({
     ],
   }),
 
-  // Оптимизация Webpack
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.optimization.runtimeChunk = 'single';
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        cacheGroups: {
-          default: false,
-          vendors: false,
-          vendor: {
-            filename: 'chunks/vendor-[hash].js',
-            test: /node_modules/,
-            priority: 10,
-            reuseExistingChunk: true,
-            enforce: true,
-          },
-          common: {
-            filename: 'chunks/common-[hash].js',
-            minChunks: 2,
-            priority: 5,
-            reuseExistingChunk: true,
-            enforce: true,
-          },
-        },
-      };
-    }
-    return config;
-  },
-
   // Переменные окружения
   env: {
     NEXT_PUBLIC_SITE_URL: siteUrl,
     NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT || 'development',
   },
 
-  // Экспериментальные функции для лучшей производительности
+  // Экспериментальные функции
   experimental: {
     optimizePackageImports: [
       'lucide-react',
@@ -440,22 +409,6 @@ export default withPWA({
     ],
     serverMinification: true,
     staticGenerationRetryCount: 3,
-    turbotrace: {
-      logLevel: 'error',
-      logAll: false,
-    },
-  },
-
-  // TypeScript strict mode
-  typescript: {
-    strict: true,
-    tsconfigPath: './tsconfig.json',
-  },
-
-  // ESLint конфигурация
-  eslint: {
-    dirs: ['app', 'lib', 'components', 'utils', 'config'],
-    ignoreDuringBuilds: false,
   },
 
   // On-demand entries для лучшего опыта разработки
@@ -470,13 +423,33 @@ export default withPWA({
   // Генерация ETag
   generateEtags: true,
 
-  // Vercel-специфическая конфигурация
-  ...(isVercel && {
-    swcMinify: true,
-    productionBrowserSourceMaps: false,
-  }),
-
   // Оптимизация сборки
   staticPageGenerationTimeout: 120,
-  outputFileTracing: true,
+
+  // Turbopack конфигурация вместо Webpack
+  turbopack: {
+    // Оптимизация разрешения модулей
+    resolveAlias: {},
+    
+    // Настройки расширений
+    resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
+
+    // Правила для специальных файлов (если нужны специальные лоадеры)
+    rules: {
+      // SVG поддержка (если используете @svgr/webpack)
+      // '*.svg': {
+      //   loaders: ['@svgr/webpack'],
+      //   as: '*.js',
+      // },
+      
+      // YAML поддержка (если используете yaml-loader)
+      // '*.yaml': {
+      //   loaders: ['yaml-loader'],
+      //   as: '*.js',
+      // },
+    },
+
+    // Debug IDs для лучшей отладки (опционально)
+    // debugIds: true,
+  },
 });
