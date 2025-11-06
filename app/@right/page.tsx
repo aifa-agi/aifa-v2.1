@@ -6,7 +6,6 @@ import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig, getHomePageIllustration } from '@/config/app-config';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 
 
 export const metadata: Metadata = constructMetadata({
