@@ -21,22 +21,66 @@ function Pill({ text }: PillProps) {
 }
 
 export default function HomePage() {
-  function LoadingIllustrationSSR() {
-    const src = getHomePageIllustration('light');
+
+
+function LoadingIllustrationSSR() {
+  // Получение путей иллюстраций для светлой и тёмной темы
+  const darkPath = getHomePageIllustration("dark");
+  const lightPath = getHomePageIllustration("light");
+
+  // ✅ Валидация путей перед рендерингом
+  const darkSrc =
+    darkPath && typeof darkPath === "string" && darkPath.length > 0
+      ? darkPath
+      : null;
+  const lightSrc =
+    lightPath && typeof lightPath === "string" && lightPath.length > 0
+      ? lightPath
+      : null;
+
+  // ✅ Если нет путей, показываем fallback
+  if (!darkSrc && !lightSrc) {
     return (
-      <div className="relative h-full w-full">
-        <Image
-          src={src}
-          alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
-          width={800}
-          height={600}
-          className="h-full w-full object-contain"
-          priority
-          unoptimized
-        />
+      <div className="relative h-full w-full flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+        <p className="text-gray-500 dark:text-gray-400">No illustration available</p>
       </div>
     );
   }
+
+  return (
+    <div className="relative h-full w-full">
+      {/* Dark theme illustration - видна только когда применён класс 'dark' */}
+      {darkSrc && (
+        <Image
+          src={darkSrc}
+          alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
+          width={800}
+          height={600}
+          className="h-full w-full object-contain dark:block hidden"
+          priority
+          unoptimized
+        />
+      )}
+
+      {/* Light theme illustration - видна по умолчанию, скрыта когда применён класс 'dark' */}
+      {lightSrc && (
+        <Image
+          src={lightSrc}
+          alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
+          width={800}
+          height={600}
+          className="h-full w-full object-contain dark:hidden block"
+          priority
+          unoptimized
+        />
+      )}
+    </div>
+  );
+}
+
+  
+
+
   return (
     <>
       <div className='h-20' />

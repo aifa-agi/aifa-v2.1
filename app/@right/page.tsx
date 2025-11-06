@@ -1,7 +1,7 @@
 // @/app/@right/page.tsx
 
 import { constructMetadata } from '@/lib/construct-metadata';
-import HomePage from '@/components/site-header/home-page';
+import HomePage from '@/components/home-page';
 import { Metadata } from 'next';
 
 
