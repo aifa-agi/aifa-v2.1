@@ -18,6 +18,7 @@ import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutProvider } from '@/hooks/use-layout'
 import { Analytics } from '@vercel/analytics/next'
 import { SiteHeader } from '@/components/site-header/(_server)/site-header-wrapper'
+import AifaFooter from '@/components/aifa-footer'
 
 
 export const metadata: Metadata = constructMetadata({
@@ -170,7 +171,9 @@ export default async function RootLayout({
 
                     </ResizablePanel>
                   </ResizablePanelGroup>
-                </div></div>
+                </div>
+                <AifaFooter/>
+                </div>
 
               <Analytics />
             </ActiveThemeProvider>
