@@ -1,19 +1,12 @@
-// @/app/@right/page.tsx
+// components/site-header/home-page.tsx
 
 import Link from 'next/link';
-import { Metadata } from 'next';
-import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig, getHomePageIllustration } from '@/config/app-config';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 
 
-export const metadata: Metadata = constructMetadata({
-  title: 'Advanced Routing Patterns in Next.js 15',
-  description: 'Production-ready Next.js 15 starter with parallel routes, intercepting routes, and complex UI patterns. Build modal dialogs, sidebars, and multi-panel layouts without route changes.',
-  pathname: '/',
-  contentType: 'website',
-});
+
 
 interface PillProps {
   text: string;
@@ -27,7 +20,7 @@ function Pill({ text }: PillProps) {
   );
 }
 
-export default function RightPage() {
+export default function HomePage() {
   function LoadingIllustrationSSR() {
     const src = getHomePageIllustration('light');
     return (

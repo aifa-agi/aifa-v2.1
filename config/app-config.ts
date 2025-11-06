@@ -133,7 +133,7 @@ export const appConfig: AppConfig = {
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'homePage-light': {
-    path: '/app-images/app-config-images/homepage-light.png',
+    path: '/app-images/app-config-images/homepage-light.svg',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },

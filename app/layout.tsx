@@ -20,7 +20,6 @@ import { Analytics } from '@vercel/analytics/next'
 import { SiteHeader } from '@/components/site-header/(_server)/site-header-wrapper'
 import AifaFooter from '@/components/aifa-footer'
 
-
 export const metadata: Metadata = constructMetadata({
   pathname: '/',
 })
@@ -87,7 +86,7 @@ export default async function RootLayout({
   right: React.ReactNode;
 }) {
   return (
-    <html lang={appConfig.lang} suppressHydrationWarning >
+    <html lang={appConfig.lang} suppressHydrationWarning>
       <head>
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
 
@@ -117,12 +116,10 @@ export default async function RootLayout({
           }}
         />
         <Script src="/register-sw.js" strategy="beforeInteractive" async={false} />
-
-
       </head>
       <body
         className={cn(
-          "text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)]",
+          "text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] ",
           fontVariables
         )}
       >
@@ -144,41 +141,50 @@ export default async function RootLayout({
           strategy="beforeInteractive"
         />
 
-       {process.env.NODE_ENV === "production" && (
-        <PWAInstallPrompt />)}
+        {process.env.NODE_ENV === "production" && (
+          <PWAInstallPrompt />
+        )}
 
         <ThemeProvider>
           <LayoutProvider>
             <ActiveThemeProvider>
               <div className="bg-background fixed inset-0 flex flex-col overflow-hidden">
                 <SiteHeader />
-                <div className="hidden md:block flex-1 min-h-0 ">
+
+                {/* Wide version - desktop layout */}
+                <div className="hidden md:flex flex-1 min-h-0 w-full">
                   <ResizablePanelGroup direction="horizontal" className="h-full">
                     <ResizablePanel defaultSize={40} minSize={35} className="relative">
                       <OnlineStatusProvider>
                         <div className="absolute inset-0 overflow-hidden">
                           {left}
-                          </div> </OnlineStatusProvider>
+                        </div>
+                      </OnlineStatusProvider>
                     </ResizablePanel>
                     <ResizableHandle withHandle />
                     <ResizablePanel defaultSize={60} minSize={35} className="relative">
-
-
                       <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
                         {right}
                       </main>
-
-
                     </ResizablePanel>
                   </ResizablePanelGroup>
                 </div>
-                <AifaFooter/>
+
+                {/* Mobile version - mobile layout */}
+                <div className="w-full md:hidden flex-1 min-h-0 relative">
+                  <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
+                    {right}
+                  </main>
                 </div>
+
+                <AifaFooter />
+              </div>
 
               <Analytics />
             </ActiveThemeProvider>
           </LayoutProvider>
         </ThemeProvider>
+        
         <noscript>
           <div
             className="fixed inset-x-0 bottom-0 z-50 w-full bg-neutral-900 text-white border-t border-white/20 shadow-[0_-8px_24px_rgba(0,0,0,0.25)]"
@@ -203,8 +209,6 @@ export default async function RootLayout({
                     </p>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
