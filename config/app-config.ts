@@ -98,12 +98,12 @@ export const appConfig: AppConfig = {
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'loading-dark': {
-    path: '/app-images/app-config-images/loading-dark.svg',
+    path: '/app-images/app-config-images/loading-dark.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'loading-light': {
-    path: '/app-images/app-config-images/loading-light.svg',
+    path: '/app-images/app-config-images/loading-light.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
@@ -118,12 +118,12 @@ export const appConfig: AppConfig = {
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'error500-dark': {
-    path: '/app-images/app-config-images/error500-dark.svg',
+    path: '/app-images/app-config-images/error500-dark.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'error500-light': {
-    path: '/app-images/app-config-images/error500-light.svg',
+    path: '/app-images/app-config-images/error500-light.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
