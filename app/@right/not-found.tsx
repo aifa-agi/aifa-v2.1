@@ -83,10 +83,6 @@ export default function RightNotFoundPage() {
         </div>
       </div>
 
-      {/* Footer text */}
-      <p className="text-muted-foreground text-sm mt-auto mb-4">
-        {appConfig.short_name} - {appConfig.chatBrand}
-      </p>
     </div>
   );
 }

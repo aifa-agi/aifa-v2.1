@@ -50,7 +50,7 @@ export default function DefaultPage() {
       </div>
 
       {/* CTA Button */}
-      <Link href="/" className="text-xl w-full mt-auto mb-2">
+      <Link href="/" className="text-xl w-full mt-auto mb-4">
         <Button className="w-full">{appConfig.chatBrand}</Button>
       </Link>
     </div>

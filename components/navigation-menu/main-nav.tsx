@@ -54,7 +54,7 @@ export function MainNav({ items, className }: MainNavProps) {
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <Link
-                          className="flex h-auto w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none transition-colors hover:bg-accent focus:shadow-md"
+                          className="flex h-auto w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none transition-colors hover:bg-accent focus:shadow-md rounded-md"
                           href="/"
                         >
                           <div className="mb-4 flex justify-center">

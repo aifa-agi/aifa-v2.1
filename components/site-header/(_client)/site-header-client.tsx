@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button"
 
 import { MenuCategory } from "@/types/menu-types"
 import { LeftSlotHidden } from "@/components/left-slot-hidden"
-import { MainNav } from "@/components/main-nav"
+import { MainNav } from "@/components/navigation-menu/main-nav"
 import { GitHubLink } from "@/components/github-link"
 import { ModeSwitcher } from "@/components/mode-switcher"
+import { MobileNav } from "@/components/navigation-menu/mobile-nav"
 
 interface SiteHeaderClientProps {
   appName: string
@@ -44,9 +45,15 @@ export function SiteHeaderClient({
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="hidden md:flex">{/* <CommandMenu /> */}</div>
+              <div className="hidden md:flex">
+                {/* <CommandMenu
+                  tree={pageTree}
+                  navItems={siteConfig.navItems}
+                  blocks={blocks}
+                /> */}
+              </div>
               <GitHubLink />
-              <LeftSlotHidden className="hidden md:flex" />
+              {/* <LeftSlotHidden className="hidden md:flex" /> */}
               <ModeSwitcher />
               <Button
                 asChild
@@ -58,6 +65,10 @@ export function SiteHeaderClient({
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
+              <MobileNav
+  categories={categories}
+  className="flex lg:hidden"
+/>
             </div>
           </div>
         </div>
