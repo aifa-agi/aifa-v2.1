@@ -20,10 +20,9 @@ type ApiResponse = {
   mock?: boolean;
 };
 
-export const dynamic = 'force-dynamic';
+
 
 export default function LeadFormModal() {
-  console.log('✅ Modal intercepted!');
   const router = useRouter();
   const { t } = useTranslationModal();
   const [isSubmitting, setIsSubmitting] = useState(false);
