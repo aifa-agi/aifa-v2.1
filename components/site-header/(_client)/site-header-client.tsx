@@ -46,23 +46,20 @@ export function SiteHeaderClient({
 
             <div className="flex items-center gap-2">
               <div className="hidden md:flex">
-                {/* <CommandMenu
-                  tree={pageTree}
-                  navItems={siteConfig.navItems}
-                  blocks={blocks}
-                /> */}
+               
               </div>
-              <GitHubLink />
-              {/* <LeftSlotHidden className="hidden md:flex" /> */}
-              <ModeSwitcher />
+            
+              <div className="hidden sm:flex"><GitHubLink  /></div>
+              
+              <div className="hidden sm:flex"><ModeSwitcher /></div>
               <Button
                 asChild
                 size="sm"
-                className="hidden rounded-full bg-white text-black hover:bg-white/90 sm:inline-flex"
+                className="rounded-full bg-white text-black hover:bg-white/90 sm:inline-flex mr-2"
               >
                 <Link href="/login" className="flex items-center gap-1">
                   Login
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 hidden md:nline-flex" />
                 </Link>
               </Button>
               <MobileNav

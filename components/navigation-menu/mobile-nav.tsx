@@ -37,7 +37,7 @@ export function MobileNav({
             className
           )}
         >
-          <span className="flex h-8 items-center text-base leading-none font-medium text-white">
+          <span className=" h-8 items-center text-base leading-none font-medium text-white hidden sm:flex" >
             Menu
           </span>
           <div className="relative flex h-8 w-4 items-center justify-center">
