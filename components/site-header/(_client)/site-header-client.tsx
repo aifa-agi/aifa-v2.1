@@ -10,6 +10,7 @@ import { MainNav } from "@/components/navigation-menu/main-nav"
 import { GitHubLink } from "@/components/github-link"
 import { ModeSwitcher } from "@/components/mode-switcher"
 import { MobileNav } from "@/components/navigation-menu/mobile-nav"
+import { RightLoginButton } from "@/components/right-login-button"
 
 interface SiteHeaderClientProps {
   appName: string
@@ -46,26 +47,30 @@ export function SiteHeaderClient({
 
             <div className="flex items-center gap-2">
               <div className="hidden md:flex">
-               
+
               </div>
-            
-              <div className="hidden sm:flex"><GitHubLink  /></div>
-              
+
+              <div className="hidden sm:flex"><GitHubLink /></div>
+
               <div className="hidden sm:flex"><ModeSwitcher /></div>
               <Button
                 asChild
                 size="sm"
-                className="rounded-full bg-white text-black hover:bg-white/90 sm:inline-flex mr-2"
+                className="rounded-full bg-white text-black hover:bg-white/90 sm:inline-flex mr-2 hidden sm:flex"
               >
                 <Link href="/login" className="flex items-center gap-1">
                   Login
-                  <ArrowRight className="h-4 w-4 hidden md:nline-flex" />
+                  <ArrowRight className="h-4 w-4 " />
                 </Link>
               </Button>
+              <div 
+              >
+                <RightLoginButton />
+                </div>
               <MobileNav
-  categories={categories}
-  className="flex lg:hidden"
-/>
+                categories={categories}
+                className="flex lg:hidden"
+              />
             </div>
           </div>
         </div>

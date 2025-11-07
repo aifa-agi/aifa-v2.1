@@ -104,6 +104,13 @@ function LoadingIllustrationSSR() {
             Production-ready Next.js 15 starter with parallel routes, intercepting routes, and complex UI patterns. Build modal dialogs, sidebars, and multi-panel layouts without route changes — fully SEO-optimized.
           </p>
 
+          {/* Hero Image */}
+        <div className="relative block sm:hidden">
+          <div className="aspect-[4/3] w-full overflow-hidden rounded-lg">
+            <LoadingIllustrationSSR />
+          </div>
+        </div>
+
           {/* CTA Buttons */}
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
@@ -127,7 +134,7 @@ function LoadingIllustrationSSR() {
         </div>
 
         {/* Hero Image */}
-        <div className="relative">
+        <div className="relative  hidden sm:block">
           <div className="aspect-[4/3] w-full overflow-hidden rounded-lg">
             <LoadingIllustrationSSR />
           </div>
