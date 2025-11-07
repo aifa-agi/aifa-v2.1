@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
 import { appConfig } from "@/config/app-config";
-import { useTranslationModal } from "../../(_INTERCEPTION_MODAL)/(_shared)/(_translations)/translation";
+import { useTranslationModal } from "../../(_shared)/(_translations)/translation";
 
 // Client component with translation support
 function LeadFormPageContent() {

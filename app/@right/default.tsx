@@ -9,8 +9,7 @@ export const metadata: Metadata = constructMetadata({
   contentType: 'website',
 })
 
-export const dynamic = 'force-static'
-export const revalidate = 3600
+
 
 /**
  * Default Page for @right slot

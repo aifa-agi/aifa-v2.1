@@ -115,7 +115,6 @@ export default async function RootLayout({
             `,
           }}
         />
-        <Script src="/register-sw.js" strategy="beforeInteractive" async={false} />
       </head>
       <body
         className={cn(

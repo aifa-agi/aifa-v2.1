@@ -28,7 +28,7 @@ export default function ThankYouPage() {
 
             <div className="min-h-screen flex items-center justify-center bg-background p-4">
                 <div className="max-w-2xl w-full">
-                    <div className="bg-card rounded-2xl shadow-2xl p-8 md:p-12 text-center border">
+                    <div className="rounded-2xl shadow-2xl p-8 md:p-12 text-center ">
                         {/* Success Illustration (theme-aware via CSS) */}
                         <div className="mb-8">
                             {/* Dark theme illustration */}
@@ -107,15 +107,7 @@ export default function ThankYouPage() {
                             </Link>
                         </div>
 
-                        {/* Additional Info */}
-                        <div className="mt-8 pt-6 border-t border-border">
-                            <div className="flex items-center justify-center text-sm text-muted-foreground">
-                                <Users className="w-4 h-4 mr-2" />
-                                <span>
-                                    {appConfig.short_name} • {appConfig.chatBrand}
-                                </span>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

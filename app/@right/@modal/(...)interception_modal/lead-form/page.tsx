@@ -1,8 +1,8 @@
-// app/@right/@modal/(...)interception_modal/lead-form/page.tsx
+// app/@right/@modal/(...) interception_modal/lead-form/page.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, CheckCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslationModal } from "@/app/@right/(_INTERCEPTION_MODAL)/(_shared)/(_translations)/translation";
@@ -20,9 +20,9 @@ type ApiResponse = {
   mock?: boolean;
 };
 
-
-
 export default function LeadFormModal() {
+  console.log("(...)interception_modal/lead-form/page.tsx loaded");
+
   const router = useRouter();
   const { t } = useTranslationModal();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,26 +30,50 @@ export default function LeadFormModal() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [message, setMessage] = useState<string>("");
 
-  // Close modal when clicking on overlay
+  // ✅ РІШЕННЯ 1: Закрийте модаль И перейдіть на /thank-you
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    const timer = setTimeout(() => {
+      console.log("[Modal] Success! Closing modal and redirecting to /thank-you");
+
+      // ✅ Закрийте модаль через router.back()
+      // Це видалить модаль з DOM (повернеться до @modal/default.tsx)
+      router.back();
+
+      // ✅ ПОТІМ перейдіть на /thank-you сторінку
+      // Невелика затримка для завершення закриття модалі
+      setTimeout(() => {
+        router.push("/thank-you");
+      }, 50);
+
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [isSuccess, router]);
+
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
+      if (isSubmitting || isSuccess) {
+        return;
+      }
       router.back();
     }
   };
 
-  // Close modal and navigate back
   const handleClose = () => {
+    if (isSubmitting) {
+      return;
+    }
     router.back();
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrors({});
     setMessage("");
 
-    // Extract form data
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get("name") as string,
@@ -58,7 +82,6 @@ export default function LeadFormModal() {
     };
 
     try {
-      // Send POST request to API route
       const response = await fetch("/api/lead-form", {
         method: "POST",
         headers: {
@@ -69,15 +92,10 @@ export default function LeadFormModal() {
 
       const result: ApiResponse = await response.json();
 
-      // Handle successful submission
       if (result.success) {
+        console.log("[Modal] Form submitted successfully");
         setIsSuccess(true);
-        // Auto close modal after 3 seconds
-        setTimeout(() => {
-          router.back();
-        }, 3000);
       } else {
-        // Handle validation or submission errors
         if (result.errors) {
           setErrors(result.errors);
         }
@@ -86,34 +104,25 @@ export default function LeadFormModal() {
         }
       }
     } catch (error) {
-      console.error("Submit error:", error);
+      console.error("[Modal] Submit error:", error);
       setMessage(t("Submit Error"));
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Success screen
   if (isSuccess) {
     return (
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
         onClick={handleOverlayClick}
       >
         <div
           className="bg-background rounded-lg shadow-2xl relative w-full max-w-md p-8"
           onClick={(e) => e.stopPropagation()}
         >
-          <button
-            onClick={handleClose}
-            className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label={t("Close")}
-          >
-            <X size={24} />
-          </button>
-
           <div className="text-center">
-            <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
+            <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4 animate-pulse" />
             <h2 className="text-2xl font-bold mb-4">
               {t("Lead Form Submitted")}
             </h2>
@@ -129,10 +138,9 @@ export default function LeadFormModal() {
     );
   }
 
-  // Form screen
   return (
     <div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       onClick={handleOverlayClick}
     >
       <div
@@ -143,20 +151,18 @@ export default function LeadFormModal() {
           onClick={handleClose}
           className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors z-10"
           aria-label={t("Close")}
+          disabled={isSubmitting}
         >
           <X size={24} />
         </button>
 
         <div className="p-6">
-          {/* Header section */}
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold mb-2">{t("Try Free")}</h2>
             <p className="text-muted-foreground">{t("Free Access Description")}</p>
           </div>
 
-          {/* Form element */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name field */}
             <div>
               <label
                 htmlFor="name"
@@ -169,10 +175,12 @@ export default function LeadFormModal() {
                 id="name"
                 name="name"
                 required
+                disabled={isSubmitting}
                 className="w-full px-3 py-2 border border-input rounded-md shadow-sm 
                           focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent
                           bg-background text-foreground
-                          placeholder:text-muted-foreground"
+                          placeholder:text-muted-foreground
+                          disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder={t("Name Placeholder")}
               />
               {errors.name && (
@@ -182,7 +190,6 @@ export default function LeadFormModal() {
               )}
             </div>
 
-            {/* Phone field */}
             <div>
               <label
                 htmlFor="phone"
@@ -195,10 +202,12 @@ export default function LeadFormModal() {
                 id="phone"
                 name="phone"
                 required
+                disabled={isSubmitting}
                 className="w-full px-3 py-2 border border-input rounded-md shadow-sm 
                           focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent
                           bg-background text-foreground
-                          placeholder:text-muted-foreground"
+                          placeholder:text-muted-foreground
+                          disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder={t("Phone Placeholder")}
               />
               {errors.phone && (
@@ -208,7 +217,6 @@ export default function LeadFormModal() {
               )}
             </div>
 
-            {/* Email field */}
             <div>
               <label
                 htmlFor="email"
@@ -221,10 +229,12 @@ export default function LeadFormModal() {
                 id="email"
                 name="email"
                 required
+                disabled={isSubmitting}
                 className="w-full px-3 py-2 border border-input rounded-md shadow-sm 
                           focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent
                           bg-background text-foreground
-                          placeholder:text-muted-foreground"
+                          placeholder:text-muted-foreground
+                          disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder={t("Email Placeholder")}
               />
               {errors.email && (
@@ -234,14 +244,12 @@ export default function LeadFormModal() {
               )}
             </div>
 
-            {/* Error message alert */}
             {message && (
               <div className="p-3 bg-destructive/10 border border-destructive/50 rounded-md">
                 <p className="text-sm text-destructive">{message}</p>
               </div>
             )}
 
-            {/* Submit button */}
             <div className="pt-2">
               <Button
                 type="submit"
@@ -265,7 +273,6 @@ export default function LeadFormModal() {
             </div>
           </form>
 
-          {/* Privacy notice */}
           <p className="text-xs text-muted-foreground text-center mt-4">
             {t("Privacy Agreement")}
           </p>
