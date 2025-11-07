@@ -63,8 +63,7 @@ export function SiteHeaderClient({
                   <ArrowRight className="h-4 w-4 " />
                 </Link>
               </Button>
-              <div 
-              >
+              <div className="flex sm:hidden">
                 <RightLoginButton />
                 </div>
               <MobileNav
