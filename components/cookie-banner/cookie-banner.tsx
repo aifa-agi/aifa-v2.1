@@ -12,7 +12,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { X, Settings, BarChart3, Target, Shield } from "lucide-react";
 import { appConfig } from "@/config/app-config";
-import { useTranslationCookie } from "../../lib/translation";
+import { useTranslationCookie } from "./translation";
 
 type CookieConsent = {
   essential: boolean;

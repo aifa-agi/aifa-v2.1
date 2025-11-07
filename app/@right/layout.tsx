@@ -1,15 +1,24 @@
-// app/@right/layout.tsx
+// app/@right/layout.tsxS
+
 import React from "react";
 
-/**
- * Comments in English:
- * Right slot layout - acts as a container for public content
- * Does not handle 404 directly (handled by catch-all routes)
- */
-export default function RightLayout({
-  children,
-}: {
+interface RightLayoutProps {
   children: React.ReactNode;
-}) {
-  return <>{children}</>;
+  modal: React.ReactNode;
+}
+
+export default async function RightLayout({
+  children,
+  modal,
+}: RightLayoutProps) {
+
+  return (
+    <>
+      {children}
+
+
+      {modal}
+
+    </>
+  );
 }

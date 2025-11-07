@@ -24,11 +24,9 @@ export default function HomePage() {
 
 
 function LoadingIllustrationSSR() {
-  // Получение путей иллюстраций для светлой и тёмной темы
   const darkPath = getHomePageIllustration("dark");
   const lightPath = getHomePageIllustration("light");
 
-  // ✅ Валидация путей перед рендерингом
   const darkSrc =
     darkPath && typeof darkPath === "string" && darkPath.length > 0
       ? darkPath
@@ -38,7 +36,6 @@ function LoadingIllustrationSSR() {
       ? lightPath
       : null;
 
-  // ✅ Если нет путей, показываем fallback
   if (!darkSrc && !lightSrc) {
     return (
       <div className="relative h-full w-full flex items-center justify-center bg-gray-100 dark:bg-gray-900">
@@ -49,7 +46,6 @@ function LoadingIllustrationSSR() {
 
   return (
     <div className="relative h-full w-full">
-      {/* Dark theme illustration - видна только когда применён класс 'dark' */}
       {darkSrc && (
         <Image
           src={darkSrc}
@@ -62,7 +58,6 @@ function LoadingIllustrationSSR() {
         />
       )}
 
-      {/* Light theme illustration - видна по умолчанию, скрыта когда применён класс 'dark' */}
       {lightSrc && (
         <Image
           src={lightSrc}
@@ -120,11 +115,12 @@ function LoadingIllustrationSSR() {
               Get Starter
             </Link>
             <Link
-              href="/docs/parallel-routes"
+              href="/interception_modal/lead-form"
               className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
             >
-              Read Docs
+              Check modal
             </Link>
+            
           </div>
 
 

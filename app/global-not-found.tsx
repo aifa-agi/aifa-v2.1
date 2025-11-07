@@ -149,7 +149,7 @@ export default function GlobalNotFoundPage() {
 
                     {/* Action buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-                      <Link href="/" className="flex-1">
+                      <Link href="/home" className="flex-1">
                         <Button className="w-full" size="lg">
                           Go to Home
                         </Button>

@@ -1,7 +1,7 @@
 // @/app/@right/(_service)/(_libs)/translation.ts
 
 import { appConfig } from "@/config/app-config";
-import translations from "../components/cookie-banner/translations.json";
+import translations from "./translation.json";
 import {
   DEFAULT_LANGUAGE,
   SupportedLanguage,

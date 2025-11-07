@@ -1,0 +1,250 @@
+{
+  "Mobile Menu": {
+    "ru": "Мобильное меню",
+    "en": "Mobile Menu",
+    "es": "Menú móvil",
+    "de": "Mobilmenü",
+    "fr": "Menu mobile",
+    "it": "Menu mobile"
+  },
+  "Open Menu": {
+    "ru": "Открыть меню",
+    "en": "Open Menu",
+    "es": "Abrir menú",
+    "de": "Menü öffnen",
+    "fr": "Ouvrir le menu",
+    "it": "Apri menu"
+  },
+  "Close Menu": {
+    "ru": "Закрыть меню",
+    "en": "Close Menu",
+    "es": "Cerrar menú",
+    "de": "Menü schließen",
+    "fr": "Fermer le menu",
+    "it": "Chiudi menu"
+  },
+  "Contents": {
+    "ru": "Содержание",
+    "en": "Contents",
+    "es": "Contenido",
+    "de": "Inhalt",
+    "fr": "Contenu",
+    "it": "Indice"
+  },
+  "Categories": {
+    "ru": "Категории",
+    "en": "Categories",
+    "es": "Categorías",
+    "de": "Kategorien",
+    "fr": "Catégories",
+    "it": "Categorie"
+  },
+  "Theme Switcher": {
+    "ru": "Переключатель темы",
+    "en": "Theme Switcher",
+    "es": "Cambiar tema",
+    "de": "Theme wechseln",
+    "fr": "Changer de thème",
+    "it": "Cambia tema"
+  },
+  "Light": {
+    "ru": "Светлая",
+    "en": "Light",
+    "es": "Claro",
+    "de": "Hell",
+    "fr": "Clair",
+    "it": "Chiaro"
+  },
+  "Dark": {
+    "ru": "Тёмная",
+    "en": "Dark",
+    "es": "Oscuro",
+    "de": "Dunkel",
+    "fr": "Sombre",
+    "it": "Scuro"
+  },
+  "System": {
+    "ru": "Системная",
+    "en": "System",
+    "es": "Sistema",
+    "de": "System",
+    "fr": "Système",
+    "it": "Sistema"
+  },
+  "Home page": {
+    "ru": "Главная страница",
+    "en": "Home page",
+    "es": "Página principal",
+    "de": "Startseite",
+    "fr": "Page d'accueil",
+    "it": "Pagina principale"
+  },
+  "Free Access Description": {
+    "ru": "Оставьте заявку и получите доступ к тестированию нашей платформы",
+    "en": "Submit a request and get access to our platform testing",
+    "es": "Envíe una solicitud y obtenga acceso a las pruebas de nuestra plataforma",
+    "de": "Senden Sie eine Anfrage und erhalten Sie Zugang zu Tests unserer Plattform",
+    "fr": "Soumettez une demande et obtenez l'accès aux tests de notre plateforme",
+    "it": "Invia una richiesta e ottieni l'accesso ai test della nostra piattaforma"
+  },
+  "Name": {
+    "ru": "Имя",
+    "en": "Name",
+    "es": "Nombre",
+    "de": "Name",
+    "fr": "Nom",
+    "it": "Nome"
+  },
+  "Name Placeholder": {
+    "ru": "Введите ваше имя",
+    "en": "Enter your name",
+    "es": "Ingrese su nombre",
+    "de": "Geben Sie Ihren Namen ein",
+    "fr": "Entrez votre nom",
+    "it": "Inserisci il tuo nome"
+  },
+  "Phone": {
+    "ru": "Телефон",
+    "en": "Phone",
+    "es": "Teléfono",
+    "de": "Telefon",
+    "fr": "Téléphone",
+    "it": "Telefono"
+  },
+  "Phone Placeholder": {
+    "ru": "+7 (999) 123-45-67",
+    "en": "+1 (555) 123-4567",
+    "es": "+34 612 345 678",
+    "de": "+49 30 12345678",
+    "fr": "+33 1 23 45 67 89",
+    "it": "+39 02 1234567"
+  },
+  "Email": {
+    "ru": "Email",
+    "en": "Email",
+    "es": "Email",
+    "de": "E-Mail",
+    "fr": "Email",
+    "it": "Email"
+  },
+  "Email Placeholder": {
+    "ru": "example@email.com",
+    "en": "example@email.com",
+    "es": "ejemplo@email.com",
+    "de": "beispiel@email.com",
+    "fr": "exemple@email.com",
+    "it": "esempio@email.com"
+  },
+  "Submit Error": {
+    "ru": "Произошла ошибка при отправке. Попробуйте еще раз.",
+    "en": "An error occurred while sending. Please try again.",
+    "es": "Ocurrió un error al enviar. Inténtelo de nuevo.",
+    "de": "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "fr": "Une erreur s'est produite lors de l'envoi. Veuillez réessayer.",
+    "it": "Si è verificato un errore durante l'invio. Riprova."
+  },
+  "Sending": {
+    "ru": "Отправка...",
+    "en": "Sending...",
+    "es": "Enviando...",
+    "de": "Senden...",
+    "fr": "Envoi en cours...",
+    "it": "Invio..."
+  },
+  "Submit Lead": {
+    "ru": "Отправить заявку",
+    "en": "Submit Request",
+    "es": "Enviar solicitud",
+    "de": "Anfrage senden",
+    "fr": "Envoyer la demande",
+    "it": "Invia richiesta"
+  },
+  "Privacy Agreement": {
+    "ru": "Нажимая \"Отправить заявку\", вы соглашаетесь с обработкой персональных данных",
+    "en": "By clicking \"Submit Request\", you agree to the processing of personal data",
+    "es": "Al hacer clic en \"Enviar solicitud\", acepta el procesamiento de datos personales",
+    "de": "Durch Klicken auf \"Anfrage senden\" stimmen Sie der Verarbeitung personenbezogener Daten zu",
+    "fr": "En cliquant sur \"Envoyer la demande\", vous acceptez le traitement des données personnelles",
+    "it": "Cliccando \"Invia richiesta\", accetti il trattamento dei dati personali"
+  },
+  "Go to Homepage": {
+    "ru": "Перейти на главную страницу",
+    "en": "Go to Homepage",
+    "es": "Ir a la página principal",
+    "de": "Zur Startseite gehen",
+    "fr": "Aller à la page d'accueil",
+    "it": "Vai alla homepage"
+  },
+  "Use Form on Homepage": {
+    "ru": "Для получения заявки воспользуйтесь формой на главной странице",
+    "en": "To submit a request, please use the form on the homepage",
+    "es": "Para enviar una solicitud, utilice el formulario en la página principal",
+    "de": "Um eine Anfrage zu stellen, verwenden Sie bitte das Formular auf der Startseite",
+    "fr": "Pour soumettre une demande, veuillez utiliser le formulaire sur la page d'accueil",
+    "it": "Per inviare una richiesta, utilizza il modulo sulla homepage"
+  },
+  "Required Field": {
+    "ru": "*",
+    "en": "*",
+    "es": "*",
+    "de": "*",
+    "fr": "*",
+    "it": "*"
+  },
+  "Close": {
+    "ru": "Закрыть",
+    "en": "Close",
+    "es": "Cerrar",
+    "de": "Schließen",
+    "fr": "Fermer",
+    "it": "Chiudi"
+  },
+  "Thank You Title": {
+    "ru": "Спасибо за вашу заявку!",
+    "en": "Thank you for your request!",
+    "es": "¡Gracias por su solicitud!",
+    "de": "Vielen Dank für Ihre Anfrage!",
+    "fr": "Merci pour votre demande !",
+    "it": "Grazie per la tua richiesta!"
+  },
+  "Thank You Message": {
+    "ru": "Мы получили вашу заявку и скоро свяжемся с вами для дальнейшего обсуждения.",
+    "en": "We have received your request and will contact you soon for further discussion.",
+    "es": "Hemos recibido su solicitud y nos pondremos en contacto pronto para mayor información.",
+    "de": "Wir haben Ihre Anfrage erhalten und werden uns bald für weitere Gespräche bei Ihnen melden.",
+    "fr": "Nous avons reçu votre demande et vous contacterons bientôt pour plus d'informations.",
+    "it": "Abbiamo ricevuto la tua richiesta e ti contatteremo presto per ulteriori informazioni."
+  },
+  "Back to Home": {
+    "ru": "Вернуться на главную страницу",
+    "en": "Back to Home Page",
+    "es": "Volver a la página principal",
+    "de": "Zurück zur Startseite",
+    "fr": "Retour à la page d'accueil",
+    "it": "Torna alla homepage"
+  },
+  "What Happens Next": {
+    "ru": "Что происходит дальше",
+    "en": "What happens next",
+    "es": "Qué pasa después",
+    "de": "Was passiert als nächstes",
+    "fr": "Que se passe-t-il ensuite",
+    "it": "Cosa succede dopo"
+  },
+  "Next Steps Description": {
+    "ru": "Наш специалист свяжется с вами в течение 24 часов для обсуждения ваших потребностей и демонстрации возможностей платформы.",
+    "en": "Our specialist will contact you within 24 hours to discuss your needs and demonstrate the platform capabilities.",
+    "es": "Nuestro especialista se pondrá en contacto con usted en 24 horas para discutir sus necesidades y demostrar las capacidades de la plataforma.",
+    "de": "Unser Spezialist wird sich innerhalb von 24 Stunden mit Ihnen in Verbindung setzen, um Ihre Bedürfnisse zu besprechen und die Plattform-Funktionen zu demonstrieren.",
+    "fr": "Notre spécialiste vous contactera dans les 24 heures pour discuter de vos besoins et démontrer les capacités de la plateforme.",
+    "it": "Il nostro specialista ti contatterà entro 24 ore per discutere le tue esigenze e dimostrare le capacità della piattaforma."
+  },
+  "Try Free": {
+    "ru": "Попробовать бесплатно",
+    "en": "Try free",
+    "es": "Probar gratis",
+    "de": "Kostenlos testen",
+    "fr": "Essai gratuit",
+    "it": "Prova gratis"
+  }
+}

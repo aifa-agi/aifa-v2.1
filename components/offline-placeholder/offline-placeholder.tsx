@@ -4,7 +4,7 @@
 
 import React from "react";
 import { WifiOff } from "lucide-react";
-import { useTranslationCookie } from "@/lib/translation";
+import { useTranslationCookie } from "@/components/cookie-banner/translation";
 
 export function OfflinePlaceholder() {
   const { t } = useTranslationCookie();
