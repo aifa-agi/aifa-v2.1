@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { appConfig, getHomePageIllustration } from '@/config/app-config';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
+import { AnimatedAIButton } from './animated-aI-button';
 
 
 
@@ -21,7 +22,7 @@ function Pill({ text }: PillProps) {
 }
 
 export default function HomePage() {
-
+ 
 
 function LoadingIllustrationSSR() {
   const darkPath = getHomePageIllustration("dark");
@@ -43,6 +44,7 @@ function LoadingIllustrationSSR() {
       </div>
     );
   }
+  
 
   return (
     <div className="relative h-full w-full">
@@ -161,6 +163,8 @@ function LoadingIllustrationSSR() {
             <div className="text-xs text-muted-foreground">Safe routing</div>
           </div>
         </div>
+        <div className='flex md:hidden'><AnimatedAIButton /></div>
+        
       </section>
       {/* Features Section */}
       <section className="grid gap-8 sm:grid-cols-3 px-4" aria-labelledby="features-title">
