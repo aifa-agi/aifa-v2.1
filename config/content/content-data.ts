@@ -28,6 +28,29 @@ export const contentData = {
           ]
         },
         {
+          "id": "blog-001-ai-chat",
+          "href": "/chat",
+          "roles": [
+            "guest"
+          ],
+          "hasBadge": false,
+          "type": "blog",
+          "isPublished": true,
+          "isAddedToPrompt": false,
+          "isVectorConnected": false,
+          "isChatSynchronized": false,
+          "order": 1,
+          "title": "AI Chat",
+          "description": "Try Chat with Ai",
+          "images": [],
+          "keywords": [
+            "AI",
+            "trends",
+            "technology",
+            "machine learning"
+          ]
+        },
+        {
           "id": "ks7eqcf6z1fhes1lwiwz75zn",
           "href": "/about",
           "roles": [
@@ -70,6 +93,7 @@ export const contentData = {
       ],
       "order": 1
     },
+    
     {
       "title": "Blog",
       "href": "/blog",

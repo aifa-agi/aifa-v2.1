@@ -11,6 +11,7 @@ import { GitHubLink } from "@/components/github-link"
 import { ModeSwitcher } from "@/components/mode-switcher"
 import { MobileNav } from "@/components/navigation-menu/mobile-nav"
 import { RightLoginButton } from "@/components/right-login-button"
+import Image from "next/image"
 
 interface SiteHeaderClientProps {
   appName: string
@@ -24,15 +25,17 @@ export function SiteHeaderClient({
   categories,
 }: SiteHeaderClientProps) {
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-30">
       <div className="container px-6 mt-4">
         <div className="mx-auto rounded-full border border-white/10 bg-black/80 backdrop-blur-sm">
           <div className="flex h-12 items-center justify-between px-2">
             <div className="flex items-center gap-3 ">
               <Link href="/" className="flex items-center gap-2">
-                <img
+                <Image
                   src={appLogo}
                   alt={appName}
+                  width={32}
+                  height={32}
                   className="h-8 w-8 rounded-full"
                 />
                 <span className="inline-block text-sm font-semibold text-white md:text-base">
@@ -56,7 +59,7 @@ export function SiteHeaderClient({
               <Button
                 asChild
                 size="sm"
-                className="rounded-full bg-white text-black hover:bg-white/90 sm:inline-flex mr-2 hidden sm:flex"
+                className="rounded-full bg-white text-black hover:bg-white/70 sm:inline-flex mr-2 hidden sm:flex"
               >
                 <Link href="/login" className="flex items-center gap-1">
                   Login

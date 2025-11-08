@@ -27,6 +27,13 @@ export function MobileNav({
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
 
+  // Функция для проверки, должна ли страница быть скрыта на больших экранах
+  const shouldHidePage = (href: string | undefined) => {
+    if (!href) return false
+    // Скрываем страницу /chat на экранах больше sm (md и выше)
+    return href.includes("chat")
+  }
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -114,7 +121,7 @@ export function MobileNav({
                   <div className="flex flex-col gap-3">
                     {category.pages.slice(0, 10).map(
                       (page) =>
-                        page.href && (
+                        page.href && !shouldHidePage(page.href) ? (
                           <MobileNavLink
                             key={page.id}
                             href={page.href}
@@ -130,6 +137,23 @@ export function MobileNav({
                               </p>
                             )}
                           </MobileNavLink>
+                        ) : (
+                          <div key={page.id} className="flex md:hidden">
+                          <MobileNavLink
+                            key={page.id}
+                            href="/interception_chat"
+                            onOpenChange={setOpen}
+                          >
+                            <div className="text-sm font-medium capitalize">
+                              {page.title}
+                            </div>
+                            {page.description && (
+                              <p className="text-xs text-muted-foreground line-clamp-1">
+                                {page.description}
+                              </p>
+                            )}
+                          </MobileNavLink>
+                          </div>
                         )
                     )}
                   </div>
@@ -159,7 +183,7 @@ export function MobileNav({
                 <div className="flex flex-col gap-3">
                   {category.pages.slice(0, 10).map(
                     (page) =>
-                      page.href && (
+                      page.href && !shouldHidePage(page.href) && (
                         <MobileNavLink
                           key={page.id}
                           href={page.href}

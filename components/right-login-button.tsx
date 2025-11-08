@@ -31,7 +31,7 @@ export function RightLoginButton({
       <DialogTrigger asChild>
         <Button
           size="sm"
-          className="rounded-full bg-white text-black hover:bg-white/90 mr-2"
+          className="rounded-full bg-white text-black hover:bg-white/70 mr-2"
         >
           Login
         </Button>
