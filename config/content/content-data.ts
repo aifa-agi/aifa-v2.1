@@ -71,6 +71,26 @@ export const contentData = {
           ]
         },
         {
+          "id": "ks7eqcf6z1fhes1lwi3575zn",
+          "href": "/about-aifa",
+          "roles": [
+            "guest"
+          ],
+          "hasBadge": false,
+          "type": "homePage",
+          "isPublished": false,
+          "isAddedToPrompt": false,
+          "isVectorConnected": false,
+          "isChatSynchronized": false,
+          "order": 2,
+          "title": "About AIFA",
+          "description": "Innovative architecture combining AI, Web3, and perfect SEO for maximum business efficiency and developer productivity.",
+          "images": [],
+          "keywords": [
+            "Ai"
+          ]
+        },
+        {
           "id": "ks7eqcf6z1fhes1lwiwz75z2",
           "href": "/404-example",
           "roles": [
