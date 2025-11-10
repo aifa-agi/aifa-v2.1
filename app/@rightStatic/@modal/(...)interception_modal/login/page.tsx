@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { X, CheckCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslationModal } from "@/app/@rightStatic/(_INTERCEPTION_MODAL)/(_shared)/(_translations)/get-modal-translation";
+import { getModalTranslation } from "@/app/@rightStatic/(_INTERCEPTION_MODAL)/(_shared)/(_translations)/get-modal-translation";
 
 type FormErrors = {
   name?: string[];
@@ -24,7 +24,7 @@ export default function LeadFormModal() {
   console.log("(...)interception_modal/lead-form/page.tsx loaded");
 
   const router = useRouter();
-  const { t } = useTranslationModal();
+  const { t } = getModalTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
