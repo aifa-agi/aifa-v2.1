@@ -1,4 +1,4 @@
-// @/app/@right/page.tsx
+//app/@rightStatic/page.tsx
 
 import { constructMetadata } from '@/lib/construct-metadata';
 import HomePage from '@/components/home-page';

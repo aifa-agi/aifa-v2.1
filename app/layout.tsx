@@ -1,4 +1,4 @@
-// app/layout.tsx
+//app/layout.tsx
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import { constructMetadata } from '@/lib/construct-metadata'

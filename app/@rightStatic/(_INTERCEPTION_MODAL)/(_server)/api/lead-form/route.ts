@@ -1,4 +1,4 @@
-// @/app/api/lead-form/route.ts
+//app/@rightStatic/(_INTERCEPTION_MODAL)/(_server)/api/lead-form/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';

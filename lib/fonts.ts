@@ -1,4 +1,4 @@
-// @/lib/fonts.ts
+//lib/fonts.ts
 
 import {
   Geist_Mono as FontMono,

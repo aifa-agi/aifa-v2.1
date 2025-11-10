@@ -1,3 +1,4 @@
+//components/aifa-footer.tsx
 "use client"
 import { appConfig } from "@/config/app-config"
 import { GitHubLink } from "./github-link";

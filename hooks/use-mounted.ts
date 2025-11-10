@@ -1,4 +1,4 @@
-// @/hooks/use-mounted.ts
+//hooks/use-mounted.ts
 
 import * as React from "react"
 

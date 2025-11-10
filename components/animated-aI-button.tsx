@@ -1,4 +1,4 @@
-// components/animated-ai-button.tsx
+//components/animated-ai-button.tsx
 "use client"
 
 import React from "react"

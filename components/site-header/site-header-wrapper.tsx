@@ -1,4 +1,4 @@
-// components/site-header/site-header.tsx
+//components/site-header/site-header.tsx
 
 import { isAuthenticated } from "@/app/@left/(_AUTH)/login/(_server)/actions/auth"
 import { SiteHeaderClient } from "./site-header-client"

@@ -1,7 +1,5 @@
+//components/tailwind-indicator.tsx
 const SHOW = true
-
-// @/components/tailwind-indicator.tsx
-
 export function TailwindIndicator() {
   if (process.env.NODE_ENV === "production" || !SHOW) {
     return null

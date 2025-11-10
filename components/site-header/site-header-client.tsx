@@ -1,4 +1,4 @@
-// ßcomponents/site-header/site-header-wrapper.tsx// components/site-header/site-header-client.tsx
+//components/site-header/site-header-wrapper.tsx// components/site-header/site-header-client.tsx
 "use client"
 
 import * as React from "react"
@@ -11,7 +11,7 @@ import { MobileNav } from "@/components/navigation-menu/mobile-nav"
 import { AuthButton } from "@/components/site-header/auth-button"
 import { appConfig } from "@/config/app-config"
 import { contentData } from "@/config/content/content-data"
-import { initAuthState, useAuth } from "@/hooks/auth-state"
+import { initAuthState, useAuth } from "@/app/@left/(_AUTH)/login/(_client)/(_hooks)/use-auth-state"
 
 interface SiteHeaderClientProps {
   initialAuth: boolean
@@ -56,7 +56,7 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
                   className="h-8 w-8 rounded-full"
                 />
                 <span className="inline-block text-sm font-semibold text-white md:text-base">
-                  {appConfig.name}
+                  {appConfig.short_name}
                 </span>
               </Link>
 

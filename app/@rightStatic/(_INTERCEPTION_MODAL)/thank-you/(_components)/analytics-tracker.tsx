@@ -1,4 +1,4 @@
-// app/@right/thank-you/(_components)/analytics-tracker.tsx
+//app/@rightStatic/(_INTERCEPTION_MODAL)/thank-you/(_components)/analytics-tracker.tsx
 "use client";
 
 import { useEffect } from "react";

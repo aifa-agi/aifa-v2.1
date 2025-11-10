@@ -1,4 +1,4 @@
-// @/hooks/use-copy-to-clipboard.ts
+//hooks/use-copy-to-clipboard.ts
 
 "use client"
 

@@ -1,4 +1,4 @@
-// @/hooks/use-is-mac.ts
+//hooks/use-is-mac.ts
 
 import { useEffect, useState } from "react"
 

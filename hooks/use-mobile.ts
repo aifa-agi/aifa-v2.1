@@ -1,4 +1,4 @@
-// @/hooks/use-mobile.ts
+//hooks/use-mobile.ts
 
 import * as React from "react"
 

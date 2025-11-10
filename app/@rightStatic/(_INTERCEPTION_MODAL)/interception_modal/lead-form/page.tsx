@@ -1,4 +1,4 @@
-// @/app/@right/interception_modal/lead-form/page.tsx
+//app/@rightStatic/(_INTERCEPTION_MODAL)/interception_modal/lead-form/page.tsx
 "use client";
 
 import Link from "next/link";

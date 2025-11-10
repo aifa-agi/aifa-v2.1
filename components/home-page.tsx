@@ -1,4 +1,4 @@
-// components/site-header/home-page.tsx
+//components/site-header/home-page.tsx
 
 import Link from 'next/link';
 import { appConfig, getHomePageIllustration } from '@/config/app-config';
@@ -97,12 +97,12 @@ function LoadingIllustrationSSR() {
             id="hero-title"
             className="text-4xl font-bold leading-tight tracking-[-0.02em] text-foreground sm:text-5xl"
           >
-            Advanced Routing Patterns — {appConfig.name}
+           AI SEO Next.js Starter with Advanced App Router — {appConfig.name}
           </h1>
 
           {/* Hero description */}
           <p className="text-base text-muted-foreground sm:text-lg">
-            Production-ready Next.js 15 starter with parallel routes, intercepting routes, and complex UI patterns. Build modal dialogs, sidebars, and multi-panel layouts without route changes — fully SEO-optimized.
+            Production-ready template combining AI chat capabilities with comprehensive advanced routing tutorial. Built with focus on maximum SEO optimization, PWA functionality, and hybrid rendering (Static + Dynamic generation) with role-based access control.
           </p>
 
           {/* Hero Image */}

@@ -1,13 +1,12 @@
-// @/components/offline-placeholder/offline-placeholder.tsx
-
+//components/offline-placeholder/offline-placeholder.tsx
 "use client";
 
 import React from "react";
 import { WifiOff } from "lucide-react";
-import { useTranslationCookie } from "@/components/cookie-banner/translation";
+import { getOfflineTranslation } from "./offline-translation";
 
 export function OfflinePlaceholder() {
-  const { t } = useTranslationCookie();
+  const { t } = getOfflineTranslation();
 
   const offlineMessage = t("Offline Message") || "You're offline";
   const offlineDescription = t("Offline Description") || "Please check your internet connection and try again.";

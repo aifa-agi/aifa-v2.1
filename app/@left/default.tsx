@@ -1,4 +1,4 @@
-// @/app/@left/default.tsx
+//app/@left/default.tsx
 import { Button } from "@/components/ui/button";
 import { appConfig, getChatbotIllustration } from "@/config/app-config";
 import Image from "next/image";

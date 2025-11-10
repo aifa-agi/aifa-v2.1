@@ -14,9 +14,9 @@ import Link from "next/link"
 import { ArrowRight, LogOut } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { useRouter } from "next/navigation"
-import { LoginForm } from "@/app/@left/(_AUTH)/login/(_client)/auth/login-form"
+import { LoginForm } from "@/app/@left/(_AUTH)/login/(_client)/(_ui_components)/auth-login-form"
 import { logoutAction } from "@/app/@left/(_AUTH)/login/(_server)/actions/auth"
-import { initAuthState, useAuth } from "@/hooks/auth-state"
+import { initAuthState, useAuth } from "@/app/@left/(_AUTH)/login/(_client)/(_hooks)/use-auth-state"
 
 interface AuthButtonProps {
   initialAuth: boolean

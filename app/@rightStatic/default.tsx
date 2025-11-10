@@ -1,4 +1,4 @@
-// @/app/@right/default.tsx
+//app/@rightStatic/default.tsx
 import { Metadata } from 'next'
 import { constructMetadata } from '@/lib/construct-metadata'
 

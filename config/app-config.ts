@@ -1,4 +1,4 @@
-// /config/app-config.ts
+//config/app-config.ts
 import { SupportedLanguage } from './translations.config';
 
 const getSiteUrl = (): string => {

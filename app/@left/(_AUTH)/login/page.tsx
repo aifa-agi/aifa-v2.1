@@ -1,7 +1,6 @@
-// app/@left/(_AUTH)/login/page.tsx
-
+//app/@left/(_AUTH)/login/(_client)/(_ui_components)/auth-login-form.tsx
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { LoginForm } from "./(_client)/auth/login-form"
+import { LoginForm } from "./(_client)/(_ui_components)/auth-login-form"
 
 
 /**

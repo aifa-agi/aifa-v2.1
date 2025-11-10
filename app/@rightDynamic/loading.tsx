@@ -1,4 +1,4 @@
-//app/@left/loading.tsx
+//app/@rightDynamic/loading.tsx
 import { appConfig, getLoadingIllustration } from "@/config/app-config";
 import Image from "next/image";
 

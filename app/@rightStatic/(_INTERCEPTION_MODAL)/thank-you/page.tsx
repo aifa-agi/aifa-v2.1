@@ -1,5 +1,4 @@
-// app/@right/thank-you/page.tsx
-
+//app/@rightStatic/(_INTERCEPTION_MODAL)/thank-you/page.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";

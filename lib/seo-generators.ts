@@ -1,4 +1,4 @@
-// /lib/seo-generators.ts
+//lib/seo-generators.ts
 
 import { appConfig, type AuthorConfig, type ContentType } from '@/config/app-config';
 

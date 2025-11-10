@@ -1,8 +1,8 @@
-//app/@rightDynamic/page.tsx
+//app/@rightDynamic/[...slug]/page.tsx
 
 "use client"
 
-import { ChartAreaInteractive } from "./(_client)/charts/chart-area-interactive"
+import { ChartAreaInteractive } from "../(_client)/charts/chart-area-interactive"
 
 export default function RightDynamicRoute() {
   return (<>

@@ -1,4 +1,4 @@
-// @/hooks/use-meta-color.ts
+//hooks/use-meta-color.ts
 
 import * as React from "react"
 import { useTheme } from "next-themes"

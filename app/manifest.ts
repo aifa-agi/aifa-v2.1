@@ -1,4 +1,4 @@
-// / app/manifest.ts
+//app/manifest.ts
 
 import { appConfig } from '@/config/app-config';
 import type { MetadataRoute } from 'next';

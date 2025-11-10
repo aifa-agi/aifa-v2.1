@@ -1,4 +1,4 @@
-// aifa-v2/config/content/content-data.ts
+//config/content/content-data.ts
 
 import { MenuCategory } from "@/types/menu-types";
 
@@ -52,7 +52,7 @@ export const contentData = {
         },
         {
           "id": "ks7eqcf6z1fhes1lwiwz75zn",
-          "href": "/about",
+          "href": "/hire-me",
           "roles": [
             "guest"
           ],
@@ -63,8 +63,8 @@ export const contentData = {
           "isVectorConnected": false,
           "isChatSynchronized": false,
           "order": 2,
-          "title": "About us",
-          "description": "Learn about our company mission, vision, and commitment to delivering exceptional AI services worldwide.",
+          "title": "Hire me",
+          "description": "Need custom setup or project? Let's discuss it.",
           "images": [],
           "keywords": [
             "Ai"
@@ -72,7 +72,7 @@ export const contentData = {
         },
         {
           "id": "ks7eqcf6z1fhes1lwiwz75z2",
-          "href": "/team",
+          "href": "/404-example",
           "roles": [
             "guest"
           ],
@@ -83,8 +83,8 @@ export const contentData = {
           "isVectorConnected": false,
           "isChatSynchronized": false,
           "order": 3,
-          "title": "Our team",
-          "description": "Meet our talented team of experts dedicated to building next-generation artificial intelligence solutions.",
+          "title": "404 example",
+          "description": "Visit a non-existent route to see error handling.",
           "images": [],
           "keywords": [
             "Ai"
@@ -194,12 +194,12 @@ export const contentData = {
       "order": 2
     },
     {
-  "title": "News",
-  "href": "/news",
+  "title": "Docs",
+  "href": "/docs",
   "pages": [
     {
       "id": "news-001-breakthrough",
-      "href": "/news/ai-breakthrough-announcement",
+      "href": "/docs/ai-breakthrough-announcement",
       "roles": ["guest"],
       "hasBadge": true,
       "type": "news",
@@ -213,7 +213,7 @@ export const contentData = {
     },
     {
       "id": "news-002-partnership",
-      "href": "/news/strategic-partnership",
+      "href": "/docs/strategic-partnership",
       "roles": ["guest"],
       "hasBadge": false,
       "type": "news",
@@ -227,7 +227,7 @@ export const contentData = {
     },
     {
       "id": "news-003-funding-round",
-      "href": "/news/funding-round-series-b",
+      "href": "/docs/funding-round-series-b",
       "roles": ["guest"],
       "hasBadge": true,
       "type": "news",
@@ -241,7 +241,7 @@ export const contentData = {
     },
     {
       "id": "news-004-product-launch",
-      "href": "/news/new-ai-product-launch",
+      "href": "/docs/new-ai-product-launch",
       "roles": ["guest"],
       "hasBadge": true,
       "type": "news",
@@ -255,7 +255,7 @@ export const contentData = {
     },
     {
       "id": "news-005-conference-keynote",
-      "href": "/news/keynote-speech-tech-summit",
+      "href": "/docs/keynote-speech-tech-summit",
       "roles": ["guest"],
       "hasBadge": true,
       "type": "news",
@@ -269,7 +269,7 @@ export const contentData = {
     },
     {
       "id": "news-006-ai-ethics",
-      "href": "/news/responsible-ai-initiative",
+      "href": "/docs/responsible-ai-initiative",
       "roles": ["guest"],
       "hasBadge": false,
       "type": "news",
@@ -283,7 +283,7 @@ export const contentData = {
     },
     {
       "id": "news-007-award-recognition",
-      "href": "/news/innovation-award-2025",
+      "href": "/docs/innovation-award-2025",
       "roles": ["guest"],
       "hasBadge": true,
       "type": "news",
@@ -297,7 +297,7 @@ export const contentData = {
     },
     {
       "id": "news-008-global-expansion",
-      "href": "/news/market-expansion-asia",
+      "href": "/docs/market-expansion-asia",
       "roles": ["guest"],
       "hasBadge": false,
       "type": "news",
@@ -311,7 +311,7 @@ export const contentData = {
     },
     {
       "id": "news-009-research-paper",
-      "href": "/news/research-paper-publication",
+      "href": "/docs/research-paper-publication",
       "roles": ["guest"],
       "hasBadge": true,
       "type": "news",
@@ -325,7 +325,7 @@ export const contentData = {
     },
     {
       "id": "news-010-customer-milestone",
-      "href": "/news/one-million-users",
+      "href": "/docs/one-million-users",
       "roles": ["guest"],
       "hasBadge": true,
       "type": "news",
@@ -339,7 +339,7 @@ export const contentData = {
     },
     {
       "id": "news-011-sustainability",
-      "href": "/news/carbon-neutral-commitment",
+      "href": "/docs/carbon-neutral-commitment",
       "roles": ["guest"],
       "hasBadge": false,
       "type": "news",
@@ -354,45 +354,7 @@ export const contentData = {
   ],
   "order": 3
 }
-,
-    {
-      "title": "Dashboard",
-      "pages": [
-        {
-          "id": "r70rhidyb8w0o8ikzuuu8nil",
-          "title": "Dashboard",
-          "description": "Manage your account, monitor analytics, and access all administrative tools from one centralized hub.",
-          "href": "/dashboard",
-          "roles": [
-            "admin"
-          ],
-          "hasBadge": false,
-          "type": "dashboard",
-          "isPublished": false,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
-          "order": 1
-        },
-        {
-          "id": "r70rhidyb8w0o8ikzuuu8ni3l",
-          "title": "Users",
-          "description": "View, manage, and control user accounts with comprehensive administration and role-based access permissions.",
-          "href": "/dashboard/users",
-          "roles": [
-            "admin"
-          ],
-          "hasBadge": false,
-          "type": "dashboard",
-          "isPublished": false,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
-          "order": 2
-        }
-      ],
-      "order": 4
-    }
+
   ]
 } as { categories: MenuCategory[] };
 

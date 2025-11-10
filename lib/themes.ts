@@ -1,4 +1,4 @@
-//  @/lib/themes.ts
+//lib/themes.ts
 
 export const THEMES = [
   {

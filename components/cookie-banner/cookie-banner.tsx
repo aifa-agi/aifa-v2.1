@@ -1,5 +1,4 @@
-// components/cookie-banner/cookie-banner.tsx
-
+//components/cookie-banner/cookie-banner.tsx
 
 "use client";
 
@@ -12,7 +11,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { X, Settings, BarChart3, Target, Shield } from "lucide-react";
 import { appConfig } from "@/config/app-config";
-import { useTranslationCookie } from "./translation";
+import { getCookieTranslation } from "./cookie-translation";
 
 type CookieConsent = {
   essential: boolean;
@@ -35,7 +34,7 @@ function formatI18n(template: string, params: Record<string, string | number> = 
 
 export function CookieBanner() {
   // Translation helper uses static JSON by appConfig.lang; no browser-only deps inside hook.
-  const { t } = useTranslationCookie();
+  const { t } = getCookieTranslation();
 
   const [isVisible, setIsVisible] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -158,7 +157,7 @@ export function CookieBanner() {
   const infoLead = t("Cookie Info Lead") || "We use cookies and similar technologies";
   const infoBody = formatI18n(
     t("Cookie Info Body") ||
-      "We and selected partners use cookies on {site} to analyze usage, enhance features, personalize experiences, and tailor advertising. You can accept, reject, or manage categories.",
+    "We and selected partners use cookies on {site} to analyze usage, enhance features, personalize experiences, and tailor advertising. You can accept, reject, or manage categories.",
     { site: siteUrl }
   );
   const privacySubtitle = formatI18n(
@@ -319,11 +318,10 @@ export function CookieBanner() {
                         onClick={() =>
                           setConsent((prev) => ({ ...prev, analytics: !prev.analytics }))
                         }
-                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                          consent.analytics
+                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${consent.analytics
                             ? "bg-blue-600 justify-end"
                             : "bg-gray-300 dark:bg-gray-600 justify-start"
-                        } flex items-center px-1`}
+                          } flex items-center px-1`}
                         aria-pressed={consent.analytics}
                         aria-label="Toggle analytics cookies"
                       >
@@ -350,11 +348,10 @@ export function CookieBanner() {
                         onClick={() =>
                           setConsent((prev) => ({ ...prev, marketing: !prev.marketing }))
                         }
-                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-                          consent.marketing
+                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${consent.marketing
                             ? "bg-purple-600 justify-end"
                             : "bg-gray-300 dark:bg-gray-600 justify-start"
-                        } flex items-center px-1`}
+                          } flex items-center px-1`}
                         aria-pressed={consent.marketing}
                         aria-label="Toggle marketing cookies"
                       >

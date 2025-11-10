@@ -1,4 +1,4 @@
-// @/providers/online-status-provider.tsx
+//online-status-provider.tsx
 
 "use client";
 

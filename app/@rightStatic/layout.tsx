@@ -1,4 +1,4 @@
-// app/@right/layout.tsxS
+//app/@rightStatic/layout.tsx
 
 import React from "react";
 

@@ -1,4 +1,4 @@
-// @/hooks/use-layout.tsx
+//hooks/use-layout.tsx
 
 "use client"
 

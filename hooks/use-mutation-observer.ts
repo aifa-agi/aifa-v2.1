@@ -1,5 +1,5 @@
 
-// @/hooks/use-mutation-observer.ts
+//hooks/use-mutation-observer.ts
 
 import * as React from "react"
 

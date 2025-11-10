@@ -1,11 +1,9 @@
-// app/@right/@modal/(...)chat/page.tsx
+//app/@rightStatic/@modal/(...)interception_chat/page.tsx
 "use client";
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ArrowRight, X } from "lucide-react";
 import ChatExample from "@/components/chat-example/chat-example";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { appConfig } from "@/config/app-config";

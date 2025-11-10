@@ -1,4 +1,4 @@
-// @/providers/active-theme.tsx
+//providers/active-theme.tsx
 
 "use client"
 

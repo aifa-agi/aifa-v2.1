@@ -1,4 +1,4 @@
-// aifa-v2/config/translations.config.ts
+//config/translations.config.ts
 
 import { appConfig } from "./app-config";
 
