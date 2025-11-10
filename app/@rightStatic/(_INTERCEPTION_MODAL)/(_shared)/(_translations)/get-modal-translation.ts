@@ -1,6 +1,6 @@
-// app/@right/(_INTERCEPTION_MODAL)/(_shared)/(_translations)/translation.ts
+// app/@right/(_INTERCEPTION_MODAL)/(_shared)/(_translations)/modal-translation.ts
 import { appConfig } from "@/config/app-config";
-import translations from "./translation.json";
+import translations from "./modal-translation.json";
 import {
   DEFAULT_LANGUAGE,
   SupportedLanguage,
@@ -16,7 +16,7 @@ type Translations = {
 
 const typedTranslations: Translations = translations;
 
-export function useTranslationModal() {
+export function getModalTranslation() {
   const language = appConfig.lang as SupportedLanguage || "en"
 
   function t(key: string): string {

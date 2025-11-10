@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
-// Validation schema for lead form data
+
 const leadFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
   phone: z.string().min(10, 'Please enter a valid phone number.'),
@@ -12,11 +12,8 @@ const leadFormSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse and validate request body
     const body = await request.json();
     const validationResult = leadFormSchema.safeParse(body);
-
-    // Return validation errors if schema validation fails
     if (!validationResult.success) {
       return NextResponse.json(
         {
@@ -46,8 +43,6 @@ export async function POST(request: NextRequest) {
       mock: true,
     });
   } catch (error) {
-    // Log unexpected errors
-    console.error('[MOCK EMAIL] Error:', error);
 
     return NextResponse.json(
       {

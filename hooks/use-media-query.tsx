@@ -1,21 +1,64 @@
-// @/hooks/use-media-query.tsx
+// hooks/use-media-query.ts
+"use client"
 
-import * as React from "react"
+import { useEffect, useState } from 'react'
 
-export function useMediaQuery(query: string) {
-  const [value, setValue] = React.useState(false)
+/**
+ * React hook for responsive media queries
+ * 
+ * Tracks whether a CSS media query matches the current viewport.
+ * Updates automatically when viewport size changes.
+ * 
+ * Features:
+ * - SSR-safe (returns false on server, updates on client)
+ * - Automatic cleanup of event listeners
+ * - TypeScript support
+ * - Works with any valid CSS media query
+ * 
+ * @param query - CSS media query string (e.g., "(min-width: 768px)")
+ * @returns Boolean indicating if media query matches
+ * 
+ * @example
+ * const isDesktop = useMediaQuery("(min-width: 1024px)")
+ * const isMobile = useMediaQuery("(max-width: 640px)")
+ * const isDarkMode = useMediaQuery("(prefers-color-scheme: dark)")
+ */
+export function useMediaQuery(query: string): boolean {
+  // Initialize with false to avoid hydration mismatch
+  // Will update to correct value after client-side mount
+  const [matches, setMatches] = useState(false)
 
-  React.useEffect(() => {
-    function onChange(event: MediaQueryListEvent) {
-      setValue(event.matches)
+  useEffect(() => {
+    // Create MediaQueryList object
+    const mediaQuery = window.matchMedia(query)
+    
+    // Set initial value
+    setMatches(mediaQuery.matches)
+
+    // Handler for media query changes
+    const handleChange = (event: MediaQueryListEvent) => {
+      setMatches(event.matches)
     }
 
-    const result = matchMedia(query)
-    result.addEventListener("change", onChange)
-    setValue(result.matches)
+    // Modern browsers: addEventListener
+    // Legacy browsers: addListener (deprecated but still supported)
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange)
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(handleChange)
+    }
 
-    return () => result.removeEventListener("change", onChange)
+    // Cleanup function
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', handleChange)
+      } else {
+        // Fallback for older browsers
+        mediaQuery.removeListener(handleChange)
+      }
+    }
   }, [query])
 
-  return value
+  return matches
 }

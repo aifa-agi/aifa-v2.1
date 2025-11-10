@@ -5,11 +5,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Home } from "lucide-react";
 import { appConfig } from "@/config/app-config";
-import { useTranslationModal } from "../../(_shared)/(_translations)/translation";
+import { getModalTranslation } from "../../(_shared)/(_translations)/get-modal-translation";
 
 // Client component with translation support
 function LeadFormPageContent() {
-  const { t } = useTranslationModal();
+  const { t } = getModalTranslation();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">

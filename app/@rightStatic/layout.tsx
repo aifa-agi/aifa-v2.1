@@ -15,10 +15,7 @@ export default async function RightLayout({
   return (
     <>
       {children}
-
-
-      {modal} 
-
-    </>
+      {modal}
+    ß</>
   );
 }

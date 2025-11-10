@@ -1,5 +1,5 @@
 // app/global-not-found.tsx
-import { SiteHeader } from "@/components/site-header/(_server)/site-header-wrapper";
+import { SiteHeader } from "@/components/site-header/site-header-wrapper";
 import { Button } from "@/components/ui/button";
 import { appConfig, getErrorIllustration, META_THEME_COLORS } from "@/config/app-config";
 import { LayoutProvider } from "@/hooks/use-layout";

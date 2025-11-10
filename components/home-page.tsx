@@ -45,13 +45,12 @@ function LoadingIllustrationSSR() {
     );
   }
   
-
   return (
     <div className="relative h-full w-full">
       {darkSrc && (
         <Image
           src={darkSrc}
-          alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
+          alt="SAdvanced Routing Patterns — AIFA — Next.js 15 + React 19"
           width={800}
           height={600}
           className="h-full w-full object-contain dark:block hidden"
@@ -63,7 +62,7 @@ function LoadingIllustrationSSR() {
       {lightSrc && (
         <Image
           src={lightSrc}
-          alt="SEO-First PWA Starter Kit with PWA — Next.js 15 + React 19"
+          alt="Advanced Routing Patterns — AIFA— Next.js 15 + React 19"
           width={800}
           height={600}
           className="h-full w-full object-contain dark:hidden block"
@@ -81,7 +80,7 @@ function LoadingIllustrationSSR() {
   return (
     <>
       <div className='h-20' />
-      <section className="grid items-center gap-8 sm:grid-cols-2 px-4" aria-labelledby="hero-title">
+      <section className="grid items-center gap-8 lg:grid-cols-2 px-4" aria-labelledby="hero-title">
 
         <div className="space-y-5">
           {/* Feature pills */}
@@ -107,14 +106,14 @@ function LoadingIllustrationSSR() {
           </p>
 
           {/* Hero Image */}
-        <div className="relative block sm:hidden">
+        <div className="relative block lg:hidden">
           <div className="aspect-[4/3] w-full overflow-hidden rounded-lg">
             <LoadingIllustrationSSR />
           </div>
         </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="flex flex-col gap-3 lg:flex-row">
             <Link
               href="https://github.com/aifa-agi/aifa-v2.1"
               className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
@@ -136,7 +135,7 @@ function LoadingIllustrationSSR() {
         </div>
 
         {/* Hero Image */}
-        <div className="relative  hidden sm:block">
+        <div className="relative  hidden lg:block">
           <div className="aspect-[4/3] w-full overflow-hidden rounded-lg">
             <LoadingIllustrationSSR />
           </div>

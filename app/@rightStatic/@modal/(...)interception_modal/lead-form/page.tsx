@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { X, CheckCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTranslationModal } from "@/app/@right/(_INTERCEPTION_MODAL)/(_shared)/(_translations)/translation";
+import { useTranslationModal } from "@/app/@rightStatic/(_INTERCEPTION_MODAL)/(_shared)/(_translations)/get-modal-translation";
 
 type FormErrors = {
   name?: string[];
@@ -30,19 +30,13 @@ export default function LeadFormModal() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [message, setMessage] = useState<string>("");
 
-  // ✅ РІШЕННЯ 1: Закрийте модаль И перейдіть на /thank-you
+
   useEffect(() => {
     if (!isSuccess) return;
 
     const timer = setTimeout(() => {
       console.log("[Modal] Success! Closing modal and redirecting to /thank-you");
 
-      // ✅ Закрийте модаль через router.back()
-      // Це видалить модаль з DOM (повернеться до @modal/default.tsx)
-      router.back();
-
-      // ✅ ПОТІМ перейдіть на /thank-you сторінку
-      // Невелика затримка для завершення закриття модалі
       setTimeout(() => {
         router.push("/thank-you");
       }, 50);

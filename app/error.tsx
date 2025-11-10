@@ -1,4 +1,4 @@
-//app/error.tsx
+// app/error.tsx
 
 'use client';
 
@@ -61,7 +61,7 @@ export default function Error({ error, reset }: ErrorProps) {
           Try Again
         </button>
 
-        {/* Внутренняя навигация — через Link */}
+       
         <Link
           href="/"
           className="rounded-lg border border-border px-6 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"

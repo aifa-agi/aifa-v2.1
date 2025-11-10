@@ -1,7 +1,8 @@
+// components/navigation-menu/mobile-nav.tsx
 "use client"
 
 import * as React from "react"
-import Link, { LinkProps } from "next/link"
+import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 
 import { cn } from "@/lib/utils"
@@ -14,6 +15,7 @@ import {
 import { MenuCategory } from "@/types/menu-types"
 import Image from "next/image"
 import { appConfig } from "@/config/app-config"
+import { AnimatedAIButton } from "../animated-aI-button"
 
 interface MobileNavProps {
   categories: MenuCategory[]
@@ -27,11 +29,16 @@ export function MobileNav({
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
 
-  // Функция для проверки, должна ли страница быть скрыта на больших экранах
+  // Check if page should be hidden on larger screens
   const shouldHidePage = (href: string | undefined) => {
     if (!href) return false
-    // Скрываем страницу /chat на экранах больше sm (md и выше)
+    // Hide /chat page on screens larger than sm (md and above)
     return href.includes("chat")
+  }
+
+  // Handler to close menu before navigation
+  const handleCloseMenu = () => {
+    setOpen(false)
   }
 
   return (
@@ -44,7 +51,7 @@ export function MobileNav({
             className
           )}
         >
-          <span className=" h-8 items-center text-base leading-none font-medium text-white hidden sm:flex" >
+          <span className="h-8 items-center text-base leading-none font-medium text-white hidden sm:flex">
             Menu
           </span>
           <div className="relative flex h-8 w-4 items-center justify-center">
@@ -74,17 +81,17 @@ export function MobileNav({
         sideOffset={14}
       >
         <div className="flex flex-col gap-6 overflow-auto px-6 py-6">
-          {/* Отображаем каждую категорию */}
+          {/* Render each category */}
           {categories.map((category) => {
             const lowerCaseTitle = category.title.toLowerCase()
             const isActive = category.href ? pathname === category.href : false
 
-            // Пропускаем категории без страниц
+            // Skip categories without pages
             if (!category.pages || category.pages.length === 0) {
               return null
             }
 
-            // Специальная логика для категории "Home"
+            // Special logic for "Home" category
             if (lowerCaseTitle === "home") {
               return (
                 <div key={category.title} className="flex flex-col gap-4">
@@ -92,7 +99,7 @@ export function MobileNav({
                     {category.title}
                   </div>
 
-                  {/* Основной блок с логотипом и описанием */}
+                  {/* Main block with logo and description */}
                   <Link
                     href="/"
                     className={cn(
@@ -117,11 +124,24 @@ export function MobileNav({
                     </p>
                   </Link>
 
-                  {/* Список страниц категории (максимум 10) */}
+                  {/* List of category pages (max 10) */}
                   <div className="flex flex-col gap-3">
-                    {category.pages.slice(0, 10).map(
-                      (page) =>
-                        page.href && !shouldHidePage(page.href) ? (
+                    {category.pages.slice(0, 10).map((page) => {
+                      // Check if this is the chat page that should use AnimatedAIButton
+                      if (page.href && shouldHidePage(page.href)) {
+                        return (
+                          <div key={page.id} className="flex md:hidden">
+                            <AnimatedAIButton
+                              className="w-full"
+                              onNavigate={handleCloseMenu}
+                            />
+                          </div>
+                        )
+                      }
+
+                      // Regular page link
+                      if (page.href) {
+                        return (
                           <MobileNavLink
                             key={page.id}
                             href={page.href}
@@ -137,28 +157,14 @@ export function MobileNav({
                               </p>
                             )}
                           </MobileNavLink>
-                        ) : (
-                          <div key={page.id} className="flex md:hidden">
-                          <MobileNavLink
-                            key={page.id}
-                            href="/interception_chat"
-                            onOpenChange={setOpen}
-                          >
-                            <div className="text-sm font-medium capitalize">
-                              {page.title}
-                            </div>
-                            {page.description && (
-                              <p className="text-xs text-muted-foreground line-clamp-1">
-                                {page.description}
-                              </p>
-                            )}
-                          </MobileNavLink>
-                          </div>
                         )
-                    )}
+                      }
+
+                      return null
+                    })}
                   </div>
 
-                  {/* Кнопка "View All" если страниц больше 10 */}
+                  {/* "View All" button if more than 10 pages */}
                   {category.pages.length > 10 && category.href && (
                     <Link
                       href={category.href}
@@ -172,18 +178,31 @@ export function MobileNav({
               )
             }
 
-            // Логика для остальных категорий
+            // Logic for other categories
             return (
               <div key={category.title} className="flex flex-col gap-4">
                 <div className="text-muted-foreground text-sm font-medium">
                   {category.title}
                 </div>
 
-                {/* Список страниц категории (максимум 10) */}
+                {/* List of category pages (max 10) */}
                 <div className="flex flex-col gap-3">
-                  {category.pages.slice(0, 10).map(
-                    (page) =>
-                      page.href && !shouldHidePage(page.href) && (
+                  {category.pages.slice(0, 10).map((page) => {
+                    // Check if this is the chat page that should use AnimatedAIButton
+                    if (page.href && shouldHidePage(page.href)) {
+                      return (
+                        <div key={page.id} className="flex md:hidden">
+                          <AnimatedAIButton
+                            className="w-full"
+                            onNavigate={handleCloseMenu}
+                          />
+                        </div>
+                      )
+                    }
+
+                    // Regular page link
+                    if (page.href) {
+                      return (
                         <MobileNavLink
                           key={page.id}
                           href={page.href}
@@ -200,10 +219,13 @@ export function MobileNav({
                           )}
                         </MobileNavLink>
                       )
-                  )}
+                    }
+
+                    return null
+                  })}
                 </div>
 
-                {/* Кнопка "View All" если страниц больше 10 */}
+                {/* "View All" button if more than 10 pages */}
                 {category.pages.length > 10 && category.href && (
                   <Link
                     href={category.href}
@@ -222,7 +244,7 @@ export function MobileNav({
   )
 }
 
-// Компонент для отдельной ссылки в мобильной навигации
+// Component for individual link in mobile navigation
 interface MobileNavLinkProps extends React.ComponentPropsWithoutRef<"a"> {
   href: string
   onOpenChange?: (open: boolean) => void

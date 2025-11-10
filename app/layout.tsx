@@ -17,7 +17,7 @@ import { ActiveThemeProvider } from '@/providers/active-theme'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutProvider } from '@/hooks/use-layout'
 import { Analytics } from '@vercel/analytics/next'
-import { SiteHeader } from '@/components/site-header/(_server)/site-header-wrapper'
+import { SiteHeader } from '@/components/site-header/site-header-wrapper'
 import AifaFooter from '@/components/aifa-footer'
 
 export const metadata: Metadata = constructMetadata({
@@ -80,10 +80,12 @@ const jsonLdOrganization = {
 
 export default async function RootLayout({
   left,
-  right,
+  rightStatic,
+  rightDynamic,
 }: {
   left: React.ReactNode;
-  right: React.ReactNode;
+  rightStatic: React.ReactNode;
+  rightDynamic: React.ReactNode;
 }) {
   return (
     <html lang={appConfig.lang} suppressHydrationWarning>
@@ -150,9 +152,10 @@ export default async function RootLayout({
               <div className="bg-background fixed inset-0 flex flex-col overflow-hidden">
                 <SiteHeader />
 
-                {/* Wide version - desktop layout */}
+                {/* Desktop layout with resizable panels */}
                 <div className="hidden md:flex flex-1 min-h-0 w-full">
                   <ResizablePanelGroup direction="horizontal" className="h-full">
+                    {/* Left panel - authentication/navigation */}
                     <ResizablePanel defaultSize={40} minSize={35} className="relative">
                       <OnlineStatusProvider>
                         <div className="absolute inset-0 overflow-hidden">
@@ -160,20 +163,32 @@ export default async function RootLayout({
                         </div>
                       </OnlineStatusProvider>
                     </ResizablePanel>
+                    
                     <ResizableHandle withHandle />
+                    
+                    {/* Right panel - static and dynamic content */}
                     <ResizablePanel defaultSize={60} minSize={35} className="relative">
+                      {/* Static content layer - always rendered for SEO */}
                       <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
-                        {right}
+                        {rightStatic}
                       </main>
+                      
+                      {/* Dynamic content layer - only for authenticated users */}
+                      {/* Overlays static content when authenticated */}
+                      {rightDynamic}
                     </ResizablePanel>
                   </ResizablePanelGroup>
                 </div>
 
-                {/* Mobile version - mobile layout */}
+                {/* Mobile layout - single column */}
                 <div className="w-full md:hidden flex-1 min-h-0 relative">
+                  {/* Static content layer */}
                   <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
-                    {right}
+                    {rightStatic}
                   </main>
+                  
+                  {/* Dynamic content layer - overlays static on mobile too */}
+                  {rightDynamic}
                 </div>
 
                 <AifaFooter />
@@ -184,6 +199,7 @@ export default async function RootLayout({
           </LayoutProvider>
         </ThemeProvider>
         
+        {/* No JavaScript fallback message */}
         <noscript>
           <div
             className="fixed inset-x-0 bottom-0 z-50 w-full bg-neutral-900 text-white border-t border-white/20 shadow-[0_-8px_24px_rgba(0,0,0,0.25)]"
