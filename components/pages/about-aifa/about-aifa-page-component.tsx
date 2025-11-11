@@ -6,6 +6,53 @@ import { Card } from '@/components/ui/card';
 import { AnimatedAIButton } from '../../animated-aI-button';
 import { appConfig } from '@/config/app-config';
 
+
+
+type FAQItem = {
+  question: string;
+  answer: string[];
+  bullets?: string[];
+};
+
+export const FAQ_DATA: FAQItem[] = [
+  {
+    question: 'Is the chatbot in this starter fake?',
+    answer: [
+      'You are correct — this starter uses a visual placeholder instead of a real AI chatbot.',
+      'This is the second AIFA starter, and its primary goal is to help you understand how parallel and intercepting routing works in Next.js 15.',
+      'There is no authentication and no real chat functionality in this project. Everything you see is a visual mock designed to demonstrate the routing architecture. The purpose is to give you hands-on experience with parallel routes so you can confidently apply them in your own projects.',
+    ],
+  },
+  {
+    question: 'Why do I see unusual folder names like (_CHAT) and @slot in the code?',
+    answer: [
+      'Next.js App Router uses special naming conventions to enable advanced routing patterns.',
+      'This naming structure is also preparation for AIFA\'s fractal architecture (coming Q4 2025). It reduces errors during AI-assisted code generation — we\'ve successfully generated features with 5,000+ lines and 50+ components without a single bug. The high level of stability and modularity is a core goal of AIFA architecture.',
+      'Additionally, fractals are much easier to test because each one acts as an independent microservice that extends the app\'s functionality. The app can still run without any particular fractal — features may be limited, but there are no errors.',
+    ],
+    bullets: [
+      '@folder — defines a parallel route slot (independent loading/error states, streaming).',
+      '(folder) — creates a route group that does not affect the URL; used for organization.',
+      '_folder — private folder, excluded from routing; ideal for internals and utilities.',
+    ],
+  },
+  {
+    question: 'Why is parallel routing central to AIFA architecture?',
+    answer: [
+      'Parallel routing in Next.js allows the app to remain functional even when one slot encounters an error. This is critical for AIFA\'s vision of AI-driven development in the left slot.',
+      'Our goal is to enable live coding through the AI chatbot in the left pane. Obviously, the app will occasionally break during development. However, with parallel routing, the chatbot always remains operational. You can simply ask it to fix the error in the right slot, and it will restore stability.',
+      'This out-of-the-box state isolation is made possible by Next.js App Router\'s advanced routing features. That\'s why AIFA architecture always has two panes: left (service/chat) and right (content/app). Each maintains independent error boundaries and loading states.',
+    ],
+  },
+  {
+    question: 'Will this starter get additional features in the future?',
+    answer: [
+      'No, this starter is complete as-is. Its sole purpose is to introduce you to parallel and intercepting routing patterns in Next.js.',
+      'New capabilities — including authentication, real AI chat, fractal architecture, and visual app composition — will be showcased in upcoming AIFA starters. Stay tuned by following updates on Twitter and GitHub.',
+    ],
+  },
+];
+
 /**
  * Pill component for displaying technology tags
  */
@@ -384,86 +431,23 @@ export default function AboutAifaPageComponent() {
           Frequently Asked Questions
         </h2>
         <div className="grid grid-cols-1 gap-4">
-          <Card className="p-4 space-y-2">
-            <h3 className="text-base font-medium">Is the chatbot in this starter fake?</h3>
-            <p className="text-sm text-muted-foreground">
-              You're absolutely right — this starter uses a visual placeholder instead of a real AI chatbot. 
-              This is the second AIFA starter, and its primary goal is to help you understand how parallel 
-              and intercepting routing works in Next.js 15.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              There is no authentication and no real chat functionality in this project. Everything you see 
-              is a visual mock designed to demonstrate the routing architecture. The purpose is to give you 
-              hands-on experience with parallel routes so you can confidently apply them in your own projects.
-            </p>
-          </Card>
-
-          <Card className="p-4 space-y-2">
-            <h3 className="text-base font-medium">
-              Why do I see unusual folder names like (_CHAT) and @slot in the code?
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              Next.js App Router uses special naming conventions to enable advanced routing patterns:
-            </p>
-            <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
-              <li>
-                <strong>@folder</strong> — Defines a parallel route slot. Slots allow you to render multiple 
-                independent pages in the same layout simultaneously. Each slot can have its own loading and 
-                error states, and they stream independently.
-              </li>
-              <li>
-                <strong>(folder)</strong> — Creates a route group that does not affect the URL. Use parentheses 
-                to organize routes logically without adding segments to the path.
-              </li>
-              <li>
-                <strong>_folder</strong> — Marks a folder as private. Next.js excludes folders prefixed with 
-                an underscore from routing, making them ideal for internal components, utilities, or organization.
-              </li>
-            </ul>
-            <p className="text-sm text-muted-foreground">
-              This naming structure is also preparation for AIFA's fractal architecture (coming Q4 2025). 
-              It reduces errors during AI-assisted code generation — we've successfully generated features 
-              with 5,000+ lines and 50+ components without a single bug. The high level of stability and 
-              modularity is a core goal of AIFA architecture.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Additionally, fractals are much easier to test because each one acts as an independent microservice 
-              that extends the app's functionality. The app can still run without any particular fractal — 
-              features may be limited, but there are no errors.
-            </p>
-          </Card>
-
-          <Card className="p-4 space-y-2">
-            <h3 className="text-base font-medium">Why is parallel routing central to AIFA architecture?</h3>
-            <p className="text-sm text-muted-foreground">
-              Parallel routing in Next.js allows the app to remain functional even when one slot encounters 
-              an error. This is critical for AIFA's vision of AI-driven development in the left slot.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Our goal is to enable live coding through the AI chatbot in the left pane. Obviously, the app 
-              will occasionally break during development. However, with parallel routing, the chatbot always 
-              remains operational. You can simply ask it to fix the error in the right slot, and it will 
-              restore stability.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              This out-of-the-box state isolation is made possible by Next.js App Router's advanced routing features. 
-              That's why AIFA architecture always has two panes: left (service/chat) and right (content/app). 
-              Each maintains independent error boundaries and loading states.
-            </p>
-          </Card>
-
-          <Card className="p-4 space-y-2">
-            <h3 className="text-base font-medium">Will this starter get additional features in the future?</h3>
-            <p className="text-sm text-muted-foreground">
-              No, this starter is complete as-is. Its sole purpose is to introduce you to parallel and 
-              intercepting routing patterns in Next.js.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              New capabilities — including authentication, real AI chat, fractal architecture, and visual 
-              app composition — will be showcased in upcoming AIFA starters. Stay tuned by following updates 
-              on Twitter and GitHub.
-            </p>
-          </Card>
+          {FAQ_DATA.map((item, idx) => (
+            <Card key={idx} className="p-4 space-y-2">
+              <h3 className="text-base font-medium">{item.question}</h3>
+              {item.answer.map((paragraph, i) => (
+                <p key={i} className="text-sm text-muted-foreground">
+                  {paragraph}
+                </p>
+              ))}
+              {item.bullets && item.bullets.length > 0 && (
+                <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
+                  {item.bullets.map((b, bi) => (
+                    <li key={bi}>{b}</li>
+                  ))}
+                </ul>
+              )}
+            </Card>
+          ))}
         </div>
       </section>
 
@@ -474,7 +458,7 @@ export default function AboutAifaPageComponent() {
         </h2>
         <p className="text-sm text-muted-foreground mb-4">
           Current version v1.0 with parallel routing is available now. Fractal architecture coming Q4 2025. 
-          Let's discuss adaptation to your needs.
+          Let&apos;s discuss adaptation to your needs.
         </p>
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
