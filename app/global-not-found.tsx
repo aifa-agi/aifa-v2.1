@@ -18,22 +18,12 @@ export const metadata: Metadata = {
   description: "The page you are looking for does not exist.",
 };
 
-/**
- * Global Not Found Page Component
- * 
- * Задачи:
- * 1. Отображает 404 страницу с адаптивным дизайном
- * 2. Показывает различные иллюстрации для светлой и тёмной темы
- * 3. Загружает скрипт service worker для PWA функциональности
- * 4. Управляет темой и раскладкой через providers
- * 5. Включает аналитику Vercel
- */
+
 export default function GlobalNotFoundPage() {
   // Получение путей иллюстраций для ошибки 404
   const darkPath = getErrorIllustration("404", "dark");
   const lightPath = getErrorIllustration("404", "light");
 
-  // ✅ Валидация путей перед рендерингом
   const darkSrc =
     darkPath && typeof darkPath === "string" && darkPath.length > 0
       ? darkPath
@@ -149,11 +139,11 @@ export default function GlobalNotFoundPage() {
 
                     {/* Action buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-                      <Link href="/home" className="flex-1">
-                        <Button className="w-full" size="lg">
+                      <Button asChild size="lg" className="w-full">
+                        <Link href="/home" className="flex-1">
                           Go to Home
-                        </Button>
-                      </Link>
+                        </Link>
+                      </Button>Í
                     </div>
                   </div>
                 </div>

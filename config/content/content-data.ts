@@ -40,7 +40,7 @@ export const contentData = {
           "isVectorConnected": false,
           "isChatSynchronized": false,
           "order": 1,
-          "title": "AI Chat",
+          "title": "New AI Chat",
           "description": "Try Chat with Ai",
           "images": [],
           "keywords": [
@@ -103,11 +103,51 @@ export const contentData = {
           "isVectorConnected": false,
           "isChatSynchronized": false,
           "order": 3,
-          "title": "404 example",
+          "title": "404 page",
           "description": "Visit a non-existent route to see error handling.",
           "images": [],
           "keywords": [
-            "Ai"
+            "404 page"
+          ]
+        },
+        {
+          "id": "ks7eq9f4z1fhes1lAAiwz75z2",
+          "href": "/error-example",
+          "roles": [
+            "guest"
+          ],
+          "hasBadge": false,
+          "type": "homePage",
+          "isPublished": false,
+          "isAddedToPrompt": false,
+          "isVectorConnected": false,
+          "isChatSynchronized": false,
+          "order": 4,
+          "title": "Error page",
+          "description": "Here you see an example page that handles errors if your application stops working due to unexpected reasons.",
+          "images": [],
+          "keywords": [
+            "404 page"
+          ]
+        },
+        {
+          "id": "As126cf631fhes1lwiwz75z2",
+          "href": "/privacy-policy",
+          "roles": [
+            "guest"
+          ],
+          "hasBadge": false,
+          "type": "homePage",
+          "isPublished": false,
+          "isAddedToPrompt": false,
+          "isVectorConnected": false,
+          "isChatSynchronized": false,
+          "order": 5,
+          "title": "Privacy policy",
+          "description": "Privacy policy example",
+          "images": [],
+          "keywords": [
+            "Privacy policy"
           ]
         }
       ],
