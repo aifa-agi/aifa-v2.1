@@ -5,15 +5,20 @@ import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { AnimatedAIButton } from '../../animated-aI-button';
 import { appConfig } from '@/config/app-config';
+import React from 'react';
 
-
-
+/**
+ * Strong typing for FAQ items used both in UI and JSON-LD.
+ */
 type FAQItem = {
   question: string;
   answer: string[];
   bullets?: string[];
 };
 
+/**
+ * Centralized FAQ content. UI and JSON-LD will stay in sync.
+ */
 export const FAQ_DATA: FAQItem[] = [
   {
     question: 'Is the chatbot in this starter fake?',
@@ -54,6 +59,25 @@ export const FAQ_DATA: FAQItem[] = [
 ];
 
 /**
+ * Build FAQPage JSON-LD from FAQ_DATA.
+ * Joins multiline answers into a single plain-text string per question.
+ */
+function buildFaqJsonLd(items: FAQItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer.join(' '),
+      },
+    })),
+  };
+}
+
+/**
  * Pill component for displaying technology tags
  */
 interface PillProps {
@@ -81,7 +105,7 @@ function StatusPill({ label }: { label: string }) {
 /**
  * AboutAifaPageComponent - Main page component describing AIFA architecture
  * Describes current implementation (parallel/intercepting routes) and future plans (fractal architecture)
- * English version with integrated FAQ section using Card components
+ * English version with integrated FAQ section using Card components + FAQPage JSON-LD
  */
 export default function AboutAifaPageComponent() {
   // Email contact configuration
@@ -109,8 +133,20 @@ export default function AboutAifaPageComponent() {
   const heroSubtitle =
     'Production-ready architecture leveraging parallel and intercepting routes, AI chat integration, and multi-role access. Currently available with fractal AI-driven development coming Q4 2025.';
 
+  // Prepare FAQ JSON-LD once per render
+  const faqJsonLd = buildFaqJsonLd(FAQ_DATA);
+
   return (
     <>
+      {/* Inject FAQ JSON-LD. Escape "<" to avoid parser issues. */}
+      <script
+        id="faq-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+
       <div className="h-20" />
 
       {/* Technology stack pills */}
@@ -402,7 +438,7 @@ export default function AboutAifaPageComponent() {
           <Card className="p-4 space-y-2">
             <h3 className="text-base font-medium">SaaS + AI Chat Support</h3>
             <p className="text-sm text-muted-foreground">
-              Quickly deploy your own AI model for user support on the website and via external API for mobile apps. 
+              Quickly deploy your own AI model for user support on the website and via external API for mobile apps.
               Roles, multi-language, and SEO out of the box.
             </p>
           </Card>
@@ -410,7 +446,7 @@ export default function AboutAifaPageComponent() {
           <Card className="p-4 space-y-2">
             <h3 className="text-base font-medium">Content Platforms with Admin Panel</h3>
             <p className="text-sm text-muted-foreground">
-              Static content for instant loading and SEO + dynamic application with role-based access for editors, 
+              Static content for instant loading and SEO + dynamic application with role-based access for editors,
               managers, and administrators.
             </p>
           </Card>
@@ -418,7 +454,7 @@ export default function AboutAifaPageComponent() {
           <Card className="p-4 space-y-2">
             <h3 className="text-base font-medium">Complex Multi-role Applications (Future)</h3>
             <p className="text-sm text-muted-foreground">
-              With fractal architecture (Q4 2025), architects will be able to visually design complex applications 
+              With fractal architecture (Q4 2025), architects will be able to visually design complex applications
               where AI generates components in real-time based on task descriptions.
             </p>
           </Card>
@@ -457,7 +493,7 @@ export default function AboutAifaPageComponent() {
           Want to use AIFA in your project?
         </h2>
         <p className="text-sm text-muted-foreground mb-4">
-          Current version v1.0 with parallel routing is available now. Fractal architecture coming Q4 2025. 
+          Current version v1.0 with parallel routing is available now. Fractal architecture coming Q4 2025.
           Let&apos;s discuss adaptation to your needs.
         </p>
         <div className="flex flex-col sm:flex-row gap-3">
