@@ -106,7 +106,7 @@ export default function HireMePageComponent() {
 
           <div className="relative block xl:hidden ">
             <div className="aspect-[16/9] w-full overflow-hidden rounded-lg">
-              <div className="relative h-full w-full flex items-center justify-center bg-muted/20">
+              <div className="relative h-full w-full flex items-center justify-center ">
                 <Image
                   src="/images/author-bolshiyanov-horizontal.png"
                   alt="Roman Bolshiyanov portrait"
@@ -165,7 +165,7 @@ export default function HireMePageComponent() {
           <div className=''>
             <div className="relative hidden 2xl:block">
               <div className="aspect-[1/1] w-full overflow-hidden rounded-lg">
-                <div className="relative h-full w-full flex items-center justify-center bg-muted/20">
+                <div className="relative h-full w-full flex items-center justify-center ">
                   <Image
                     src="/images/author-bolshiyanov.png"
                     alt="Roman Bolshiyanov portrait"
@@ -183,7 +183,7 @@ export default function HireMePageComponent() {
           <div className='2xl:hidden  block'>
             <div className="relative hidden xl:block">
               <div className="aspect-[9/16] w-full overflow-hidden rounded-lg">
-                <div className="relative h-full w-full flex items-center justify-center bg-muted/20">
+                <div className="relative h-full w-full flex items-center justify-center ">
                   <Image
                     src="/images/author-bolshiyanov-vertical.png"
                     alt="Roman Bolshiyanov portrait"
