@@ -28,29 +28,6 @@ export const contentData = {
           ]
         },
         {
-          "id": "blog-001-ai-chat",
-          "href": "/chat",
-          "roles": [
-            "guest"
-          ],
-          "hasBadge": false,
-          "type": "blog",
-          "isPublished": true,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
-          "order": 1,
-          "title": "New AI Chat",
-          "description": "Try Chat with Ai",
-          "images": [],
-          "keywords": [
-            "AI",
-            "trends",
-            "technology",
-            "machine learning"
-          ]
-        },
-        {
           "id": "ks7eqcf6z1fhes1ldiwz75zn",
           "href": "/hire-me",
           "roles": [
@@ -89,10 +66,18 @@ export const contentData = {
           "keywords": [
             "Ai"
           ]
-        },
-        {
-          "id": "ks7eqcf6z1fhes123iwz75z2",
-          "href": "/404-example",
+        }
+      ],
+      "order": 1
+    },
+    
+    {
+      "title": "Examples",
+      "href": "/examples",
+      "pages": [
+       {
+          "id": "As126cf631fhes1lwiwz75q3",
+          "href": "/privacy-policy",
           "roles": [
             "guest"
           ],
@@ -102,12 +87,12 @@ export const contentData = {
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
-          "order": 3,
-          "title": "404 page",
-          "description": "Visit a non-existent route to see error handling.",
+          "order": 5,
+          "title": "Privacy policy",
+          "description": "Privacy policy example",
           "images": [],
           "keywords": [
-            "404 page"
+            "Privacy policy"
           ]
         },
         {
@@ -131,8 +116,8 @@ export const contentData = {
           ]
         },
         {
-          "id": "As126cf631fhes1lwiwz75q3",
-          "href": "/privacy-policy",
+          "id": "ks7eqcf6z1fhes123iwz75z2",
+          "href": "/404-example",
           "roles": [
             "guest"
           ],
@@ -142,112 +127,12 @@ export const contentData = {
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
-          "order": 5,
-          "title": "Privacy policy",
-          "description": "Privacy policy example",
-          "images": [],
-          "keywords": [
-            "Privacy policy"
-          ]
-        }
-      ],
-      "order": 1
-    },
-    
-    {
-      "title": "Blog",
-      "href": "/blog",
-      "pages": [
-        {
-          "id": "blog-001-ai-trends",
-          "href": "/blog/ai-trends-2025",
-          "roles": [
-            "guest"
-          ],
-          "hasBadge": false,
-          "type": "blog",
-          "isPublished": true,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
-          "order": 1,
-          "title": "AI Trends 2025",
-          "description": "Explore the latest artificial intelligence trends and breakthroughs shaping the future of technology.",
-          "images": [],
-          "keywords": [
-            "AI",
-            "trends",
-            "technology",
-            "machine learning"
-          ]
-        },
-        {
-          "id": "blog-002-neural-networks",
-          "href": "/blog/neural-networks-guide",
-          "roles": [
-            "guest"
-          ],
-          "hasBadge": false,
-          "type": "blog",
-          "isPublished": true,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
-          "order": 2,
-          "title": "Neural Networks Guide",
-          "description": "A comprehensive guide to understanding neural networks and their applications in modern AI systems.",
-          "images": [],
-          "keywords": [
-            "neural networks",
-            "deep learning",
-            "AI",
-            "guide"
-          ]
-        },
-        {
-          "id": "blog-003-nlp-advances",
-          "href": "/blog/nlp-advances",
-          "roles": [
-            "guest"
-          ],
-          "hasBadge": false,
-          "type": "blog",
-          "isPublished": true,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
           "order": 3,
-          "title": "NLP Advances",
-          "description": "Discover recent advances in natural language processing and how they revolutionize human-computer interaction.",
+          "title": "404 page",
+          "description": "Visit a non-existent route to see error handling.",
           "images": [],
           "keywords": [
-            "NLP",
-            "natural language processing",
-            "AI",
-            "language models"
-          ]
-        },
-        {
-          "id": "blog-004-ai-ethics",
-          "href": "/blog/ai-ethics",
-          "roles": [
-            "guest"
-          ],
-          "hasBadge": false,
-          "type": "blog",
-          "isPublished": true,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
-          "order": 4,
-          "title": "AI Ethics Framework",
-          "description": "Understanding ethical considerations and responsible development practices in artificial intelligence systems.",
-          "images": [],
-          "keywords": [
-            "ethics",
-            "AI",
-            "responsibility",
-            "governance"
+            "404 page"
           ]
         }
       ],

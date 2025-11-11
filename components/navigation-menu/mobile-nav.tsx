@@ -4,6 +4,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
+import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -13,7 +14,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { MenuCategory } from "@/types/menu-types"
-import Image from "next/image"
 import { appConfig } from "@/config/app-config"
 import { AnimatedAIButton } from "../animated-aI-button"
 
@@ -22,24 +22,20 @@ interface MobileNavProps {
   className?: string
 }
 
-export function MobileNav({
-  categories,
-  className,
-}: MobileNavProps) {
+
+export function MobileNav({ categories, className }: MobileNavProps) {
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
 
-  // Check if page should be hidden on larger screens
-  const shouldHidePage = (href: string | undefined) => {
-    if (!href) return false
-    // Hide /chat page on screens larger than sm (md and above)
-    return href.includes("chat")
-  }
+  // Close menu before navigation
+  const handleCloseMenu = () => setOpen(false)
 
-  // Handler to close menu before navigation
-  const handleCloseMenu = () => {
-    setOpen(false)
-  }
+  // Filter out any "Home" category from data to avoid duplicates
+  const otherCategories = React.useMemo(() => {
+    return (categories ?? []).filter(
+      (c) => (c?.title ?? "").toLowerCase() !== "home"
+    )
+  }, [categories])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -73,6 +69,7 @@ export function MobileNav({
           </div>
         </Button>
       </PopoverTrigger>
+
       <PopoverContent
         className="bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
         align="start"
@@ -81,155 +78,92 @@ export function MobileNav({
         sideOffset={14}
       >
         <div className="flex flex-col gap-6 overflow-auto px-6 py-6">
-          {/* Render each category */}
-          {categories.map((category) => {
-            const lowerCaseTitle = category.title.toLowerCase()
-            const isActive = category.href ? pathname === category.href : false
+          {/* 1) Home section (always first, independent of categories) */}
+          <div className="flex flex-col gap-4">
+            <div className="text-muted-foreground text-sm font-medium">
+              Home
+            </div>
 
+            <Link
+              href="/"
+              onClick={handleCloseMenu}
+              className={cn(
+                "flex flex-col justify-start rounded-md bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-none transition-colors hover:bg-accent",
+                pathname === "/" && "bg-accent"
+              )}
+            >
+              <div className="mb-3 flex justify-center">
+                <Image
+                  src={appConfig.logo}
+                  alt={appConfig.name}
+                  width={96}
+                  height={96}
+                  className="h-24 w-24 object-cover rounded-md"
+                />
+              </div>
+              <div className="mb-2 text-base font-medium text-left capitalize">
+                {appConfig.name}
+              </div>
+              <p className="text-sm leading-tight text-muted-foreground line-clamp-4">
+                {appConfig.description}
+              </p>
+            </Link>
+          </div>
+
+          {/* 2) Chat action (always second, visible only on mobile: flex md:hidden) */}
+          <div className="flex flex-col gap-4 md:hidden">
+            <div className="text-muted-foreground text-sm font-medium">
+              Chat
+            </div>
+            <div className="flex">
+              <AnimatedAIButton
+                className="w-full"
+                onNavigate={handleCloseMenu}
+              />
+            </div>
+          </div>
+
+          {/* 3) Other categories (excluding Home) */}
+          {otherCategories.map((category) => {
             // Skip categories without pages
-            if (!category.pages || category.pages.length === 0) {
+            if (!category?.pages || category.pages.length === 0) {
               return null
             }
 
-            // Special logic for "Home" category
-            if (lowerCaseTitle === "home") {
-              return (
-                <div key={category.title} className="flex flex-col gap-4">
-                  <div className="text-muted-foreground text-sm font-medium">
-                    {category.title}
-                  </div>
-
-                  {/* Main block with logo and description */}
-                  <Link
-                    href="/"
-                    className={cn(
-                      "flex flex-col justify-start rounded-md bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-none transition-colors hover:bg-accent",
-                      pathname === "/" && "bg-accent"
-                    )}
-                  >
-                    <div className="mb-3 flex justify-center">
-                      <Image
-                        src={appConfig.logo}
-                        alt={appConfig.name}
-                        width={96}
-                        height={96}
-                        className="h-24 w-24 object-cover rounded-md"
-                      />
-                    </div>
-                    <div className="mb-2 text-base font-medium text-left capitalize">
-                      {appConfig.name}
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground line-clamp-4">
-                      {appConfig.description}
-                    </p>
-                  </Link>
-
-                  {/* List of category pages (max 10) */}
-                  <div className="flex flex-col gap-3">
-                    {category.pages.slice(0, 10).map((page) => {
-                      // Check if this is the chat page that should use AnimatedAIButton
-                      if (page.href && shouldHidePage(page.href)) {
-                        return (
-                          <div key={page.id} className="flex md:hidden">
-                            <AnimatedAIButton
-                              className="w-full"
-                              onNavigate={handleCloseMenu}
-                            />
-                          </div>
-                        )
-                      }
-
-                      // Regular page link
-                      if (page.href) {
-                        return (
-                          <MobileNavLink
-                            key={page.id}
-                            href={page.href}
-                            onOpenChange={setOpen}
-                            isActive={pathname === page.href}
-                          >
-                            <div className="text-sm font-medium capitalize">
-                              {page.title}
-                            </div>
-                            {page.description && (
-                              <p className="text-xs text-muted-foreground line-clamp-1">
-                                {page.description}
-                              </p>
-                            )}
-                          </MobileNavLink>
-                        )
-                      }
-
-                      return null
-                    })}
-                  </div>
-
-                  {/* "View All" button if more than 10 pages */}
-                  {category.pages.length > 10 && category.href && (
-                    <Link
-                      href={category.href}
-                      onClick={() => setOpen(false)}
-                      className="text-sm font-medium text-primary hover:text-primary/80 underline transition-colors"
-                    >
-                      View All
-                    </Link>
-                  )}
-                </div>
-              )
-            }
-
-            // Logic for other categories
             return (
               <div key={category.title} className="flex flex-col gap-4">
                 <div className="text-muted-foreground text-sm font-medium">
                   {category.title}
                 </div>
 
-                {/* List of category pages (max 10) */}
                 <div className="flex flex-col gap-3">
                   {category.pages.slice(0, 10).map((page) => {
-                    // Check if this is the chat page that should use AnimatedAIButton
-                    if (page.href && shouldHidePage(page.href)) {
-                      return (
-                        <div key={page.id} className="flex md:hidden">
-                          <AnimatedAIButton
-                            className="w-full"
-                            onNavigate={handleCloseMenu}
-                          />
+                    if (!page?.href) return null
+
+                    return (
+                      <MobileNavLink
+                        key={page.id}
+                        href={page.href}
+                        onOpenChange={setOpen}
+                        isActive={pathname === page.href}
+                      >
+                        <div className="text-sm font-medium capitalize">
+                          {page.title}
                         </div>
-                      )
-                    }
-
-                    // Regular page link
-                    if (page.href) {
-                      return (
-                        <MobileNavLink
-                          key={page.id}
-                          href={page.href}
-                          onOpenChange={setOpen}
-                          isActive={pathname === page.href}
-                        >
-                          <div className="text-sm font-medium capitalize">
-                            {page.title}
-                          </div>
-                          {page.description && (
-                            <p className="text-xs text-muted-foreground line-clamp-1">
-                              {page.description}
-                            </p>
-                          )}
-                        </MobileNavLink>
-                      )
-                    }
-
-                    return null
+                        {page.description && (
+                          <p className="text-xs text-muted-foreground line-clamp-1">
+                            {page.description}
+                          </p>
+                        )}
+                      </MobileNavLink>
+                    )
                   })}
                 </div>
 
-                {/* "View All" button if more than 10 pages */}
                 {category.pages.length > 10 && category.href && (
                   <Link
                     href={category.href}
-                    onClick={() => setOpen(false)}
+                    onClick={handleCloseMenu}
                     className="text-sm font-medium text-primary hover:text-primary/80 underline transition-colors"
                   >
                     View All
@@ -265,7 +199,8 @@ function MobileNavLink({
   return (
     <Link
       href={href}
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault()
         router.push(href)
         onOpenChange?.(false)
       }}
