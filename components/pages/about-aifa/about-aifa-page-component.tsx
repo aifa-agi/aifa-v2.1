@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Script from 'next/script';
 import { Card } from '@/components/ui/card';
 import { AnimatedAIButton } from '../../animated-aI-button';
 import { appConfig } from '@/config/app-config';
@@ -19,6 +18,7 @@ type FAQItem = {
 
 /**
  * Centralized FAQ content. UI and JSON-LD will stay in sync.
+ * EXPORTED for use in page.tsx JSON-LD generation.
  */
 export const FAQ_DATA: FAQItem[] = [
   {
@@ -60,58 +60,6 @@ export const FAQ_DATA: FAQItem[] = [
 ];
 
 /**
- * Build FAQPage JSON-LD from FAQ_DATA.
- * Joins multiline answers and optional bullets into a single plain-text string per question.
- */
-function buildFaqJsonLd(items: FAQItem[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => {
-      let answerText = item.answer.join(' ');
-      
-      // Include bullets in the answer text for better SEO context
-      if (item.bullets && item.bullets.length > 0) {
-        answerText += ' Key points: ' + item.bullets.join('; ') + '.';
-      }
-      
-      return {
-        '@type': 'Question',
-        name: item.question,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: answerText,
-        },
-      };
-    }),
-  };
-}
-
-/**
- * Build BreadcrumbList JSON-LD for navigation hierarchy.
- */
-function buildBreadcrumbJsonLd() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: appConfig.url,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'About AIFA',
-        item: `${appConfig.url}/about-aifa`,
-      },
-    ],
-  };
-}
-
-/**
  * Pill component for displaying technology tags
  */
 interface PillProps {
@@ -138,7 +86,7 @@ function StatusPill({ label }: { label: string }) {
 
 /**
  * Main component for the About AIFA page.
- * Includes structured data (JSON-LD) for SEO optimization.
+ * Note: JSON-LD schemas are now in page.tsx for proper SSR rendering.
  */
 export default function AboutAifaPageComponent() {
   // Email contact configuration
@@ -166,32 +114,8 @@ export default function AboutAifaPageComponent() {
   const heroSubtitle =
     'Production-ready architecture leveraging parallel and intercepting routes, AI chat integration, and multi-role access. Currently available with fractal AI-driven development coming Q4 2025.';
 
-  // Prepare JSON-LD schemas once per render
-  const faqJsonLd = buildFaqJsonLd(FAQ_DATA);
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd();
-
   return (
     <>
-      {/* Inject BreadcrumbList JSON-LD for navigation hierarchy */}
-      <Script
-        id="breadcrumb-jsonld"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
-
-      {/* Inject FAQPage JSON-LD. Escape "<" to avoid parser issues. */}
-      <Script
-        id="faq-jsonld"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
-
       <div className="h-20" />
 
       {/* Technology stack pills */}

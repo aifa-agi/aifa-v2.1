@@ -1,7 +1,8 @@
-// aapp/@rightStatic/(_PUBLIC)/about-aifa/page.tsx
+// app/@rightStatic/(_PUBLIC)/about-aifa/page.tsx
 
-import AboutAifaPageComponent from '@/components/pages/about-aifa/about-aifa-page-component';
+import AboutAifaPageComponent, { FAQ_DATA } from '@/components/pages/about-aifa/about-aifa-page-component';
 import { constructMetadata } from '@/lib/construct-metadata';
+import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
 
 /**
@@ -21,9 +22,88 @@ export const metadata: Metadata = constructMetadata({
   // Optional: locale and content type influence openGraph.type/locale
   locale: 'en',
   contentType: 'website', // or 'article' if you want og:type=article
-
 });
 
+/**
+ * Build FAQPage JSON-LD from FAQ_DATA.
+ * Joins multiline answers and optional bullets into a single plain-text string per question.
+ */
+function buildFaqJsonLd(items: typeof FAQ_DATA) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => {
+      let answerText = item.answer.join(' ');
+      
+      // Include bullets in the answer text for better SEO context
+      if (item.bullets && item.bullets.length > 0) {
+        answerText += ' Key points: ' + item.bullets.join('; ') + '.';
+      }
+      
+      return {
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: answerText,
+        },
+      };
+    }),
+  };
+}
+
+/**
+ * Build BreadcrumbList JSON-LD for navigation hierarchy.
+ */
+function buildBreadcrumbJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: appConfig.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About AIFA',
+        item: `${appConfig.url}/about-aifa`,
+      },
+    ],
+  };
+}
+
+/**
+ * Server Component - renders static HTML with JSON-LD schemas
+ */
 export default function Page() {
-  return <AboutAifaPageComponent />;
+  // Generate JSON-LD schemas on server side
+  const faqJsonLd = buildFaqJsonLd(FAQ_DATA);
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd();
+
+  return (
+    <>
+      {/* Inject BreadcrumbList JSON-LD for navigation hierarchy */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd),
+        }}
+      />
+
+      {/* Inject FAQPage JSON-LD with FAQ data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqJsonLd),
+        }}
+      />
+
+      {/* Render page component with UI */}
+      <AboutAifaPageComponent />
+    </>
+  );
 }
