@@ -1,22 +1,11 @@
-// components/pages/hire-me/hire-me-page-component.tsx
-// Understanding (EN):
-// - Extend the existing English "Hire Me" page with a new FAQ section (3 Q&A).
-// - Drive JSON-LD (FAQPage) directly from the same Q&A data source used in the UI.
-// - Keep a single author photo usage policy elsewhere; FAQ itself is text-only.
-// - All visible copy stays in English; code comments are in English.
-// - This structure lets you later edit Q&A and automatically receive updated JSON-LD.
-//
-// References:
-// - Schema.org FAQPage structure (Question -> acceptedAnswer) [web:62]
-// - Adding JSON-LD in Next.js (script tag best practices) [web:67][web:70]
-// - Google FAQ rich results are limited/eligibility-based since 2023; still fine to include [web:71]
+//components/pages/about-aifa/about-aifa-page-component.tsx
+
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { AnimatedAIButton } from '../../animated-aI-button';
 import { appConfig } from '@/config/app-config';
-import React from 'react';
 
 interface PillProps {
   text: string;
@@ -37,60 +26,8 @@ function StatusPill({ label }: { label: string }) {
   );
 }
 
-// Reusable FAQ types for stronger typing and JSON-LD generation
-type FAQItem = {
-  question: string;
-  answer: string;
-};
-
-// Centralized FAQ data source (edit here; UI and JSON-LD will stay in sync)
-const FAQ_DATA: FAQItem[] = [
-  {
-    question: 'Can you integrate AI into our existing website or mobile application?',
-    answer:
-      'Yes, this is feasible for most modern tech stacks. I audit your architecture (frontend/backend), prepare technical documentation covering AI SDK integration points, including RAG mechanisms, agents, and knowledge base connectivity. The documentation enables your team to test, stage, and deploy to production with minimal risk. If you lack internal resources, I can implement the integration myself or collaborate closely with your developers.',
-  },
-  {
-    question: 'What types of AI chat systems do you develop?',
-    answer:
-      'Built on the latest AI SDK with flexible architecture tailored to your business. I implement various patterns: from embedded prompts with context to hybrid solutions orchestrating vector knowledge bases (Pinecone, Weaviate), Redis caching, and PostgreSQL. Integration with any model (OpenAI GPT-4, Anthropic Claude, Gemini, open-source LLaMA) and tuning for your KPIs: response time, accuracy, cost per query. Analytics dashboards and continuous learning loops based on user feedback are also available.',
-  },
-  {
-    question: 'Do you develop asset tokenization systems, blockchain, and Web3 solutions?',
-    answer:
-      'Yes, this is a priority area. In partnership with an experienced business analyst and B2B product manager, I offer end-to-end delivery: from concept to Security Token Offering (STO) launch with legal compliance and regulatory alignment. Platform built on Node.js, smart contract integration (Solidity/EVM, standards ERC-20, ERC-1404, ERC-3643 for compliance), supporting both private and public blockchains. We tokenize real estate, intellectual property, and fractional assets with KYC/AML processes and secondary market infrastructure.',
-  },
-  {
-    question: 'Do you consider full-time employment opportunities?',
-    answer:
-      'Yes, open to discussing full-time roles at companies working at the intersection of Next.js, Web3, and AI. Particularly interested in Technical Lead, Solution Architect, or Product Engineer positions where I can apply 25 years of experience in architecture, team leadership, and product launches. I prefer projects with clear business strategy where technology enables growth, not just tech for techs sake.',
-  },
-  {
-    question: 'What is your minimum rate, and do you accept freelance projects?',
-    answer:
-      'Rates start at 40 EUR/hour. Key advantage: extensive library of ready-made solutions (AIFA starters, AI/Web3 modules, Next.js 15 components) that dramatically reduce timelines—projects estimated at months often complete in days of focused work. I accept freelance projects if theyre technically interesting and require architectural thinking, not just basic implementation. Minimum engagement: 2-hour consultation (80 EUR) with roadmap and estimate.',
-  },
-];
-
-
-// Helper to build FAQPage JSON-LD from the data above
-function buildFaqJsonLd(items: FAQItem[]) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  };
-}
-
-export default function HireMePageComponent() {
-  // Prefilled mailto link with URL-encoded subject and body. [web:12][web:49]
+export default function AboutAifaPageComponent() {
+  // Prefilled mailto link with URL-encoded subject and body. [web:15][web:31][web:33]
   const email = 'bolshiyanov@gmail.com';
   const mailSubject = encodeURIComponent('AIFA Collaboration — AI/Web3/SEO Architecture');
   const mailBody = encodeURIComponent(
@@ -108,7 +45,7 @@ export default function HireMePageComponent() {
       'Thank you!',
     ].join('\n')
   );
-  const mailtoHref = `mailto:${email}?subject=${mailSubject}&body=${mailBody}`; // [web:12][web:49]
+  const mailtoHref = `mailto:${email}?subject=${mailSubject}&body=${mailBody}`; // [web:15][web:31][web:33]
 
   // Telegram deep link using public username. [web:16]
   const telegramHref = 'https://t.me/bolshiyanov';
@@ -118,19 +55,8 @@ export default function HireMePageComponent() {
   const heroSubtitle =
     'Architecture that extracts maximum value from AI and Web3 with SEO and AI-search focus — minimizing costs while maximizing outcomes. A technical partner, not just a developer.';
 
-  // Build JSON-LD once per render from FAQ data
-  const faqJsonLd = buildFaqJsonLd(FAQ_DATA);
-
   return (
     <>
-      {/* Inject FAQ JSON-LD. Safe replacement for < to avoid parser issues. [web:67][web:70] */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
-
       <div className="h-20" />
 
       {/* Expertise pills */}
@@ -162,12 +88,14 @@ export default function HireMePageComponent() {
             {heroSubtitle}
           </p>
 
-          {/* Mobile image (horizontal) */}
+
+
+
           <div className="relative block xl:hidden ">
             <div className="aspect-[16/9] w-full overflow-hidden rounded-lg">
               <div className="relative h-full w-full flex items-center justify-center ">
                 <Image
-                  src="/images/author-bolshiyanov-horizontal.png"
+                  src="/images/pic2.png"
                   alt="Roman Bolshiyanov portrait"
                   width={800}
                   height={600}
@@ -199,7 +127,6 @@ export default function HireMePageComponent() {
               </span>
             </div>
           </div>
-
           {/* CTA */}
           <div className="flex flex-col gap-3 xl:flex-row">
             <Link
@@ -219,14 +146,15 @@ export default function HireMePageComponent() {
           </div>
         </div>
 
-        {/* Photo on desktop */}
-        <div className="hidden xl:block">
-          <div className="">
+        {/* Photo on desktop (kept for layout balance) */}
+        <div className='hidden xl:block'>
+
+          <div className=''>
             <div className="relative hidden 2xl:block">
               <div className="aspect-[1/1] w-full overflow-hidden rounded-lg">
                 <div className="relative h-full w-full flex items-center justify-center ">
                   <Image
-                    src="/images/author-bolshiyanov.png"
+                    src="/images/pic2.png"
                     alt="Roman Bolshiyanov portrait"
                     width={800}
                     height={600}
@@ -238,12 +166,13 @@ export default function HireMePageComponent() {
             </div>
           </div>
 
-          <div className="2xl:hidden  block">
+
+          <div className='2xl:hidden  block'>
             <div className="relative hidden xl:block">
               <div className="aspect-[9/16] w-full overflow-hidden rounded-lg">
                 <div className="relative h-full w-full flex items-center justify-center ">
                   <Image
-                    src="/images/author-bolshiyanov-vertical.png"
+                    src="/images/pic2.png"
                     alt="Roman Bolshiyanov portrait"
                     width={800}
                     height={600}
@@ -254,6 +183,7 @@ export default function HireMePageComponent() {
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
@@ -277,6 +207,7 @@ export default function HireMePageComponent() {
             <div className="text-2xl font-bold text-foreground">5</div>
             <div className="text-xs text-muted-foreground">Patents</div>
           </div>
+
         </div>
         <div className="flex md:hidden">
           <AnimatedAIButton />
@@ -346,19 +277,6 @@ export default function HireMePageComponent() {
               <li>Vercel hosting</li>
             </ul>
           </Card>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="px-4 mt-10" aria-labelledby="faq">
-        <h2 id="faq" className="text-xl font-semibold text-foreground mb-4">FAQ</h2>
-        <div className="space-y-3">
-          {FAQ_DATA.map((item) => (
-            <Card key={item.question} className="p-4">
-              <h3 className="text-base font-medium">{item.question}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{item.answer}</p>
-            </Card>
-          ))}
         </div>
       </section>
 
