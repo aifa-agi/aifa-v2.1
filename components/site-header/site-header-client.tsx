@@ -59,6 +59,8 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
     initAuthState(initialAuth)
   }, [initialAuth])
 
+  
+   
   return (
     <header className="fixed inset-x-0 top-0 z-100">
       <div className="container px-6 mt-4">
@@ -66,6 +68,7 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
           <div className="flex h-12 items-center justify-between px-2">
             {/* Left section - Logo and Navigation */}
             <div className="flex items-center gap-3">
+              {!isAuthenticated ?
               <Link href="/home" className="flex items-center gap-2">
                 <Image
                   src={appConfig.logo}
@@ -77,7 +80,19 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
                 <span className="inline-block text-sm font-semibold text-white md:text-base">
                   {appConfig.short_name}
                 </span>
-              </Link>
+              </Link>: <Link href="/" className="flex items-center gap-2">
+                <Image
+                  src={appConfig.logo}
+                  alt={`${appConfig.name} image`}
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 rounded-full"
+                />
+                <span className="inline-block text-sm font-semibold text-white md:text-base">
+                  {appConfig.short_name}
+                </span>
+              </Link>}
+
 
               {/* Navigation - hidden when authenticated */}
               {!isAuthenticated && (

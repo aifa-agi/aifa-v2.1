@@ -70,13 +70,13 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ['productivity', 'utilities'],
     screenshots: [
       {
-        src: '/app-images/app-config-images/og-image.jpg',
+        src: '/app-config-images/og-image.jpg',
         sizes: '1200x630',
         type: 'image/jpeg',
         form_factor: 'wide',
       },
       {
-        src: '/app-images/app-config-images/og-image.jpg',
+        src: '/app-config-images/og-image.jpg',
         sizes: '512x512',
         type: 'image/jpeg',
         form_factor: 'narrow',

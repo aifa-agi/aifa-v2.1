@@ -93,72 +93,72 @@ export const appConfig: AppConfig = {
 
   images: {
   ogImage: {
-    path: '/app-images/app-config-images/og-image.jpg',
+    path: '/app-config-images/og-image.jpg',
     format: 'jpeg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'loading-dark': {
-    path: '/app-images/app-config-images/loading-dark.png',
+    path: '/app-config-images/loading-dark.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'loading-light': {
-    path: '/app-images/app-config-images/loading-light.png',
+    path: '/app-config-images/loading-light.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'notFound-dark': {
-    path: '/app-images/app-config-images/not-found-dark.png',
+    path: '/app-config-images/not-found-dark.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'notFound-light': {
-    path: '/app-images/app-config-images/not-found-light.png',
+    path: '/app-config-images/not-found-light.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'error500-dark': {
-    path: '/app-images/app-config-images/error500-dark.png',
+    path: '/app-config-images/error500-dark.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'error500-light': {
-    path: '/app-images/app-config-images/error500-light.png',
+    path: '/app-config-images/error500-light.png',
     format: 'svg',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'homePage-dark': {
-    path: '/app-images/app-config-images/homepage-dark.png',
+    path: '/app-config-images/homepage-dark.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'homePage-light': {
-    path: '/app-images/app-config-images/homepage-light.png',
+    path: '/app-config-images/homepage-light.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'chatbot-dark': {
-    path: '/app-images/app-config-images/chatbot-dark.png',
+    path: '/app-config-images/chatbot-dark.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
   'chatbot-light': {
-    path: '/app-images/app-config-images/chatbot-light.png',
+    path: '/app-config-images/chatbot-light.png',
     format: 'png',
     uploadedAt: '2025-10-16T18:48:01.446Z',
   },
 },
 
-logo: '/app-images/app-config-images/logo.png',
+logo: '/app-config-images/logo.png',
 
 icons: {
   faviconAny: '/favicon.ico',
-  icon32: '/app-images/app-config-images/icons/icon-32.png',
-  icon48: '/app-images/app-config-images/icons/icon-48.png',
-  icon192: '/app-images/app-config-images/icons/icon-192.png',
-  icon512: '/app-images/app-config-images/icons/icon-512.png',
-  icon512Maskable: '/app-images/app-config-images/icons/icon-512-maskable.png', // ← НОВОЕ
-  appleTouch: '/app-images/app-config-images/icons/apple-touch-icon.png',
+  icon32: '/app-config-images/icons/icon-32.png',
+  icon48: '/app-config-images/icons/icon-48.png',
+  icon192: '/app-config-images/icons/icon-192.png',
+  icon512: '/app-config-images/icons/icon-512.png',
+  icon512Maskable: '/app-config-images/icons/icon-512-maskable.png', // ← НОВОЕ
+  appleTouch: '/app-config-images/icons/apple-touch-icon.png',
 },
 
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { appConfig, getHomePageIllustration } from '@/config/app-config';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
-import { AnimatedAIButton } from './animated-aI-button';
+import { AnimatedAIButton } from '../../animated-aI-button';
 
 // Small utility to render compact label badges (pills)
 interface PillProps {
@@ -27,7 +27,7 @@ function StatusPill({ label }: { label: string }) {
   );
 }
 
-export default function HomePage() {
+export default function HomePageComponent() {
   // SSR-friendly illustration switcher for dark/light themes
   function LoadingIllustrationSSR() {
     const darkPath = getHomePageIllustration('dark');
@@ -106,7 +106,7 @@ export default function HomePage() {
           {/* Hero heading */}
           <h1
             id="hero-title"
-            className="text-4xl font-bold leading-tight tracking-[-0.02em] text-foreground sm:text-5xl"
+            className="text-4xl font-bold leading-tight tracking-[-0.02em] text-foreground sm:text-4xl"
           >
             AI SEO Next.js Starter with Advanced App Router — {appConfig.short_name}
           </h1>
