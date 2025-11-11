@@ -5,6 +5,7 @@
 import { ChartAreaInteractive } from "../(_client)/charts/chart-area-interactive"
 
 export default function RightDynamicRoute() {
+  console.log("RightDynamicPage")
   return (<>
     <div className="container mx-auto p-6">
       {/* Admin Panel Header */}

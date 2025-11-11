@@ -12,6 +12,8 @@ import { AuthButton } from "@/components/site-header/auth-button"
 import { appConfig } from "@/config/app-config"
 import { contentData } from "@/config/content/content-data"
 import { initAuthState, useAuth } from "@/app/@left/(_AUTH)/login/(_client)/(_hooks)/use-auth-state"
+import { usePathname } from "next/navigation"
+import { MobailCloseChatButton } from "./mobail-close-chat-button"
 
 interface SiteHeaderClientProps {
   initialAuth: boolean
@@ -34,6 +36,23 @@ interface SiteHeaderClientProps {
  */
 export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
   const { isAuthenticated } = useAuth()
+  const pathname = usePathname()
+  const [shouldShowCloseChat, setShouldShowCloseChat] = React.useState(false)
+
+  React.useEffect(() => {
+  const update = () => {
+    const current = typeof window !== 'undefined' ? window.location.pathname : pathname
+    setShouldShowCloseChat(current.includes("interception_chat"))
+  }
+
+  // Initial sync on mount and on pathname change
+  update()
+
+  // Fallback for back/forward without immediate pathname change in intercepted routes
+  window.addEventListener('popstate', update)
+  return () => window.removeEventListener('popstate', update)
+}, [pathname])
+
 
   // Initialize auth state from server on mount
   React.useEffect(() => {
@@ -64,9 +83,9 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
               {!isAuthenticated && (
                 <>
                   <div className="hidden h-6 w-px bg-white/20 lg:block" />
-                  <MainNav 
-                    items={contentData.categories} 
-                    className="hidden lg:flex" 
+                  <MainNav
+                    items={contentData.categories}
+                    className="hidden lg:flex"
                   />
                 </>
               )}
@@ -82,7 +101,9 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
                 <ModeSwitcher />
               </div>
 
-              <AuthButton initialAuth={initialAuth} />
+              {!isAuthenticated && shouldShowCloseChat ? (
+                <MobailCloseChatButton/>):(
+              <AuthButton initialAuth={initialAuth} />)}
 
               {/* Mobile navigation - hidden when authenticated */}
               {!isAuthenticated && (
