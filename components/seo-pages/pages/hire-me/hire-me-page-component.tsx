@@ -1,7 +1,7 @@
 // components/pages/hire-me/hire-me-page-component.tsx
 
 import { Card } from '@/components/ui/card';
-import { AnimatedAIButton } from '../../animated-aI-button';
+import { AnimatedAIButton } from '../../../animated-ai-button';
 
 /**
  * StatusPill component for service labels

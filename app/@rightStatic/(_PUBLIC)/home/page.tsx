@@ -1,8 +1,8 @@
 //app/@rightStatic/(_PUBLIC)/home/page.tsx
 
+import HomePageComponent from '@/components/seo-pages/pages/home/home-page-component';
 import { constructMetadata } from '@/lib/construct-metadata';
 import { Metadata } from 'next';
-import HomePageComponent from '@/components/pages/home/home-page-component';
 
 
 export const metadata: Metadata = constructMetadata();

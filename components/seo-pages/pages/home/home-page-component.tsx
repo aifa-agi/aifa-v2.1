@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { appConfig, getHomePageIllustration } from '@/config/app-config';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
-import { AnimatedAIButton } from '../../animated-aI-button';
+import { AnimatedAIButton } from '@/components/animated-ai-button';
 
 // Small utility to render compact label badges (pills)
 interface PillProps {

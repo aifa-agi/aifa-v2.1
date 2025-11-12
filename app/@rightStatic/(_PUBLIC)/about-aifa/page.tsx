@@ -1,6 +1,6 @@
 // app/@rightStatic/(_PUBLIC)/about-aifa/page.tsx
 
-import AboutAifaPageComponent, { FAQ_DATA } from '@/components/pages/about-aifa/about-aifa-page-component';
+import AboutAifaPageComponent, { FAQ_DATA } from '@/components/seo-pages/pages/about-aifa/about-aifa-page-component';
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';

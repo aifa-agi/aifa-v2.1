@@ -153,44 +153,32 @@ export default async function RootLayout({
               <div className="bg-background fixed inset-0 flex flex-col overflow-hidden">
                 <SiteHeader />
 
-                {/* Desktop layout with resizable panels */}
-                <div className="hidden md:flex flex-1 min-h-0 w-full">
-                  <ResizablePanelGroup direction="horizontal" className="h-full">
-                    {/* Left panel - authentication/navigation */}
-                    <ResizablePanel defaultSize={40} minSize={35} className="relative">
+
+
+                <div className="flex-1 min-h-0 w-full">
+
+                  <div className="h-full flex">
+
+                    <div className="hidden md:flex md:w-0 lg:w-[50%] xl:w-[35%] border-r border-border">
                       <OnlineStatusProvider>
-                        <div className="absolute inset-0 overflow-hidden">
+                        <div className="h-full w-full overflow-hidden">
                           {left}
                         </div>
                       </OnlineStatusProvider>
-                    </ResizablePanel>
-                    
-                    <ResizableHandle withHandle />
-                    
-                    {/* Right panel - static and dynamic content */}
-                    <ResizablePanel defaultSize={60} minSize={35} className="relative">
-                      {/* Static content layer - always rendered for SEO */}
+                    </div>
+
+
+                    <div className="w-full md:w-full lg:w-[50%] xl:w-[65%] relative">
                       <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
                         {rightStatic}
                       </main>
-                      
-                      {/* Dynamic content layer - only for authenticated users */}
-                      {/* Overlays static content when authenticated */}
                       {rightDynamic}
-                    </ResizablePanel>
-                  </ResizablePanelGroup>
+                    </div>
+                  </div>
                 </div>
+                
 
-                {/* Mobile layout - single column */}
-                <div className="w-full md:hidden flex-1 min-h-0 relative">
-                  {/* Static content layer */}
-                  {/* <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
-                    {rightStatic}
-                  </main> */}
-                  
-                  {/* Dynamic content layer - overlays static on mobile too */}
-                  {rightDynamic}
-                </div>
+
 
                 <AifaFooter />
               </div>
@@ -199,7 +187,7 @@ export default async function RootLayout({
             </ActiveThemeProvider>
           </LayoutProvider>
         </ThemeProvider>
-        
+
         {/* No JavaScript fallback message */}
         <noscript>
           <div

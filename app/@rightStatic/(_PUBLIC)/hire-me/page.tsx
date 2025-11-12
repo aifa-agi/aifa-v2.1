@@ -3,9 +3,9 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import HireMePageComponent from '@/components/pages/hire-me/hire-me-page-component';
-import { PageWrapperConfig, SeoPageWrapper } from '@/components/pages/seo-page-wrapper/seo-page-wrapper';
-import { StructuredDataWrapper } from '@/components/pages/seo-page-wrapper/structured-data-wrapper';
+import HireMePageComponent from '@/components/seo-pages/pages/hire-me/hire-me-page-component';
+import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-pages/seo-page-wrapper/seo-page-wrapper';
+import { StructuredDataWrapper } from '@/components/seo-pages/seo-page-wrapper/structured-data-wrapper';
 
 // ============================================================================
 // META CONFIGURATION
@@ -114,9 +114,9 @@ const PAGE_CONFIG: PageWrapperConfig= {
     title: 'Have an idea? Let\'s build something monumental together',
     subtitle: 'Architecture that extracts maximum value from AI and Web3 with SEO and AI-search focus — minimizing costs while maximizing outcomes. A technical partner, not just a developer.',
     images: {
-      mobile: '/images/author-bolshiyanov-horizontal.png',
-      desktop: '/images/author-bolshiyanov-vertical.png',
-      desktopLarge: '/images/author-bolshiyanov.png',
+      horizontal: '/images/author-bolshiyanov-horizontal.png',
+      vertical: '/images/author-bolshiyanov-vertical.png',
+      square: '/images/author-bolshiyanov.png',
       alt: 'Roman Bolshiyanov portrait',
     },
     author: {
@@ -186,11 +186,11 @@ const PAGE_CONFIG: PageWrapperConfig= {
 export default function Page() {
   // Generate JSON-LD schemas in page.tsx
   const breadcrumbJsonLd = buildBreadcrumbJsonLd(PAGE_CONFIG.breadcrumbs);
-  const faqJsonLd = buildFaqJsonLd(PAGE_CONFIG.faqs);
+   const faqJsonLd = buildFaqJsonLd(PAGE_CONFIG.faqs ?? []);
 
   return (
     <>
-      {/* JSON-LD Structured Data - wrapped in client component to avoid RSC payload duplication */}
+      
       <StructuredDataWrapper data={breadcrumbJsonLd} />
       <StructuredDataWrapper data={faqJsonLd} />
 
