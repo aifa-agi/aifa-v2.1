@@ -120,7 +120,7 @@ export default function AboutAifaPageComponent() {
 
       {/* Technology stack pills */}
       <div className="flex justify-center flex-wrap gap-2 px-4 mb-4 max-h-[4.75rem] overflow-hidden">
-        ß<Pill text="Next.js 15" />
+        <Pill text="Next.js 15" />
         <Pill text="React 19" />
         <Pill text="App Router" />
         <Pill text="Parallel Routes" />

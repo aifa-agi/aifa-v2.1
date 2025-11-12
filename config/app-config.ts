@@ -52,8 +52,8 @@ export interface ContentTypeDefaults {
 const getDefaultAuthorConfig = (): AuthorConfig => {
   return {
     name: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_NAME || process.env.NEXT_PUBLIC_APP_NAME || 'AIFA',
-    email: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_EMAIL,
-    twitter: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_TWITTER,
+    email: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_EMAIL || 'bolshiyanov@gmail.com',
+    twitter: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_TWITTER || 'https://x.com/aifa_agi',
     linkedin: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_LINKEDIN,
     facebook: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_FACEBOOK,
     bio: process.env.NEXT_PUBLIC_DEFAULT_AUTHOR_BIO,
@@ -65,9 +65,9 @@ const getDefaultAuthorConfig = (): AuthorConfig => {
 
 const getSocialConfig = (): SocialConfig => {
   return {
-    twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE,
-    github: process.env.NEXT_PUBLIC_GITHUB_URL,
-    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL,
+    twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE || '@aifa_agi',
+    github: process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/aifa-agi/aifa-v2.1',  
+    linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || 'https://www.linkedin.com/in/bolshiyanov',
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL,
   };
 };
