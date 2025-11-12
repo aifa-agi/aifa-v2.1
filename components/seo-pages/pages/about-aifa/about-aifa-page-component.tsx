@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
-import { AnimatedAIButton } from '../../../animated-ai-button';
+import { AnimatedAIButton } from '@/components/animated-ai-button';
 import { appConfig } from '@/config/app-config';
 import React from 'react';
 

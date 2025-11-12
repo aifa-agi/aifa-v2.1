@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/popover"
 import { MenuCategory } from "@/types/menu-types"
 import { appConfig } from "@/config/app-config"
-import { AnimatedAIButton } from "../animated-ai-button"
+import { AnimatedAIButton } from '@/components/animated-ai-button';
 
 interface MobileNavProps {
   categories: MenuCategory[]
