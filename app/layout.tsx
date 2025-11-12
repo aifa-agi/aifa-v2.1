@@ -1,6 +1,5 @@
-//app/layout.tsx
+// app/layout.tsx
 import type { Metadata, Viewport } from 'next'
-import Script from 'next/script'
 import { constructMetadata } from '@/lib/construct-metadata'
 import { META_THEME_COLORS, appConfig } from '@/config/app-config'
 import { fontVariables } from "@/lib/fonts"
@@ -20,9 +19,11 @@ import { Analytics } from '@vercel/analytics/next'
 import { SiteHeader } from '@/components/site-header/site-header-wrapper'
 import AifaFooter from '@/components/aifa-footer'
 
+
 export const metadata: Metadata = constructMetadata({
   pathname: '/',
 })
+
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -36,6 +37,7 @@ export const viewport: Viewport = {
     { media: '(prefers-color-scheme: dark)', color: appConfig.pwa.themeColor },
   ],
 }
+
 
 const jsonLdWebSite = {
   '@context': 'https://schema.org',
@@ -53,6 +55,7 @@ const jsonLdWebSite = {
     'query-input': 'required name=search_term_string',
   },
 }
+
 
 const jsonLdOrganization = {
   '@context': 'https://schema.org',
@@ -77,6 +80,7 @@ const jsonLdOrganization = {
     availableLanguage: appConfig.seo?.locales || [appConfig.lang],
   },
 }
+
 
 export default async function RootLayout({
   left,
@@ -103,6 +107,7 @@ export default async function RootLayout({
         <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
         <meta name="theme-color" content={META_THEME_COLORS.light} />
 
+        {/* Theme script - must be inline for no-flash */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -117,6 +122,20 @@ export default async function RootLayout({
             `,
           }}
         />
+
+        {/* JSON-LD schemas for SEO - MOVED TO HEAD with native script tags */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLdWebSite),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLdOrganization),
+          }}
+        />
       </head>
       <body
         className={cn(
@@ -124,24 +143,6 @@ export default async function RootLayout({
           fontVariables
         )}
       >
-        {/* JSON-LD schemas for SEO */}
-        <Script
-          id="schema-website"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLdWebSite),
-          }}
-          strategy="beforeInteractive"
-        />
-        <Script
-          id="schema-organization"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLdOrganization),
-          }}
-          strategy="beforeInteractive"
-        />
-
         {process.env.NODE_ENV === "production" && (
           <PWAInstallPrompt />
         )}
