@@ -108,7 +108,7 @@ export default async function RootLayout({
         <meta name="theme-color" content={META_THEME_COLORS.light} />
 
         {/* Theme script - must be inline for no-flash */}
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
@@ -121,7 +121,7 @@ export default async function RootLayout({
               } catch (_) {}
             `,
           }}
-        />
+        /> */}
 
         {/* JSON-LD schemas for SEO - MOVED TO HEAD with native script tags */}
         <script
