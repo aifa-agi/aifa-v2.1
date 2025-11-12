@@ -8,7 +8,7 @@ import { appConfig } from '@/config/app-config';
  * Generate dynamic sitemap based on published pages in content-data.ts
  * 
  * This file is automatically discovered by Next.js and generates sitemap.xml
- * during build time. Only pages with isPublished: true are included.
+ * during build time. Includes both category pages and their published child pages.
  * 
  * @see https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
  */
@@ -16,18 +16,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = appConfig.url;
   const currentDate = new Date();
 
-  // Extract all published pages from content data
-  const publishedPages = contentData.categories
-    .flatMap((category) => category.pages)
-    .filter((page) => page.isPublished)
+  // Extract category pages (e.g., /features, /examples)
+  const categoryPages: MetadataRoute.Sitemap = contentData.categories
+    .filter((category) => category.href) // Only categories with href
+    .map((category) => ({
+      url: `${baseUrl}${category.href}`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8, // Category pages get high priority
+    }));
+
+  // Extract all published child pages from categories
+  const publishedPages: MetadataRoute.Sitemap = contentData.categories
+    .flatMap((category) => category.pages || [])
+    .filter((page) => page.isPublished && page.href)
     .map((page) => ({
       url: `${baseUrl}${page.href}`,
       lastModified: currentDate,
       changeFrequency: getChangeFrequency(page.type),
-      priority: getPriority(page.type, page.href ?? "https://aifa.dev"),
+      priority: getPriority(page.type, page.href!),
     }));
 
-  // Add static routes (if not already in content-data)
+  // Add static routes (homepage and other root pages)
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -35,10 +45,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 1.0,
     },
+    {
+      url: `${baseUrl}/home`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
   ];
 
-  // Combine and deduplicate routes
-  const allRoutes = [...staticRoutes, ...publishedPages];
+  // Combine all routes: static + categories + pages
+  const allRoutes = [...staticRoutes, ...categoryPages, ...publishedPages];
+  
+  // Deduplicate and return
   const uniqueRoutes = deduplicateRoutes(allRoutes);
 
   return uniqueRoutes;
@@ -51,10 +69,10 @@ function getChangeFrequency(
   pageType: string
 ): 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never' {
   const frequencyMap: Record<string, MetadataRoute.Sitemap[number]['changeFrequency']> = {
-    homePage: 'daily',
-    blogPost: 'weekly',
-    product: 'weekly',
-    documentation: 'monthly',
+    feature: 'monthly',
+    blog: 'weekly',
+    news: 'weekly',
+    docs: 'monthly',
     staticPage: 'monthly',
   };
 
@@ -70,10 +88,10 @@ function getPriority(pageType: string, href: string): number {
 
   // Priority map by page type
   const priorityMap: Record<string, number> = {
-    homePage: 1.0,
-    blogPost: 0.8,
-    product: 0.9,
-    documentation: 0.7,
+    feature: 0.7,
+    blog: 0.8,
+    news: 0.6,
+    docs: 0.7,
     staticPage: 0.6,
   };
 
@@ -89,6 +107,7 @@ function deduplicateRoutes(routes: MetadataRoute.Sitemap): MetadataRoute.Sitemap
   routes.forEach((route) => {
     const existing = urlMap.get(route.url);
     
+    // Keep entry with higher priority or the new one if priorities are equal
     if (!existing || (route.priority && existing.priority && route.priority > existing.priority)) {
       urlMap.set(route.url, route);
     }

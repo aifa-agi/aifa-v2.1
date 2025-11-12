@@ -15,7 +15,7 @@ export const metadata: Metadata = constructMetadata({
   title: 'About AIFA — AI-first Next.js Architecture',
   description:
     'AIFA is an AI-first, enterprise-grade Next.js starter built on parallel and intercepting routes with a two-pane layout (left: auth/AI chat, right: static+dynamic). Multi-language, role-based access, external API. Fractal architecture coming Q4 2025.',
-  image: '/og/aifa-about.png',
+  image: '/images/pic2.png',
   pathname: '/about-aifa',
   locale: 'en',
   contentType: 'website',
@@ -25,7 +25,7 @@ export const metadata: Metadata = constructMetadata({
     name: 'Roman Bolshiyanov (Armstrong)',
     email: 'bolshiyanov@gmail.com',
     url: 'https://t.me/bolshiyanov',
-    image: '/images/author-bolshiyanov.png',
+    image: '/images/pic2.png',
     bio: 'AI/Web3/Next Architect delivering business-ready solutions that orchestrate frontend, backend, and go-to-market.',
     jobTitle: 'AI/Web3/Next Architect',
     twitter: undefined,

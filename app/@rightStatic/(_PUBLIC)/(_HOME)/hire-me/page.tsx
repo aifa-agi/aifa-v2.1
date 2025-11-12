@@ -15,7 +15,7 @@ export const metadata: Metadata = constructMetadata({
   title: 'Hire Roman Bolshiyanov — AI/Web3/Next Architect',
   description:
     'Architecture that extracts maximum value from AI and Web3 with SEO and AI-search focus — minimizing costs while maximizing outcomes. A technical partner, not just a developer.',
-  image: '/images/author-bolshiyanov.png',
+  image: '/images/author-bolshiyanov-horizontal.png',
   pathname: '/hire-me',
   locale: 'en',
   contentType: 'website',

@@ -349,7 +349,7 @@ export interface PageData {
   metadata?: Metadata;
   id: string;
   href?: string;
-  type: "blog" | "docs" | "news";
+  type: "blog" | "docs" | "news" | "feature"; 
   title?: string;
   description?: string;
   internalKnowledgeBase?: string;
