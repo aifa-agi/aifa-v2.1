@@ -134,19 +134,20 @@ export default function HireMePageComponent() {
       <div className="h-20" />
 
       {/* Expertise pills */}
-      <div className="flex flex-wrap gap-2  mr-16 ml-4">
-        <Pill text="AI SDK" />
-        <Pill text="Web3" />
-        <Pill text="Next.js 15" />
-        <Pill text="React 19" />
-        <Pill text="Vercel" />
-        <Pill text="OpenAI" />
-        <Pill text="Prisma" />
-        <Pill text="Neon" />
-        <Pill text="Stripe" />
-        <Pill text="SEO + AI-Search" />
-        <Pill text="AIFA Architecture" />
-      </div>
+      <div className="flex justify-center flex-wrap gap-2 px-4 mb-4 max-h-[4.75rem] overflow-hidden">
+  <Pill text="AI SDK" />
+  <Pill text="Web3" />
+  <Pill text="Next.js 15" />
+  <Pill text="React 19" />
+  <Pill text="Vercel" />
+  <Pill text="OpenAI" />
+  <Pill text="Prisma" />
+  <Pill text="Neon" />
+  <Pill text="Stripe" />
+  <Pill text="SEO + AI-Search" />
+  <Pill text="AIFA Architecture" />
+</div>
+
 
       {/* Hero */}
       <section className="grid items-center gap-8 xl:grid-cols-2 px-4" aria-labelledby="hero-title">

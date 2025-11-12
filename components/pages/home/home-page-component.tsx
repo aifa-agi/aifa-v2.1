@@ -84,7 +84,8 @@ export default function HomePageComponent() {
       <div className="h-20" />
 
       {/* Top feature pills */}
-      <div className="flex flex-wrap gap-2 mb-8 mr-16 ml-4">
+          <div className="flex justify-center flex-wrap gap-2 px-4 mb-4 max-h-[4.75rem] overflow-hidden">
+  
         <Pill text="Advanced Routing" />
         <Pill text="AIFA AI || SEO" />
         <Pill text="Parallel Routes" />

@@ -77,7 +77,7 @@ export const contentData = {
       "pages": [
        {
           "id": "As126cf631fhes1lwiwz75q3",
-          "href": "/privacy-policy",
+          "href": "/examples/privacy-policy-example",
           "roles": [
             "guest"
           ],
@@ -97,7 +97,7 @@ export const contentData = {
         },
         {
           "id": "ks7eq9f4z1fhes1lAAiwz745z2",
-          "href": "/error-example",
+          "href": "/examples/error-example",
           "roles": [
             "guest"
           ],
@@ -117,7 +117,7 @@ export const contentData = {
         },
         {
           "id": "ks7eqcf6z1fhes123iwz75z2",
-          "href": "/404-example",
+          "href": "/examples/404-example",
           "roles": [
             "guest"
           ],
@@ -133,6 +133,26 @@ export const contentData = {
           "images": [],
           "keywords": [
             "404 page"
+          ]
+        },
+        {
+          "id": "y7eqcf6z3fhes123iwz7ff2",
+          "href": "/examples/loading-example",
+          "roles": [
+            "guest"
+          ],
+          "hasBadge": false,
+          "type": "homePage",
+          "isPublished": false,
+          "isAddedToPrompt": false,
+          "isVectorConnected": false,
+          "isChatSynchronized": false,
+          "order": 4,
+          "title": "Loading page",
+          "description": "Check loading example page, which using for dynamic routes",
+          "images": [],
+          "keywords": [
+            "Loading page"
           ]
         }
       ],

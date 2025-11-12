@@ -37,6 +37,19 @@ export function MobileNav({ categories, className }: MobileNavProps) {
     )
   }, [categories])
 
+const homeCategories = React.useMemo(() => {
+  return (categories ?? [])
+    .filter((c) => (c?.title ?? "").toLowerCase() === "home")
+    .map((category) => ({
+      ...category,
+      pages: (category.pages ?? []).filter(
+        (page) => (page?.title ?? "").toLowerCase() !== "home"
+      ),
+    }))
+    .filter((category) => category.pages.length > 0); // Remove empty categories
+}, [categories]);
+
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -80,9 +93,7 @@ export function MobileNav({ categories, className }: MobileNavProps) {
         <div className="flex flex-col gap-6 overflow-auto px-6 py-6">
           {/* 1) Home section (always first, independent of categories) */}
           <div className="flex flex-col gap-4">
-            <div className="text-muted-foreground text-sm font-medium">
-              Home
-            </div>
+           
 
             <Link
               href="/"
@@ -102,10 +113,10 @@ export function MobileNav({ categories, className }: MobileNavProps) {
                 />
               </div>
               <div className="mb-2 text-base font-medium text-left capitalize">
-                {appConfig.name}
+                {appConfig.short_name}
               </div>
               <p className="text-sm leading-tight text-muted-foreground line-clamp-4">
-                {appConfig.description}
+                {appConfig.name}
               </p>
             </Link>
           </div>
@@ -123,7 +134,57 @@ export function MobileNav({ categories, className }: MobileNavProps) {
             </div>
           </div>
 
-          {/* 3) Other categories (excluding Home) */}
+          {/* 3) home categories (excluding Home) */}
+          {homeCategories.map((category) => {
+            // Skip categories without pages
+            if (!category?.pages || category.pages.length === 0) {
+              return null
+            }
+
+            return (
+              <div key={category.title} className="flex flex-col gap-4">
+                <div className="text-muted-foreground text-sm font-medium">
+                  {category.title}
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  {category.pages.slice(0, 10).map((page) => {
+                    if (!page?.href) return null
+
+                    return (
+                      <MobileNavLink
+                        key={page.id}
+                        href={page.href}
+                        onOpenChange={setOpen}
+                        isActive={pathname === page.href}
+                      >
+                        <div className="text-sm font-medium capitalize">
+                          {page.title}
+                        </div>
+                        {page.description && (
+                          <p className="text-xs text-muted-foreground line-clamp-1">
+                            {page.description}
+                          </p>
+                        )}
+                      </MobileNavLink>
+                    )
+                  })}
+                </div>
+
+                {category.pages.length > 10 && category.href && (
+                  <Link
+                    href={category.href}
+                    onClick={handleCloseMenu}
+                    className="text-sm font-medium text-primary hover:text-primary/80 underline transition-colors"
+                  >
+                    View All
+                  </Link>
+                )}
+              </div>
+            )
+          })}
+
+          {/* 4) Other categories (excluding Home) */}
           {otherCategories.map((category) => {
             // Skip categories without pages
             if (!category?.pages || category.pages.length === 0) {

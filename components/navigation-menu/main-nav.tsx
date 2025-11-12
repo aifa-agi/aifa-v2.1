@@ -68,10 +68,10 @@ export function MainNav({ items, className }: MainNavProps) {
                             />
                           </div>
                           <div className="mb-2 text-lg font-medium text-left capitalize">
-                            {appConfig.name}
+                            {appConfig.short_name}
                           </div>
                           <p className="text-sm leading-tight text-muted-foreground line-clamp-6">
-                            {appConfig.description}
+                            {appConfig.name}
                           </p>
                         </Link>
                       </NavigationMenuLink>
