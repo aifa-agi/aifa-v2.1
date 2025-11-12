@@ -184,9 +184,9 @@ export default async function RootLayout({
                 {/* Mobile layout - single column */}
                 <div className="w-full md:hidden flex-1 min-h-0 relative">
                   {/* Static content layer */}
-                  <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
+                  {/* <main className="absolute inset-0 overflow-y-auto hide-scrollbar">
                     {rightStatic}
-                  </main>
+                  </main> */}
                   
                   {/* Dynamic content layer - overlays static on mobile too */}
                   {rightDynamic}
