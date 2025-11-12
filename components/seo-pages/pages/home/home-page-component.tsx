@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { AnimatedAIButton } from '@/components/animated-ai-button';
+import FeaturesPageComponent from '@/app/@rightStatic/(_PUBLIC)/(_FEATURES)/(_components)/features-page-component';
 
 /**
  * StatusPill component for feature labels
@@ -49,6 +50,8 @@ export default function HomePageComponent() {
           <AnimatedAIButton />
         </div>
       </section>
+
+      <FeaturesPageComponent />
 
       {/* Features Section */}
       <section className="mb-12" aria-labelledby="features">

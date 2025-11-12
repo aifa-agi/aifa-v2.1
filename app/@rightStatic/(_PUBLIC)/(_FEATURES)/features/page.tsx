@@ -15,7 +15,7 @@ export const metadata: Metadata = constructMetadata({
   title: 'Features — Advanced Next.js Routing & SEO Capabilities',
   description:
     'Comprehensive guide to AIFA starter features including parallel routing, intercepting routes, SEO optimization, PWA capabilities, and modern web development patterns with Next.js 15 and React 19.',
-  image: '/og/features.png',
+  image: '/images/pic3.png',
   pathname: '/features',
   locale: 'en',
   contentType: 'website',
@@ -25,7 +25,7 @@ export const metadata: Metadata = constructMetadata({
     name: 'Roman Bolshiyanov (Armstrong)',
     email: 'bolshiyanov@gmail.com',
     url: 'https://t.me/bolshiyanov',
-    image: '/images/author-bolshiyanov.png',
+    image: '/images/pic3.png',
     bio: 'AI/Web3/Next Architect delivering business-ready solutions that orchestrate frontend, backend, and go-to-market.',
     jobTitle: 'AI/Web3/Next Architect',
     twitter: undefined,
@@ -103,9 +103,9 @@ const PAGE_CONFIG: PageWrapperConfig = {
     title: 'AIFA Starter Features',
     subtitle: 'Explore comprehensive documentation covering advanced routing patterns, SEO optimization, PWA capabilities, and modern web development best practices with Next.js 15 and React 19.',
     images: {
-      horizontal: '/app-config-images/logo.png',
-      vertical: '/app-config-images/logo.png',
-      square: '/app-config-images/logo.png',
+      horizontal: '/images/pic3.png',
+      vertical: '/images/pic3.png',
+      square: '/images/pic3.png',
       alt: 'AIFA Features Overview',
     },
     author: {
