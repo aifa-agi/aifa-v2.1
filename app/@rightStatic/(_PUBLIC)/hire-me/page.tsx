@@ -4,8 +4,8 @@ import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
 import HireMePageComponent from '@/components/pages/hire-me/hire-me-page-component';
-import { StructuredDataWrapper } from '@/components/pages/seo-page-wrapper/structured-data-wrapper';
 import { PageWrapperConfig, SeoPageWrapper } from '@/components/pages/seo-page-wrapper/seo-page-wrapper';
+import { StructuredDataClient } from '@/components/pages/seo-page-wrapper/structured-data-wrapper';
 
 // ============================================================================
 // META CONFIGURATION
@@ -87,14 +87,14 @@ function buildFaqJsonLd(items: FAQItem[]) {
 // PAGE CONFIGURATION
 // ============================================================================
 
-const PAGE_CONFIG: PageWrapperConfig= {
+const PAGE_CONFIG: PageWrapperConfig = {
   topSpacing: 80,
-  
+
   breadcrumbs: [
     { name: 'Home', path: '/home' },
     { name: 'Hire Me', path: '/hire-me' },
   ],
-  
+
   badges: [
     { text: 'AI SDK' },
     { text: 'Web3' },
@@ -109,7 +109,7 @@ const PAGE_CONFIG: PageWrapperConfig= {
     { text: 'AIFA Architecture' },
   ],
   showBadges: true,
-  
+
   hero: {
     title: 'Have an idea? Let\'s build something monumental together',
     subtitle: 'Architecture that extracts maximum value from AI and Web3 with SEO and AI-search focus — minimizing costs while maximizing outcomes. A technical partner, not just a developer.',
@@ -148,7 +148,7 @@ const PAGE_CONFIG: PageWrapperConfig= {
     },
   },
   showHero: true,
-  
+
   faqs: [
     {
       question: 'Can you integrate AI into our existing website or mobile application?',
@@ -191,8 +191,8 @@ export default function Page() {
   return (
     <>
       {/* JSON-LD Structured Data - wrapped in client component to avoid RSC payload duplication */}
-      <StructuredDataWrapper data={breadcrumbJsonLd} />
-      <StructuredDataWrapper data={faqJsonLd} />
+      <StructuredDataClient data={breadcrumbJsonLd} id="breadcrumb-hire-me" />
+      <StructuredDataClient data={faqJsonLd} id="faq-hire-me" />
 
       {/* UI Wrapper Component */}
       <SeoPageWrapper config={PAGE_CONFIG}>
