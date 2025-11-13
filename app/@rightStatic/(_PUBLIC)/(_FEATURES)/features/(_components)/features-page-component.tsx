@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { contentData } from '@/config/content/content-data';
+import { contentData } from '@/config/content-data';
 import type { PageData } from '@/types/page-types';
 import type { MenuCategory } from '@/types/menu-types';
 

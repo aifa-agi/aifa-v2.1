@@ -14,6 +14,8 @@ import { AnimatedAIButton } from '@/components/animated-ai-button';
 export type PageWrapperConfig = {
   // Spacing configuration
   topSpacing?: number;
+  
+  variant: "landing" |"blog" | "feature" 
 
   // Navigation
   breadcrumbs: BreadcrumbItemType[];
@@ -55,7 +57,7 @@ export function SeoPageWrapper({ config, children }: SeoPageWrapperProps) {
     showHero = true,
     blockquote,
     showBlockquote = true,
-
+    variant,
     // Top Features
     topFeatures,
     showTopFeatures = Boolean(topFeatures),
@@ -80,7 +82,7 @@ export function SeoPageWrapper({ config, children }: SeoPageWrapperProps) {
         <TechBadges badges={badges} show={showBadges} />
 
         {/* Hero Section */}
-        {hero && <HeroSection config={hero} show={showHero} />}
+        {hero && <HeroSection config={hero} show={showHero} variant={variant } />}
 
         {/* Top Features Section */}
         {topFeatures && <TopFeaturesSection config={topFeatures} show={showTopFeatures} />}

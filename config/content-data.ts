@@ -1,4 +1,4 @@
-//config/content/content-data.ts
+//config/content-data.ts
 
 import { MenuCategory } from "@/types/menu-types";
 

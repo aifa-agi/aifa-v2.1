@@ -1,35 +1,29 @@
 // app/sitemap.ts
+// Comments: Exclude "/home" from sitemap to avoid duplicate with "/". Keep only canonical URLs.
+// This preserves your category/page logic while ensuring no duplicate homepage URL.
 
 import { MetadataRoute } from 'next';
-import { contentData } from '@/config/content/content-data';
+import { contentData } from '@/config/content-data';
 import { appConfig } from '@/config/app-config';
 
-/**
- * Generate dynamic sitemap based on published pages in content-data.ts
- * 
- * This file is automatically discovered by Next.js and generates sitemap.xml
- * during build time. Includes both category pages and their published child pages.
- * 
- * @see https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
- */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = appConfig.url;
   const currentDate = new Date();
 
-  // Extract category pages (e.g., /features, /examples)
+  // Extract category pages (exclude "/home" defensively)
   const categoryPages: MetadataRoute.Sitemap = contentData.categories
-    .filter((category) => category.href) // Only categories with href
+    .filter((category) => category.href && category.href !== '/home') // exclude /home
     .map((category) => ({
       url: `${baseUrl}${category.href}`,
       lastModified: currentDate,
       changeFrequency: 'weekly' as const,
-      priority: 0.8, // Category pages get high priority
+      priority: 0.8,
     }));
 
-  // Extract all published child pages from categories
+  // Extract all published child pages from categories (exclude "/home" defensively)
   const publishedPages: MetadataRoute.Sitemap = contentData.categories
     .flatMap((category) => category.pages || [])
-    .filter((page) => page.isPublished && page.href)
+    .filter((page) => page.isPublished && page.href && page.href !== '/home') // exclude /home
     .map((page) => ({
       url: `${baseUrl}${page.href}`,
       lastModified: currentDate,
@@ -37,27 +31,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: getPriority(page.type, page.href!),
     }));
 
-  // Add static routes (homepage and other root pages)
+  // Static routes: keep only canonical root, remove "/home"
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: baseUrl, // canonical "/"
       lastModified: currentDate,
       changeFrequency: 'daily',
       priority: 1.0,
     },
-    {
-      url: `${baseUrl}/home`,
-      lastModified: currentDate,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
+    // Intentionally no "/home" to avoid duplicate homepage in sitemap.
   ];
 
-  // Combine all routes: static + categories + pages
+  // Combine all routes
   const allRoutes = [...staticRoutes, ...categoryPages, ...publishedPages];
-  
+
+  // Additional defensive filter to ensure "/home" never slips through
+  const filteredRoutes = allRoutes.filter((item) => !item.url.endsWith('/home'));
+
   // Deduplicate and return
-  const uniqueRoutes = deduplicateRoutes(allRoutes);
+  const uniqueRoutes = deduplicateRoutes(filteredRoutes);
 
   return uniqueRoutes;
 }
@@ -83,10 +75,9 @@ function getChangeFrequency(
  * Calculate priority based on page type and path
  */
 function getPriority(pageType: string, href: string): number {
-  // Home page gets highest priority
-  if (href === '/home' || href === '/') return 1.0;
+  // Home page canonical rule: "/" is canonical; "/home" is excluded earlier
+  if (href === '/') return 1.0;
 
-  // Priority map by page type
   const priorityMap: Record<string, number> = {
     feature: 0.7,
     blog: 0.8,
@@ -106,9 +97,10 @@ function deduplicateRoutes(routes: MetadataRoute.Sitemap): MetadataRoute.Sitemap
 
   routes.forEach((route) => {
     const existing = urlMap.get(route.url);
-    
-    // Keep entry with higher priority or the new one if priorities are equal
-    if (!existing || (route.priority && existing.priority && route.priority > existing.priority)) {
+    if (
+      !existing ||
+      (route.priority && existing.priority && route.priority > existing.priority)
+    ) {
       urlMap.set(route.url, route);
     }
   });

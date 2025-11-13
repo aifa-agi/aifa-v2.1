@@ -1,4 +1,4 @@
-// components/pages/hire-me/hire-me-page-component.tsx
+//app/@rightStatic/(_PUBLIC)/(_HOME)/hire-me/(_components)/hire-me-page-component.tsx
 
 import { Card } from '@/components/ui/card';
 

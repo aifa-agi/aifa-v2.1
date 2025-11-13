@@ -12,26 +12,7 @@ import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-
 // ============================================================================
 
 export const metadata: Metadata = constructMetadata({
-  title: `AI SEO Next.js Starter with Advanced App Router — ${appConfig.short_name}`,
-  description:
-    'Production-ready template combining AI chat capabilities with comprehensive advanced routing tutorial. Built with focus on maximum SEO optimization, PWA functionality, and hybrid rendering (Static + Dynamic generation) with role-based access control.',
-  image: '/images/aifai_white_frame_logo.png',
   pathname: '/',
-  locale: 'en',
-  contentType: 'website',
-  noIndex: false,
-  noFollow: false,
-  author: {
-    name: 'Roman Bolshiyanov (Armstrong)',
-    email: 'bolshiyanov@gmail.com',
-    url: 'https://t.me/bolshiyanov',
-    image: '/images/aifai_white_frame_logo.png',
-    bio: 'AI/Web3/Next Architect delivering business-ready solutions that orchestrate frontend, backend, and go-to-market.',
-    jobTitle: 'AI/Web3/Next Architect',
-    twitter: undefined,
-    linkedin: 'roman-bolshiyanov',
-    facebook: undefined,
-  },
 });
 
 // ============================================================================
@@ -104,7 +85,7 @@ function buildWebSiteJsonLd() {
 // PAGE CONFIGURATION
 // ============================================================================
 
-const PAGE_CONFIG: PageWrapperConfig = {
+export const HOME_PAGE_CONFIG: PageWrapperConfig = {
   topSpacing: 80,
   
   breadcrumbs: [
@@ -157,7 +138,7 @@ const PAGE_CONFIG: PageWrapperConfig = {
 
   topFeatures: [
     {
-      title: '29+',
+      title: '30+',
       description: 'Route features',
     },
     {
@@ -211,8 +192,8 @@ const PAGE_CONFIG: PageWrapperConfig = {
 
 export default function Page() {
   // Generate JSON-LD schemas in page.tsx
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd(PAGE_CONFIG.breadcrumbs);
-  const faqJsonLd = buildFaqJsonLd(PAGE_CONFIG.faqs ?? []);
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(HOME_PAGE_CONFIG.breadcrumbs);
+  const faqJsonLd = buildFaqJsonLd(HOME_PAGE_CONFIG.faqs ?? []);
   const websiteJsonLd = buildWebSiteJsonLd();
 
   return (
@@ -223,7 +204,7 @@ export default function Page() {
       <StructuredDataWrapper data={websiteJsonLd} />
 
       {/* UI Wrapper Component */}
-      <SeoPageWrapper config={PAGE_CONFIG}>
+      <SeoPageWrapper config={HOME_PAGE_CONFIG}>
         <HomePageComponent />
       </SeoPageWrapper>
     </>

@@ -82,7 +82,7 @@ function buildFaqJsonLd(items: FAQItem[]) {
 
 const PAGE_CONFIG: PageWrapperConfig = {
   topSpacing: 80,
-
+   variant:"landing",
   breadcrumbs: [
     { name: 'Home', path: '/home' },
     { name: 'Hire Me', path: '/hire-me' },

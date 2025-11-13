@@ -36,6 +36,7 @@ export type HeroConfig = {
   images: HeroImages;
   author: AuthorInfo;
   cta: CTAButtons;
+
 };
 
 /**
@@ -44,6 +45,7 @@ export type HeroConfig = {
 interface HeroSectionProps {
   config: HeroConfig;
   show?: boolean;
+  variant: "landing" | "blog" | "feature" 
 }
 
 /**
@@ -65,16 +67,89 @@ interface HeroSectionProps {
  * @param config - Hero section configuration object
  * @param show - Optional visibility flag, defaults to true
  */
-export function HeroSection({ config, show = true }: HeroSectionProps) {
+export function HeroSection({ config, show = true, variant  }: HeroSectionProps) {
   if (!show) {
     return null;
   }
-
   const { title, subtitle, images, author, cta } = config;
+  if (variant === "feature") {
+    return (
+      <section className="px-4 mb-12" aria-labelledby="hero-title">
+        <div className="space-y-5">
+          <h1
+            id="hero-title"
+            className="text-2xl font-bold leading-tight tracking-[-0.02em] text-foreground"
+          >
+            {title}
+          </h1>
+
+          <p className="text-base text-muted-foreground">
+            {subtitle}
+          </p>
+
+          {/* Horizontal Image */}
+          <div className="relative">
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg">
+              <div className="relative h-full w-full flex items-center justify-center">
+                <Image
+                  src={images.horizontal}
+                  alt={images.alt}
+                  width={800}
+                  height={450}
+                  className="h-full w-full object-contain"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Author */}
+          <div className="flex items-center gap-4">
+            <div className="relative h-14 w-14 overflow-hidden rounded-full border">
+              <Image
+                src={author.avatar}
+                alt={author.name}
+                fill
+                sizes="56px"
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium text-foreground">
+                {author.name}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {author.role}
+              </span>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="flex flex-col gap-3">
+            <Link
+              href={cta.primary.href}
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
+            >
+              {cta.primary.text}
+            </Link>
+            <Link
+              href={cta.secondary.href}
+              className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
+
+            >
+              {cta.secondary.text}
+            </Link>
+          </div>
+        </div>S
+      </section>)
+  }
+
+
 
   return (
     <section className="px-4 mb-12" aria-labelledby="hero-title">
-      
+
       {/* XS: Single column + Horizontal (0-640px) */}
       <div className="block sm:hidden">
         <div className="space-y-5">
@@ -138,8 +213,8 @@ export function HeroSection({ config, show = true }: HeroSectionProps) {
             <Link
               href={cta.secondary.href}
               className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-             
-            > 
+
+            >
               {cta.secondary.text}
             </Link>
           </div>
@@ -209,7 +284,7 @@ export function HeroSection({ config, show = true }: HeroSectionProps) {
             <Link
               href={cta.secondary.href}
               className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-             
+
             >
               {cta.secondary.text}
             </Link>
@@ -265,7 +340,7 @@ export function HeroSection({ config, show = true }: HeroSectionProps) {
               <Link
                 href={cta.secondary.href}
                 className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-               
+
               >
                 {cta.secondary.text}
               </Link>
@@ -353,7 +428,7 @@ export function HeroSection({ config, show = true }: HeroSectionProps) {
             <Link
               href={cta.secondary.href}
               className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-            
+
             >
               {cta.secondary.text}
             </Link>
@@ -409,7 +484,7 @@ export function HeroSection({ config, show = true }: HeroSectionProps) {
               <Link
                 href={cta.secondary.href}
                 className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-                
+
               >
                 {cta.secondary.text}
               </Link>
@@ -482,7 +557,7 @@ export function HeroSection({ config, show = true }: HeroSectionProps) {
               <Link
                 href={cta.secondary.href}
                 className="inline-flex items-center justify-center rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
-               
+
               >
                 {cta.secondary.text}
               </Link>
