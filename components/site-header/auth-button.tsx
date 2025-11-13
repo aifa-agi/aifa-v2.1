@@ -40,7 +40,7 @@ interface AuthButtonProps {
  */
 export function AuthButton({ initialAuth }: AuthButtonProps) {
   const [open, setOpen] = React.useState(false)
-  const isDesktop = useMediaQuery("(min-width: 640px)")
+  const isDesktop = useMediaQuery("(min-width: 1024px)")
   const { isAuthenticated, logout } = useAuth()
   const router = useRouter()
 
@@ -96,6 +96,32 @@ export function AuthButton({ initialAuth }: AuthButtonProps) {
   }
 
   // Mobile unauthenticated - modal dialog with login form
+
+  /**
+ * ⚠️ CRITICAL: Login Form Routing Restrictions
+ * 
+ * 🚫 DO NOT implement login forms using Next.js intercepting routes (@modal patterns)
+ * 
+ * Why this matters:
+ * 🔐 OAuth providers (Google, GitHub, Facebook, etc.) require full page navigation
+ * 🔄 OAuth redirect callbacks cannot function properly within intercepted routes
+ * 🍪 Cookie-based session management needs complete request/response cycles
+ * 🔒 Security tokens and state parameters must persist across redirects
+ * 
+ * ✅ CORRECT APPROACH:
+ * - Use dedicated route pages: /login, /auth/signin
+ * - Implement server-side redirects after authentication
+ * - Handle OAuth callbacks on full page routes
+ * 
+ * ❌ AVOID:
+ * - Modal-based login with intercepting routes
+ * - Client-side only authentication flows
+ * - Mixing intercepting routes with OAuth providers
+ * 
+ * @see https://nextjs.org/docs/app/building-your-application/authentication
+ * @see https://next-auth.js.org/configuration/pages
+ */
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

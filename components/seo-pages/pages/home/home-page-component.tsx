@@ -46,7 +46,7 @@ export default function HomePageComponent() {
             <div className="text-xs text-muted-foreground">Safe routing</div>
           </div>
         </div>
-        <div className="flex md:hidden mt-4">
+        <div className="flex lg:hidden mt-4">
           <AnimatedAIButton />
         </div>
       </section>

@@ -122,7 +122,7 @@ const homeCategories = React.useMemo(() => {
           </div>
 
           {/* 2) Chat action (always second, visible only on mobile: flex md:hidden) */}
-          <div className="flex flex-col gap-4 md:hidden">
+          <div className="flex flex-col gap-4 lg:hidden">
             <div className="text-muted-foreground text-sm font-medium">
               Chat
             </div>
