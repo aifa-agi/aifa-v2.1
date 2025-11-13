@@ -3,9 +3,9 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import HireMePageComponent from '@/components/seo-pages/pages/hire-me/hire-me-page-component';
-import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-pages/seo-page-wrapper/seo-page-wrapper';
-import { StructuredDataWrapper } from '@/components/seo-pages/seo-page-wrapper/structured-data-wrapper';
+import HireMePageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/hire-me/(_components)/hire-me-page-component';
+import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
+import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 
 // ============================================================================
 // META CONFIGURATION

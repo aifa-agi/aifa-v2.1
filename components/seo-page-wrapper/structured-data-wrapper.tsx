@@ -1,4 +1,5 @@
-//components/pages/seo-page-wrapper/structured-data-wrapper.tsx
+//components/seo-page-wrapper/structured-data-wrapper.tsx
+
 'use client'
 
 type Props = {

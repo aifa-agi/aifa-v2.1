@@ -1,4 +1,6 @@
-//components/pages/seo-page-wrapper/components/tech-badges.tsx
+//components/seo-page-wrapper/(_components)/tech-badges.tsx
+
+
 import React from 'react';
 
 /**

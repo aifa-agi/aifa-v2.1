@@ -1,5 +1,4 @@
-//components/pages/seo-page-wrapper/breadcrumbs-navigation.tsx
-
+//components/seo-page-wrapper/(_components)/breadcrumbs-navigation.tsx
 import React from 'react';
 import Link from 'next/link';
 import {

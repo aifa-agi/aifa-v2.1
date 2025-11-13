@@ -3,9 +3,9 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import AboutAifaPageComponent from '@/components/seo-pages/pages/about-aifa/about-aifa-page-component';
-import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-pages/seo-page-wrapper/seo-page-wrapper';
-import { StructuredDataWrapper } from '@/components/seo-pages/seo-page-wrapper/structured-data-wrapper';
+import AboutAifaPageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/about-aifa/(_components)/about-aifa-page-component';
+import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
+import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 
 // ============================================================================
 // META CONFIGURATION
@@ -146,6 +146,30 @@ const PAGE_CONFIG: PageWrapperConfig = {
     },
   },
   showHero: true,
+
+   topFeatures: [
+    {
+      title: 'v1.0',
+      description: 'v1.0',
+    },
+    {
+      title: '0.4s',
+      description: ' Loading time of your website',
+    },
+    {
+      title: '3',
+      description: 'Parallel routes',
+    },
+    {
+      title: 'Q4',
+      description: 'Fractal release',
+    },
+    
+  ],
+
+   blockquote: {
+    text:
+  'The AIFA architecture combines stability with innovation, offering a pre‑configured boilerplate featuring resilient parallel routing and maximum SEO optimization. Even with JavaScript disabled, your content remains accessible and lightning fast. The system dynamically switches to intercepting routes on mobile devices, ensuring seamless adaptation across formats. At the same time, an integrated AI layer interacts with static content in real time, bridging dynamic intelligence with stable delivery. The first version is already available with numerous built‑in extensions, and the upcoming AIFA 2.0 release will enable the generation of large‑scale, complex web applications directly within this architecture.'},
   
   faqs: [
   {

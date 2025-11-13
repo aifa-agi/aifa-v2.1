@@ -1,5 +1,4 @@
-// components/pages/seo-page-wrapper/components/hero-section.tsx
-
+//components/seo-page-wrapper/(_components)/hero-section.tsx
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';

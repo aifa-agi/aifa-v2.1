@@ -66,7 +66,7 @@ const getDefaultAuthorConfig = (): AuthorConfig => {
 const getSocialConfig = (): SocialConfig => {
   return {
     twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE || '@aifa_agi',
-    github: process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/aifa-agi/aifa-v2.1',  
+    github: process.env.NEXT_PUBLIC_GITHUB_URL ,  
     linkedin: process.env.NEXT_PUBLIC_LINKEDIN_URL || 'https://www.linkedin.com/in/bolshiyanov',
     facebook: process.env.NEXT_PUBLIC_FACEBOOK_URL,
   };

@@ -50,7 +50,7 @@ export function AnimatedAIButton({
   }
 
   return (
-    <div className="block lg:hidden">
+    <div className="flex lg:hidden w-full">
     <Link
       href="/interception_chat"
       scroll={false}

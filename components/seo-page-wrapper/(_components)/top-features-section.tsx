@@ -1,5 +1,4 @@
-// components/seo-pages/seo-page-wrapper/components/top-features-section.tsx
-
+//components/seo-page-wrapper/(_components)/top-features-section.tsx
 import React from 'react';
 import { Card } from '@/components/ui/card';
 

@@ -128,7 +128,6 @@ const homeCategories = React.useMemo(() => {
             </div>
             <div className="flex">
               <AnimatedAIButton
-                className="w-full"
                 onNavigate={handleCloseMenu}
               />
             </div>

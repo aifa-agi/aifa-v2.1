@@ -1,11 +1,10 @@
 //app/@rightStatic/(_PUBLIC)/404-example/page.tsx
 import type { Metadata } from 'next';
-import { Card } from '@/components/ui/card';
 import Link from 'next/link';
 
 // SEO: use your existing constructMetadata helper
 import { constructMetadata } from '@/lib/construct-metadata';
-import { appConfig, getErrorIllustration } from '@/config/app-config';
+import {  getErrorIllustration } from '@/config/app-config';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 

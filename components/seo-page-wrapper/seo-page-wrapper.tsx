@@ -1,14 +1,13 @@
-//ccomponents/seo-pages/seo-page-wrapper/seo-page-wrapper.tsx
-
+//components/seo-page-wrapper/seo-page-wrapper.tsx
 
 import React from 'react';
-import { BreadcrumbsNavigation, type BreadcrumbItemType } from './components/breadcrumbs-navigation';
-import { TechBadges, type BadgeItemType } from './components/tech-badges';
-import { HeroSection, type HeroConfig } from './components/hero-section';
-import { FAQSection, type FAQItem } from './components/faq-section';
-import { BlockquoteSection, type BlockquoteConfig } from './components/blockquote-section';
+import { BreadcrumbsNavigation, type BreadcrumbItemType } from './(_components)/breadcrumbs-navigation';
+import { TechBadges, type BadgeItemType } from './(_components)/tech-badges';
+import { HeroSection, type HeroConfig } from './(_components)/hero-section';
+import { FAQSection, type FAQItem } from './(_components)/faq-section';
+import { BlockquoteSection, type BlockquoteConfig } from './(_components)/blockquote-section';
 
-import { TopFeaturesSection, type TopFeatureItem } from './components/top-features-section';
+import { TopFeaturesSection, type TopFeatureItem } from './(_components)/top-features-section';
 import { AnimatedAIButton } from '@/components/animated-ai-button';
 
 // Configuration type for SEO Page Wrapper

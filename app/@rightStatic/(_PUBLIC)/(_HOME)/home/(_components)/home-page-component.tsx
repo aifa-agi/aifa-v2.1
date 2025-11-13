@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
-import { AnimatedAIButton } from '@/components/animated-ai-button';
-import FeaturesPageComponent from '@/app/@rightStatic/(_PUBLIC)/(_FEATURES)/(_components)/features-page-component';
+import FeaturesPageComponent from '@/app/@rightStatic/(_PUBLIC)/(_FEATURES)/features/(_components)/features-page-component';
 
 /**
  * StatusPill component for feature labels
@@ -25,31 +24,7 @@ function StatusPill({ label }: { label: string }) {
 export default function HomePageComponent() {
   return (
     <>
-      {/* Stats Grid */}
-      <section className="w-full mb-12" aria-labelledby="stats-grid">
-        <h2 id="stats-grid" className="sr-only">Project Statistics</h2>
-        <div className="flex flex-row flex-wrap justify-start gap-4">
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">8+</div>
-            <div className="text-xs text-muted-foreground">Route patterns</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">Zero</div>
-            <div className="text-xs text-muted-foreground">Route reloads</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">A+</div>
-            <div className="text-xs text-muted-foreground">SEO optimized</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">Type</div>
-            <div className="text-xs text-muted-foreground">Safe routing</div>
-          </div>
-        </div>
-        <div className="flex lg:hidden mt-4">
-          <AnimatedAIButton />
-        </div>
-      </section>
+    
 
       <FeaturesPageComponent />
 

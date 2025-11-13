@@ -1,7 +1,6 @@
 // components/seo-pages/pages/about-aifa/about-aifa-page-component.tsx
 
 import { Card } from '@/components/ui/card';
-import { AnimatedAIButton } from '@/components/animated-ai-button';
 import Link from 'next/link';
 
 /**
@@ -44,31 +43,7 @@ export default function AboutAifaPageComponent() {
 
   return (
     <>
-      {/* Architecture Stats */}
-      <section className="w-full mb-12" aria-labelledby="architecture-stats">
-        <h2 id="architecture-stats" className="sr-only">Architecture Stats</h2>
-        <div className="flex flex-row flex-wrap justify-start gap-4">
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">v1.0</div>
-            <div className="text-xs text-muted-foreground">Available now</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">7</div>
-            <div className="text-xs text-muted-foreground">User roles</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">2x</div>
-            <div className="text-xs text-muted-foreground">i18n levels</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">Q4</div>
-            <div className="text-xs text-muted-foreground">Fractal release</div>
-          </div>
-        </div>
-        <div className="flex md:hidden mt-4">
-          <AnimatedAIButton />
-        </div>
-      </section>
+      
 
       {/* Current Architecture v1.0 */}
       <section className="mb-12" aria-labelledby="current-architecture">

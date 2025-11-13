@@ -3,8 +3,8 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-pages/seo-page-wrapper/seo-page-wrapper';
-import { StructuredDataWrapper } from '@/components/seo-pages/seo-page-wrapper/structured-data-wrapper';
+import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
+import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 import FeaturesPageComponent from '../../(_FEATURES)/features/page';
 
 // ============================================================================
