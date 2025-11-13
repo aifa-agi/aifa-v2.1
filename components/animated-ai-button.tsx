@@ -50,6 +50,7 @@ export function AnimatedAIButton({
   }
 
   return (
+    <div className="block lg:hidden">
     <Link
       href="/interception_chat"
       scroll={false}
@@ -110,5 +111,6 @@ export function AnimatedAIButton({
         </span>
       </span>
     </Link>
+    </div>
   )
 }

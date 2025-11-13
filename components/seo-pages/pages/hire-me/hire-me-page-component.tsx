@@ -1,7 +1,6 @@
 // components/pages/hire-me/hire-me-page-component.tsx
 
 import { Card } from '@/components/ui/card';
-import { AnimatedAIButton } from '@/components/animated-ai-button';
 
 /**
  * StatusPill component for service labels
@@ -23,32 +22,7 @@ function StatusPill({ label }: { label: string }) {
 export default function HireMePageComponent() {
   return (
     <>
-      {/* Credibility Stats */}
-      <section className="w-full mb-12" aria-labelledby="credibility-stats">
-        <h2 id="credibility-stats" className="sr-only">Credibility Stats</h2>
-        <div className="flex flex-row flex-wrap justify-start gap-4">
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">25+</div>
-            <div className="text-xs text-muted-foreground">Years in web</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">10+</div>
-            <div className="text-xs text-muted-foreground">Businesses launched</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">10</div>
-            <div className="text-xs text-muted-foreground">Years leading teams</div>
-          </div>
-          <div className="rounded-lg border border-border bg-card p-4 text-center w-28">
-            <div className="text-2xl font-bold text-foreground">5</div>
-            <div className="text-xs text-muted-foreground">Patents</div>
-          </div>
-        </div>
-        <div className="flex md:hidden mt-4">
-          <AnimatedAIButton />
-        </div>
-      </section>
-
+      
       {/* Services */}
       <section className="mb-12" aria-labelledby="services">
         <h2 id="services" className="text-2xl font-semibold text-foreground mb-6">

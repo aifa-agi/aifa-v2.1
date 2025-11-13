@@ -1,61 +1,51 @@
-//components/pages/seo-page-wrapper/components/breadcrumbs-navigation.tsx
+//ccomponents/seo-pages/seo-page-wrapper/seo-page-wrapper.tsx
+
 
 import React from 'react';
 import { BreadcrumbsNavigation, type BreadcrumbItemType } from './components/breadcrumbs-navigation';
 import { TechBadges, type BadgeItemType } from './components/tech-badges';
 import { HeroSection, type HeroConfig } from './components/hero-section';
 import { FAQSection, type FAQItem } from './components/faq-section';
+import { BlockquoteSection, type BlockquoteConfig } from './components/blockquote-section';
 
-/**
- * Configuration type for SEO Page Wrapper
- */
+import { TopFeaturesSection, type TopFeatureItem } from './components/top-features-section';
+import { AnimatedAIButton } from '@/components/animated-ai-button';
+
+// Configuration type for SEO Page Wrapper
 export type PageWrapperConfig = {
   // Spacing configuration
-  topSpacing?: number; // in pixels, default: 80
-  
+  topSpacing?: number;
+
   // Navigation
   breadcrumbs: BreadcrumbItemType[];
-  
+
   // Badges/Pills
   badges?: BadgeItemType[];
-  showBadges?: boolean; // default: true if badges exist
-  
+  showBadges?: boolean;
+
   // Hero section
   hero?: HeroConfig;
-  showHero?: boolean; // default: true if hero exists
-  
-  // FAQ section
+  showHero?: boolean;
+
+  // Blockquote section
+  blockquote?: BlockquoteConfig;
+  showBlockquote?: boolean;
+
+  // Top Features: ТОЛЬКО массив карточек
+  topFeatures?: TopFeatureItem[];
+  showTopFeatures?: boolean;
+
+  // FAQ
   faqs?: FAQItem[];
-  showFaq?: boolean; // default: true if FAQs exist
-  faqTitle?: string; // optional custom FAQ title
+  showFaq?: boolean;
+  faqTitle?: string;
 };
 
-/**
- * Props for SeoPageWrapper component
- */
 interface SeoPageWrapperProps {
   config: PageWrapperConfig;
   children: React.ReactNode;
 }
 
-/**
- * SeoPageWrapper Component
- * 
- * Main wrapper component for SEO-optimized pages.
- * Orchestrates breadcrumbs, badges, hero section, content, and FAQ.
- * Provides consistent layout and spacing across all SEO pages.
- * 
- * Features:
- * - Configurable top spacing
- * - Breadcrumb navigation
- * - Technology badges
- * - Responsive hero section
- * - Main content area
- * - FAQ section
- * 
- * @param config - Page wrapper configuration object
- * @param children - Main page content to render
- */
 export function SeoPageWrapper({ config, children }: SeoPageWrapperProps) {
   const {
     topSpacing = 80,
@@ -64,6 +54,14 @@ export function SeoPageWrapper({ config, children }: SeoPageWrapperProps) {
     showBadges = true,
     hero,
     showHero = true,
+    blockquote,
+    showBlockquote = true,
+
+    // Top Features
+    topFeatures,
+    showTopFeatures = Boolean(topFeatures),
+
+    // FAQ
     faqs = [],
     showFaq = true,
     faqTitle,
@@ -71,7 +69,6 @@ export function SeoPageWrapper({ config, children }: SeoPageWrapperProps) {
 
   return (
     <div className="min-h-screen">
-      
       {/* Top Spacing */}
       <div style={{ height: `${topSpacing}px` }} />
 
@@ -80,25 +77,34 @@ export function SeoPageWrapper({ config, children }: SeoPageWrapperProps) {
 
       {/* Main Content Area */}
       <main className="container mx-auto px-4 py-8">
-        
         {/* Technology Badges/Pills */}
         <TechBadges badges={badges} show={showBadges} />
-        
+
         {/* Hero Section */}
         {hero && <HeroSection config={hero} show={showHero} />}
 
+        {/* Top Features Section */}
+        {topFeatures && <TopFeaturesSection config={topFeatures} show={showTopFeatures} />}
+
+        {/* Blockquote Section */}
+        {blockquote && <BlockquoteSection config={blockquote} show={showBlockquote} />}
+    
+        <AnimatedAIButton/>
+        
         {/* Page Content (children) */}
-        <section className="mb-12">
-          {children}
-        </section>
+        <section className="mb-12">{children}</section>
 
         {/* FAQ Section */}
         <FAQSection faqs={faqs} show={showFaq} title={faqTitle} />
-
       </main>
     </div>
   );
 }
 
 // Re-export types for convenience
-export type { BreadcrumbItemType, BadgeItemType, HeroConfig, FAQItem };
+export type {
+  BreadcrumbItemType,
+  BadgeItemType,
+  HeroConfig,
+  FAQItem,
+};

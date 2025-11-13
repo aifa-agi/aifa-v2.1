@@ -38,7 +38,6 @@ export const metadata: Metadata = constructMetadata({
 // JSON-LD HELPER FUNCTIONS (inside page.tsx)
 // ============================================================================
 
-// ✅ Типы остаются БЕЗ ИЗМЕНЕНИЙ
 type BreadcrumbItem = {
   name: string;
   path: string;
@@ -49,9 +48,6 @@ type FAQItem = {
   answer: string;
 };
 
-/**
- * Build BreadcrumbList JSON-LD schema
- */
 function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
   return {
     '@context': 'https://schema.org',
@@ -65,9 +61,6 @@ function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
   };
 }
 
-/**
- * Build FAQPage JSON-LD schema
- */
 function buildFaqJsonLd(items: FAQItem[]) {
   return {
     '@context': 'https://schema.org',
@@ -87,14 +80,14 @@ function buildFaqJsonLd(items: FAQItem[]) {
 // PAGE CONFIGURATION
 // ============================================================================
 
-const PAGE_CONFIG: PageWrapperConfig= {
+const PAGE_CONFIG: PageWrapperConfig = {
   topSpacing: 80,
-  
+
   breadcrumbs: [
     { name: 'Home', path: '/home' },
     { name: 'Hire Me', path: '/hire-me' },
   ],
-  
+
   badges: [
     { text: 'AI SDK' },
     { text: 'Web3' },
@@ -109,16 +102,19 @@ const PAGE_CONFIG: PageWrapperConfig= {
     { text: 'AIFA Architecture' },
   ],
   showBadges: true,
-  
+
+  showBlockquote: true,
   hero: {
-    title: 'Have an idea? Let\'s build something monumental together',
-    subtitle: 'Architecture that extracts maximum value from AI and Web3 with SEO and AI-search focus — minimizing costs while maximizing outcomes. A technical partner, not just a developer.',
+    title: "Have an idea? Let's build something monumental together",
+    subtitle:
+      'Architecture that extracts maximum value from AI and Web3 with SEO and AI-search focus — minimizing costs while maximizing outcomes. A technical partner, not just a developer.',
     images: {
       horizontal: '/images/author-bolshiyanov-horizontal.png',
       vertical: '/images/author-bolshiyanov-vertical.png',
       square: '/images/author-bolshiyanov.png',
       alt: 'Roman Bolshiyanov portrait',
     },
+
     author: {
       name: 'Roman Bolshiyanov (Armstrong)',
       role: 'AI / Web3 / Next Architect',
@@ -127,19 +123,23 @@ const PAGE_CONFIG: PageWrapperConfig= {
     cta: {
       primary: {
         text: 'Email Roman',
-        href: `mailto:bolshiyanov@gmail.com?subject=${encodeURIComponent('AIFA Collaboration — AI/Web3/SEO Architecture')}&body=${encodeURIComponent([
-          'Hi Roman,',
-          '',
-          'I have a project/idea and would like to discuss:',
-          '- AI integration into existing processes',
-          '- Web3 tokenization',
-          '- Next.js + React architecture',
-          '- SEO & AI-search optimization',
-          '',
-          'Please share a couple of time slots for a quick call.',
-          '',
-          'Thank you!',
-        ].join('\n'))}`,
+        href: `mailto:bolshiyanov@gmail.com?subject=${encodeURIComponent(
+          'AIFA Collaboration — AI/Web3/SEO Architecture',
+        )}&body=${encodeURIComponent(
+          [
+            'Hi Roman,',
+            '',
+            'I have a project/idea and would like to discuss:',
+            '- AI integration into existing processes',
+            '- Web3 tokenization',
+            '- Next.js + React architecture',
+            '- SEO & AI-search optimization',
+            '',
+            'Please share a couple of time slots for a quick call.',
+            '',
+            'Thank you!',
+          ].join('\n'),
+        )}`,
       },
       secondary: {
         text: 'Message on Telegram',
@@ -148,7 +148,34 @@ const PAGE_CONFIG: PageWrapperConfig= {
     },
   },
   showHero: true,
-  
+
+  blockquote: {
+    text:
+      'To live is to be so deeply immersed that no one can tell whether youre mad or a genius.',
+  },
+
+
+  topFeatures: [
+    {
+      title: '25+',
+      description: 'Years in web',
+    },
+    {
+      title: '10+',
+      description: 'Business launched',
+    },
+    {
+      title: '10',
+      description: 'Years leading teams ',
+    },
+    {
+      title: '5',
+      description: 'Patents',
+    },
+    
+  ],
+  showTopFeatures: true,
+
   faqs: [
     {
       question: 'Can you integrate AI into our existing website or mobile application?',
@@ -184,17 +211,14 @@ const PAGE_CONFIG: PageWrapperConfig= {
 // ============================================================================
 
 export default function Page() {
-  // Generate JSON-LD schemas in page.tsx
   const breadcrumbJsonLd = buildBreadcrumbJsonLd(PAGE_CONFIG.breadcrumbs);
-   const faqJsonLd = buildFaqJsonLd(PAGE_CONFIG.faqs ?? []);
+  const faqJsonLd = buildFaqJsonLd(PAGE_CONFIG.faqs ?? []);
 
   return (
     <>
-      
       <StructuredDataWrapper data={breadcrumbJsonLd} />
       <StructuredDataWrapper data={faqJsonLd} />
 
-      {/* UI Wrapper Component */}
       <SeoPageWrapper config={PAGE_CONFIG}>
         <HireMePageComponent />
       </SeoPageWrapper>

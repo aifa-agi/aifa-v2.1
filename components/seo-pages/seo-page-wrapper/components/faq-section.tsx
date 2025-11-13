@@ -43,7 +43,7 @@ export function FAQSection({
 
   return (
     <section className="mb-12" aria-labelledby="faq-section">
-      <h2 id="faq-section" className="text-3xl font-bold tracking-tight mb-6">
+      <h2 id="faq-section" className="text-2xl font-bold tracking-tight mb-6">
         {title}
       </h2>
       <div className="space-y-4">
