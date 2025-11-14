@@ -35,7 +35,7 @@ export const contentData = {
           ],
           "hasBadge": false,
           "type": "homePage",
-          "isPublished": true,
+          "isPublished": false,
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
