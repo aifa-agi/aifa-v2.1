@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚀 AIFA v2.1
+# 🚀 AI - SEO - Parallel - Intercepting - Routes - Nextjs - Starter
 
-### Next.js 15 App Router SEO Starter
+### AIFA v2.1
 
 **Production‑ready template** for advanced routing, parallel slots, and AI‑ready architecture.
 
