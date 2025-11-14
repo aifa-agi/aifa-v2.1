@@ -202,6 +202,7 @@ const PAGE_CONFIG: PageWrapperConfig = {
       answer:
         'Rates start at 40 EUR/hour. Key advantage: extensive library of ready-made solutions (AIFA starters, AI/Web3 modules, Next.js 15 components) that dramatically reduce timelines—projects estimated at months often complete in days of focused work. I accept freelance projects if theyre technically interesting and require architectural thinking, not just basic implementation. Minimum engagement: 2-hour consultation (80 EUR) with roadmap and estimate.',
     },
+    
   ],
   showFaq: true,
 };

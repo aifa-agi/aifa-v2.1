@@ -172,13 +172,13 @@ export const contentData = {
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
-          "order": 1,
+          "order": 0,
           "title": "Static Generation",
           "description": "Pre-rendering pages at build time for maximum performance and SEO optimization with Next.js static site generation capabilities."
         },
         {
           "id": "news-002-partnership",
-          "href": "/docs/strategic-partnership",
+          "href": "/docs/strategic-partnership-ai-vs-seo",
           "roles": ["guest"],
           "hasBadge": false,
           "type": "news",
@@ -186,8 +186,8 @@ export const contentData = {
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
-          "order": 2,
-          "title": "Strategic Partnership",
+          "order": 1,
+          "title": "Strategic Partnership AI || SEO",
           "description": "Announcing our strategic partnership with leading technology companies to advance AI research and innovation."
         },
         {
@@ -196,7 +196,7 @@ export const contentData = {
           "roles": ["guest"],
           "hasBadge": true,
           "type": "feature",
-          "isPublished": false,
+          "isPublished": true,
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
