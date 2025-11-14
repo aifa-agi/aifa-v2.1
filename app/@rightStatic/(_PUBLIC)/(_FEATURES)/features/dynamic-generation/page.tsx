@@ -103,7 +103,7 @@ const PAGE_CONFIG: PageWrapperConfig = {
     title:
       "Dynamic Generation — On-Demand Rendering for Personalized Web Experiences",
     subtitle:
-      "Server-side rendering on each request powers authenticated dashboards, real-time analytics, and role-based interfaces while preserving SEO-optimized static content through AIFA's innovative dual-slot architecture.",
+      "Server-side rendering on each request powers authenticated dashboards, real-time analytics, and role-based interfaces while preserving SEO-optimized static content through AIFA innovative dual-slot architecture.",
     images: {
       horizontal: "/images/dynamic-generate-aifa.png",
       vertical: "/images/dynamic-generate-aifa.png",
@@ -159,7 +159,7 @@ const PAGE_CONFIG: PageWrapperConfig = {
   faqs: [
     {
       question:
-        "What's the difference between Dynamic Generation and Client-Side Rendering?",
+        "Whats the difference between Dynamic Generation and Client-Side Rendering?",
       answer:
         "Dynamic Generation runs on the server on each request, delivering complete HTML to the browser. Client-Side Rendering happens in the browser after page load, requiring JavaScript execution to display content. Dynamic Generation provides better SEO and faster initial render.",
     },
@@ -172,13 +172,13 @@ const PAGE_CONFIG: PageWrapperConfig = {
     {
       question: "Does Dynamic Generation hurt SEO?",
       answer:
-        "If you render personalized content server-side, search engines won't see it (which is expected). That's why AIFA keeps SEO content in the static slot while dynamic features appear only for authenticated users.",
+        "If you render personalized content server-side, search engines wont see it (which is expected). Thats why AIFA keeps SEO content in the static slot while dynamic features appear only for authenticated users.",
     },
     {
       question:
         "What happens if JavaScript is disabled on a dynamic page?",
       answer:
-        "The static fallback from @rightStatic remains visible. Dynamic features won't work, but core content is accessible. This progressive enhancement approach ensures content availability regardless of JavaScript execution.",
+        "The static fallback from @rightStatic remains visible. Dynamic features wont work, but core content is accessible. This progressive enhancement approach ensures content availability regardless of JavaScript execution.",
     },
     {
       question: "How does AIFA handle role-based rendering?",
@@ -187,7 +187,7 @@ const PAGE_CONFIG: PageWrapperConfig = {
     },
     {
   question: "How much does Dynamic Generation cost compared to Static Generation?",
-  answer: "Static Generation is 50-100x cheaper than Dynamic Generation for high-traffic sites. A static site serving 1 million page views costs ~$5-10/month on Vercel (mostly bandwidth), while dynamic SSR for the same traffic costs $200-500/month due to serverless function invocations. CDN caching eliminates server costs entirely for static pages, while dynamic pages require server processing on every request. For example, serving 1,000 requests/second costs $0 for static (pure CDN) vs $0.20-0.40 per million invocations for dynamic. AIFA's hybrid architecture maximizes static content (marketing pages, blogs, docs) to leverage CDN caching, using dynamic rendering only for authenticated user dashboards where personalization justifies the cost."
+  answer: "Static Generation is 50-100x cheaper than Dynamic Generation for high-traffic sites. A static site serving 1 million page views costs ~$5-10/month on Vercel (mostly bandwidth), while dynamic SSR for the same traffic costs $200-500/month due to serverless function invocations. CDN caching eliminates server costs entirely for static pages, while dynamic pages require server processing on every request. For example, serving 1,000 requests/second costs $0 for static (pure CDN) vs $0.20-0.40 per million invocations for dynamic. AIFA hybrid architecture maximizes static content (marketing pages, blogs, docs) to leverage CDN caching, using dynamic rendering only for authenticated user dashboards where personalization justifies the cost."
 }
 
   ],
@@ -343,7 +343,7 @@ function ArticleContent() {
   return (
     <article className="prose prose-slate dark:prose-invert max-w-none">
       <p>
-        When we talk about web personalization, we're really talking about
+        When we talk about web personalization, we&apos;re really talking about
         meeting user expectations—authenticated dashboards that remember
         preferences, real-time data that updates without refreshing, and
         interfaces that adapt to roles. Yet many developers face a brutal
@@ -417,7 +417,7 @@ function ArticleContent() {
       </h4>
 
       <p>
-        AIFA's architecture introduces a groundbreaking solution: <b>parallel
+        AIFA&apos;s architecture introduces a groundbreaking solution: <b>parallel
         route slots with absolute positioning overlays</b>. The{" "}
         <code className="bg-muted px-2 py-1 rounded">@rightDynamic</code> slot
         renders authenticated content—dashboards, admin panels, interactive
@@ -454,7 +454,7 @@ function ArticleContent() {
         The <code className="bg-muted px-2 py-1 rounded">@left</code> parallel
         slot houses authentication flows (login, registration, password reset)
         and the AI chatbot interface. This architectural separation ensures
-        auth-related loading states and errors don't interfere with main content
+        auth-related loading states and errors don&apos;t interfere with main content
         rendering.
       </p>
 
@@ -482,7 +482,7 @@ function ArticleContent() {
       </h4>
 
       <p>
-        AIFA's dynamic generation follows <b>progressive enhancement</b>: deliver
+        AIFA&apos;s dynamic generation follows <b>progressive enhancement</b>: deliver
         core functionality as static HTML first, then layer interactivity via
         JavaScript hydration. When a user first requests a page, the server
         returns static HTML (instantly visible), minimal JavaScript bundle
@@ -614,8 +614,8 @@ function ArticleContent() {
 
       <p className="text-lg font-medium mt-8">
         Dynamic Generation transforms web applications from static document
-        servers into responsive, personalized platforms. AIFA's dual-slot
-        architecture proves you don't have to choose between SEO visibility and
+        servers into responsive, personalized platforms. AIFA&apos;s dual-slot
+        architecture proves you don&apos;t have to choose between SEO visibility and
         dynamic functionality—<b>both coexist through intelligent layering and
         progressive enhancement</b>.
       </p>

@@ -18,8 +18,8 @@ import type { MenuCategory } from '@/types/menu-types';
  */
 function getFeaturesData() {
   // Check if contentData has categories property or is array directly
-  const categories: MenuCategory[] = Array.isArray(contentData) 
-    ? contentData 
+  const categories: MenuCategory[] = Array.isArray(contentData)
+    ? contentData
     : contentData.categories || [];
 
   // Find Features section in content data
@@ -117,19 +117,34 @@ export default function FeaturesPageComponent() {
 
         {/* Features Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {featuresData.map((feature: FeatureCard) => (
+          {featuresData.map((feature: FeatureCard, index: number) => (
             <Card key={feature.id} className="flex flex-col">
               <CardHeader className="flex-1">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <CardTitle className="text-lg font-medium leading-tight">
-                    {feature.title}
-                  </CardTitle>
-                  {feature.hasBadge && <NewBadge />}
+                {/* Первая строка с кругом и порядковым номером */}
+                <div className="flex items-center gap-4 mb-4">
+                  {/* Круг с номером */}
+                  <div className="flex-shrink-0 w-16 h-16 rounded-full border-2 border-primary flex items-center justify-center">
+                    <span className="text-xl font-semibold text-foreground">
+                      {index + 1}
+                    </span>
+                  </div>
+
+                  {/* Заголовок и бейдж */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <CardTitle className="text-lg font-medium leading-tight">
+                        {feature.title}
+                      </CardTitle>
+                      {feature.hasBadge && <NewBadge />}
+                    </div>
+                  </div>
                 </div>
+
                 <CardDescription className="text-sm text-muted-foreground">
                   {feature.description}
                 </CardDescription>
               </CardHeader>
+
               <CardFooter>
                 <Button asChild variant="ghost" size="sm" className="group">
                   <Link href={feature.href}>
@@ -141,6 +156,7 @@ export default function FeaturesPageComponent() {
             </Card>
           ))}
         </div>
+
       </section>
 
       {/* CTA Section */}
