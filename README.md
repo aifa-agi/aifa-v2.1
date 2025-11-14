@@ -80,10 +80,10 @@ pnpm install
 pnpm dev
 
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-!!! Use only Incognito Mode
-!!! Use only Incognito Mode
-!!! Use only Incognito Mode
+##### Open [http://localhost:3000](http://localhost:3000) in your browser.
+##### !!! Use only Incognito Mode
+##### !!! Use only Incognito Mode
+##### !!! Use only Incognito Mode
 ---
 
 ## 📦 Tech Stack
