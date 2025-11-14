@@ -119,20 +119,16 @@ const PAGE_CONFIG: PageWrapperConfig = {
             role: "AI & Web3 & Next Architect",
             avatar: appConfig.logo,
         },
-        cta: {
-            primary: {
-                text: "Email Roman",
-                href: `mailto:bolshiyanov@gmail.com?subject=${encodeURIComponent(
-                    "AIFA Collaboration — AI/Web3/SEO Architecture"
-                )}&body=${encodeURIComponent(
-                    `Hi Roman,\n\nI have a project/idea and would like to discuss:\n- AI integration into existing processes\n- Web3 tokenization\n- Next.js / React architecture\n- SEO & AI-search optimization\n\nPlease share a couple of time slots for a quick call.\n\nThank you!`
-                )}`,
-            },
-            secondary: {
-                text: "Message on Telegram",
-                href: "https://t.me/bolshiyanov",
-            },
-        },
+       cta: {
+      primary: {
+        text: 'Get Starter',
+        href: 'https://github.com/aifa-agi/aifa-v2.1',
+      },
+      secondary: {
+        text: 'Check Modal',
+        href: '/interception_modal/lead-form',
+      },
+    },
     },
     showHero: true,
 

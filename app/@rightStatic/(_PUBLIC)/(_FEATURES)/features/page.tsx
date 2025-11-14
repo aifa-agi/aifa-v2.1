@@ -119,8 +119,8 @@ const PAGE_CONFIG: PageWrapperConfig = {
         href: 'https://github.com/aifa-agi/aifa-v2.1',
       },
       secondary: {
-        text: 'Original AIFA',
-        href: 'https://github.com/aifa-agi/aifa-v2.1',
+        text: 'Check Modal',
+        href: '/interception_modal/lead-form',
       },
     },
   },

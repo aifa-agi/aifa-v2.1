@@ -61,8 +61,14 @@ const PAGE_CONFIG: PageWrapperConfig = {
       avatar: appConfig.logo
     },
     cta: {
-      primary: { text: "Email Roman", href: "mailto:bolshiyanov@gmail.com?subject=AIFA Partnership&body=Hello Roman," },
-      secondary: { text: "Message on Telegram", href: "https://t.me/bolshiyanov" },
+      primary: {
+        text: 'Get Starter',
+        href: 'https://github.com/aifa-agi/aifa-v2.1',
+      },
+      secondary: {
+        text: 'Check Modal',
+        href: '/interception_modal/lead-form',
+      },
     },
   },
   showHero: true,

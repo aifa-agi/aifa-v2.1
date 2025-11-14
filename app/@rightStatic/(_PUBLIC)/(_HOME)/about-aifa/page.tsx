@@ -125,23 +125,12 @@ const PAGE_CONFIG: PageWrapperConfig = {
     },
     cta: {
       primary: {
-        text: 'Email Roman',
-        href: `mailto:bolshiyanov@gmail.com?subject=${encodeURIComponent('AIFA Architecture — Collaboration Request')}&body=${encodeURIComponent([
-          'Hi Roman!',
-          '',
-          'I would like to discuss AIFA architecture for my project:',
-          '- Using Next.js parallel routing',
-          '- AI chat integration',
-          '- Fractal architecture for scaling',
-          '',
-          'Please suggest a couple of convenient time slots for a call.',
-          '',
-          'Thank you!',
-        ].join('\n'))}`,
+        text: 'Get Starter',
+        href: 'https://github.com/aifa-agi/aifa-v2.1',
       },
       secondary: {
-        text: 'Message on Telegram',
-        href: 'https://t.me/bolshiyanov',
+        text: 'Check Modal',
+        href: '/interception_modal/lead-form',
       },
     },
   },
