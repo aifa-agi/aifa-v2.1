@@ -3,7 +3,7 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import HomePageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/home/(_components)/home-page-component';
+import HomePageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/home/(_components)/article-content';
 import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
 import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 import { HOME_PAGE_CONFIG } from './(_PUBLIC)/(_HOME)/home/page';

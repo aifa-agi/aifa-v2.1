@@ -3,7 +3,7 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import AboutAifaPageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/about-aifa/(_components)/about-aifa-page-component';
+import ArticleContent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/about-aifa/(_components)/article-content';
 import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
 import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 
@@ -214,7 +214,7 @@ export default function Page() {
 
       {/* UI Wrapper Component */}
       <SeoPageWrapper config={PAGE_CONFIG}>
-        <AboutAifaPageComponent />
+        <ArticleContent />
       </SeoPageWrapper>
     </>
   );

@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
 import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 import { appConfig } from '@/config/app-config';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { CodeBlock } from '../(_components)/code-block';
 
 // ============================================================================
 // META CONFIGURATION
@@ -20,6 +20,17 @@ export const metadata: Metadata = constructMetadata({
     contentType: 'article',
     noIndex: false,
     noFollow: false,
+    author: {
+        name: 'Roman Bolshiyanov (Armstrong)',
+        email: 'bolshiyanov@gmail.com',
+        url: 'https://t.me/bolshiyanov',
+        image: '/images/author-bolshiyanov.png',
+        bio: 'AI/Web3/Next Architect delivering business-ready solutions that orchestrate frontend, backend, and go-to-market.',
+        jobTitle: 'AI/Web3/Next Architect',
+        twitter: undefined,
+        linkedin: 'roman-bolshiyanov',
+        facebook: undefined,
+    },
 });
 
 // ============================================================================
@@ -259,39 +270,7 @@ export default async function RightDynamicLayout({ children }) {
 }`,
 };
 
-// ============================================================================
-// CODE BLOCK COMPONENT WITH SYNTAX HIGHLIGHTING
-// ============================================================================
 
-interface CodeBlockProps {
-    code: string;
-    language?: string;
-    fileName?: string;
-}
-
-function CodeBlock({ code, language = 'typescript', fileName }: CodeBlockProps) {
-    return (
-        <div className="my-6 rounded-lg overflow-hidden border border-border">
-            {fileName && (
-                <div className="bg-muted px-4 py-2 text-xs font-mono text-muted-foreground border-b border-border">
-                    {fileName}
-                </div>
-            )}
-            <SyntaxHighlighter
-                language={language}
-                customStyle={{
-                    margin: 0,
-                    padding: '1.5rem',
-                    fontSize: '0.875rem',
-                    lineHeight: '1.5',
-                }}
-                showLineNumbers={false}
-            >
-                {code.trim()}
-            </SyntaxHighlighter>
-        </div>
-    );
-}
 
 // ============================================================================
 // PAGE COMPONENT

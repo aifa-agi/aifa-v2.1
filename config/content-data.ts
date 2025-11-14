@@ -176,20 +176,7 @@ export const contentData = {
           "title": "Static Generation",
           "description": "Pre-rendering pages at build time for maximum performance and SEO optimization with Next.js static site generation capabilities."
         },
-        {
-          "id": "news-002-partnership",
-          "href": "/docs/strategic-partnership-ai-vs-seo",
-          "roles": ["guest"],
-          "hasBadge": false,
-          "type": "news",
-          "isPublished": false,
-          "isAddedToPrompt": false,
-          "isVectorConnected": false,
-          "isChatSynchronized": false,
-          "order": 1,
-          "title": "Strategic Partnership AI || SEO",
-          "description": "Announcing our strategic partnership with leading technology companies to advance AI research and innovation."
-        },
+        
         {
           "id": "feature-002-dynamic-generation",
           "href": "/features/dynamic-generation",
@@ -200,9 +187,23 @@ export const contentData = {
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
-          "order": 2,
+          "order": 1,
           "title": "Dynamic Generation",
           "description": "Server-side rendering on demand for personalized content and real-time data with Next.js dynamic rendering strategies."
+        },
+        {
+          "id": "news-002-partnership",
+          "href": "/features/strategic-partnership-ai-vs-seo",
+          "roles": ["guest"],
+          "hasBadge": false,
+          "type": "news",
+          "isPublished": true,
+          "isAddedToPrompt": false,
+          "isVectorConnected": false,
+          "isChatSynchronized": false,
+          "order": 2,
+          "title": "Strategic Partnership AI || SEO",
+          "description": "Announcing our strategic partnership with leading technology companies to advance AI research and innovation."
         },
         {
           "id": "feature-003-parallel-routing",

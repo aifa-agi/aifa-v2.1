@@ -3,7 +3,7 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import HireMePageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/hire-me/(_components)/hire-me-page-component';
+import ArticleContent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/hire-me/(_components)/article-content';
 import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
 import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 
@@ -221,7 +221,7 @@ export default function Page() {
       <StructuredDataWrapper data={faqJsonLd} />
 
       <SeoPageWrapper config={PAGE_CONFIG}>
-        <HireMePageComponent />
+        <ArticleContent />
       </SeoPageWrapper>
     </>
   );

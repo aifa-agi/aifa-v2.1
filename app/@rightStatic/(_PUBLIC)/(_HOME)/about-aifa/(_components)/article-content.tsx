@@ -20,7 +20,7 @@ function StatusPill({ label }: { label: string }) {
  * Note: Hero, Breadcrumbs, Badges, and FAQ are handled by SeoPageWrapper
  * This component contains only the main content sections
  */
-export default function AboutAifaPageComponent() {
+export default function ArticleContent() {
   // Email and Telegram configuration for CTA section
   const email = 'bolshiyanov@gmail.com';
   const mailSubject = encodeURIComponent('AIFA Architecture — Collaboration Request');

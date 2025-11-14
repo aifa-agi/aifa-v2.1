@@ -11,6 +11,7 @@ import { appConfig } from "@/config/app-config";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { CheckCircle2Icon, Sparkles } from "lucide-react";
+import { CodeBlock } from "../(_components)/code-block";
 
 /* ============================================
  * META CONFIGURATION
@@ -287,38 +288,7 @@ return (
 )`,
 };
 
-/* ============================================
- * CODE BLOCK COMPONENT WITH SYNTAX HIGHLIGHTING
- * ============================================ */
-interface CodeBlockProps {
-    code: string;
-    language?: string;
-    fileName?: string;
-}
 
-function CodeBlock({ code, language = "typescript", fileName }: CodeBlockProps) {
-    return (
-        <div className="my-6 rounded-lg overflow-hidden border border-border">
-            {fileName && (
-                <div className="bg-muted px-4 py-2 text-xs font-mono text-muted-foreground border-b border-border">
-                    {fileName}
-                </div>
-            )}
-            <SyntaxHighlighter
-                language={language}
-                customStyle={{
-                    margin: 0,
-                    padding: "1.5rem",
-                    fontSize: "0.875rem",
-                    lineHeight: 1.5,
-                }}
-                showLineNumbers={false}
-            >
-                {code.trim()}
-            </SyntaxHighlighter>
-        </div>
-    );
-}
 
 /* ============================================
  * PAGE COMPONENT

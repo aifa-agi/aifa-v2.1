@@ -16,9 +16,7 @@ export function GitHubLink() {
     >
       <Link href={appConfig.seo.social?.github || "/"} target="_blank" rel="noreferrer">
         <Icons.gitHub />
-        {/* <React.Suspense fallback={<Skeleton className="h-4 w-8" />}>
-          <StarsCount />
-        </React.Suspense> */}
+        
       </Link>
     </Button>
   )

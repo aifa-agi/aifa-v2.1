@@ -19,7 +19,7 @@ function StatusPill({ label }: { label: string }) {
  * Note: Hero, Breadcrumbs, Badges, and FAQ are handled by SeoPageWrapper
  * This component contains only the main content sections
  */
-export default function HireMePageComponent() {
+export default function ArticleContent() {
   return (
     <>
       
