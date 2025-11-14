@@ -382,7 +382,7 @@ Click the button below to deploy your own instance of AIFA v2.1 to Vercel:
 <sub>© 2025 AIFA · Next.js 15 · App Router · AI-Ready Architecture</sub>
 
 </div>
-```
+
 
 
 
