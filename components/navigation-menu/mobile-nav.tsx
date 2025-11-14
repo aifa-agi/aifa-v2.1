@@ -1,4 +1,4 @@
-//components/navigation-menu/mobile-nav.tsx
+// components/navigation-menu/mobile-nav.tsx
 "use client"
 
 import * as React from "react"
@@ -15,40 +15,98 @@ import {
 } from "@/components/ui/popover"
 import { MenuCategory } from "@/types/menu-types"
 import { appConfig } from "@/config/app-config"
-import { AnimatedAIButton } from '@/components/animated-ai-button';
+import { AnimatedAIButton } from "@/components/animated-ai-button"
 
 interface MobileNavProps {
   categories: MenuCategory[]
   className?: string
 }
 
+/**
+ * Helper: filter only published pages inside a category
+ * Returns new category object with filtered pages
+ */
+function withPublishedPagesOnly(category: MenuCategory): MenuCategory {
+  const safePages = category.pages ?? []
+
+  const publishedPages = safePages.filter((page) => page?.isPublished === true)
+
+  return {
+    ...category,
+    pages: publishedPages,
+  }
+}
+
+// Component for individual link in mobile navigation
+interface MobileNavLinkProps extends React.ComponentPropsWithoutRef<"a"> {
+  href: string
+  onOpenChange?: (open: boolean) => void
+  children: React.ReactNode
+  isActive?: boolean
+}
+
+function MobileNavLink({
+  href,
+  onOpenChange,
+  className,
+  children,
+  isActive = false,
+  ...props
+}: MobileNavLinkProps) {
+  const router = useRouter()
+
+  return (
+    <Link
+      href={href}
+      onClick={(e) => {
+        e.preventDefault()
+        router.push(href)
+        onOpenChange?.(false)
+      }}
+      className={cn(
+        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+        isActive && "bg-accent text-accent-foreground",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </Link>
+  )
+}
 
 export function MobileNav({ categories, className }: MobileNavProps) {
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
 
-  // Close menu before navigation
   const handleCloseMenu = () => setOpen(false)
+
+  // Pre-filter all categories to contain only published pages
+  const filteredCategories = React.useMemo(() => {
+    return (categories ?? [])
+      .map(withPublishedPagesOnly)
+      .filter((category) => category.pages && category.pages.length > 0)
+  }, [categories])
 
   // Filter out any "Home" category from data to avoid duplicates
   const otherCategories = React.useMemo(() => {
-    return (categories ?? []).filter(
+    return (filteredCategories ?? []).filter(
       (c) => (c?.title ?? "").toLowerCase() !== "home"
     )
-  }, [categories])
+  }, [filteredCategories])
 
-const homeCategories = React.useMemo(() => {
-  return (categories ?? [])
-    .filter((c) => (c?.title ?? "").toLowerCase() === "home")
-    .map((category) => ({
-      ...category,
-      pages: (category.pages ?? []).filter(
-        (page) => (page?.title ?? "").toLowerCase() !== "home"
-      ),
-    }))
-    .filter((category) => category.pages.length > 0); // Remove empty categories
-}, [categories]);
-
+  // Home categories (only those named "Home")
+  const homeCategories = React.useMemo(() => {
+    return (filteredCategories ?? [])
+      .filter((c) => (c?.title ?? "").toLowerCase() === "home")
+      .map((category) => ({
+        ...category,
+        pages: (category.pages ?? []).filter(
+          (page) => (page?.title ?? "").toLowerCase() !== "home"
+        ),
+      }))
+      .filter((category) => category.pages.length > 0)
+  }, [filteredCategories])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -93,8 +151,6 @@ const homeCategories = React.useMemo(() => {
         <div className="flex flex-col gap-6 overflow-auto px-6 py-6">
           {/* 1) Home section (always first, independent of categories) */}
           <div className="flex flex-col gap-4">
-           
-
             <Link
               href="/"
               onClick={handleCloseMenu}
@@ -127,15 +183,12 @@ const homeCategories = React.useMemo(() => {
               Chat
             </div>
             <div className="flex">
-              <AnimatedAIButton
-                onNavigate={handleCloseMenu}
-              />
+              <AnimatedAIButton onNavigate={handleCloseMenu} />
             </div>
           </div>
 
-          {/* 3) home categories (excluding Home) */}
+          {/* 3) Home categories (excluding Home title page) */}
           {homeCategories.map((category) => {
-            // Skip categories without pages
             if (!category?.pages || category.pages.length === 0) {
               return null
             }
@@ -185,7 +238,6 @@ const homeCategories = React.useMemo(() => {
 
           {/* 4) Other categories (excluding Home) */}
           {otherCategories.map((category) => {
-            // Skip categories without pages
             if (!category?.pages || category.pages.length === 0) {
               return null
             }
@@ -235,43 +287,5 @@ const homeCategories = React.useMemo(() => {
         </div>
       </PopoverContent>
     </Popover>
-  )
-}
-
-// Component for individual link in mobile navigation
-interface MobileNavLinkProps extends React.ComponentPropsWithoutRef<"a"> {
-  href: string
-  onOpenChange?: (open: boolean) => void
-  children: React.ReactNode
-  isActive?: boolean
-}
-
-function MobileNavLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  isActive = false,
-  ...props
-}: MobileNavLinkProps) {
-  const router = useRouter()
-
-  return (
-    <Link
-      href={href}
-      onClick={(e) => {
-        e.preventDefault()
-        router.push(href)
-        onOpenChange?.(false)
-      }}
-      className={cn(
-        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-        isActive && "bg-accent text-accent-foreground",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </Link>
   )
 }

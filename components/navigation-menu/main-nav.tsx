@@ -1,4 +1,4 @@
-//components/navigation-menu/main-nav.tsx
+// components/navigation-menu/main-nav.tsx
 "use client"
 
 import * as React from "react"
@@ -23,22 +23,44 @@ interface MainNavProps {
   className?: string
 }
 
+/**
+ * Helper: filter only published pages inside a category
+ * Returns new category object with filtered pages
+ */
+function withPublishedPagesOnly(category: MenuCategory): MenuCategory {
+  const safePages = category.pages ?? []
+
+  const publishedPages = safePages.filter((page) => page?.isPublished === true)
+
+  return {
+    ...category,
+    pages: publishedPages,
+  }
+}
+
 export function MainNav({ items, className }: MainNavProps) {
   const pathname = usePathname()
+
+  // Pre-filter categories to contain only published pages
+  const categoriesWithPublishedPages = React.useMemo(() => {
+    return (items ?? [])
+      .map(withPublishedPagesOnly)
+      .filter((category) => category.pages && category.pages.length > 0)
+  }, [items])
 
   return (
     <NavigationMenu className={className}>
       <NavigationMenuList>
-        {items.map((category) => {
-          const lowerCaseTitle = category.title.toLowerCase()
+        {categoriesWithPublishedPages.map((category) => {
+          const lowerCaseTitle = (category.title ?? "").toLowerCase()
           const isActive = category.href ? pathname === category.href : false
 
-          // Проверяем есть ли страницы
+          // Skip categories without pages after filtering
           if (!category.pages || category.pages.length === 0) {
             return null
           }
 
-          // Логика для "Home" категории
+          // Special logic for "Home" category
           if (lowerCaseTitle === "home") {
             return (
               <NavigationMenuItem key={category.title}>
@@ -77,7 +99,7 @@ export function MainNav({ items, className }: MainNavProps) {
                       </NavigationMenuLink>
                     </li>
 
-                    {/* Показываем максимум 10 страниц */}
+                    {/* Show up to 10 published pages */}
                     {category.pages.slice(0, 10).map(
                       (page) =>
                         page.href && (
@@ -92,7 +114,7 @@ export function MainNav({ items, className }: MainNavProps) {
                         )
                     )}
 
-                    {/* Если больше 10 страниц, показываем "View All" */}
+                    {/* If more than 10 pages, show "View All" */}
                     {category.pages.length > 10 && category.href && (
                       <li className="col-span-1">
                         <Link
@@ -109,7 +131,7 @@ export function MainNav({ items, className }: MainNavProps) {
             )
           }
 
-          // Логика для остальных категорий
+          // Default logic for all other categories
           return (
             <NavigationMenuItem key={category.title}>
               <NavigationMenuTrigger
@@ -122,7 +144,7 @@ export function MainNav({ items, className }: MainNavProps) {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-full gap-3 p-4 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                  {/* Показываем максимум 10 страниц */}
+                  {/* Show up to 10 published pages */}
                   {category.pages.slice(0, 10).map(
                     (page) =>
                       page.href && (
@@ -137,7 +159,7 @@ export function MainNav({ items, className }: MainNavProps) {
                       )
                   )}
 
-                  {/* Если больше 10 страниц, показываем "View All" */}
+                  {/* If more than 10 pages, show "View All" */}
                   {category.pages.length > 10 && category.href && (
                     <li className="col-span-full">
                       <Link
