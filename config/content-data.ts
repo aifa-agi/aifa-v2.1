@@ -247,6 +247,21 @@ export const contentData = {
           "title": "Intercepting Routes: Authentication",
           "description": "Seamless authentication flow using intercepting routes for login and signup modals that preserve user context and navigation state."
         },
+         {
+          "id": "feature-006-intercepting-chat",
+          "href": "/features/intercepting-chat",
+          "roles": ["guest"],
+          "hasBadge": true,
+          "type": "feature",
+          "isPublished": false,
+          "isAddedToPrompt": false,
+          "isVectorConnected": false,
+          "isChatSynchronized": false,
+          "order": 5,
+          "title": "Intercepting Routes: AI Chat",
+          "description": "Seamless AI chat experience using intercepting routes for modal conversations that preserve user context and navigation state."
+
+        },
         {
           "id": "feature-006-soft-navigation",
           "href": "/features/soft-navigation",
