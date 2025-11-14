@@ -122,7 +122,7 @@ This separation allows **SEO‑perfect static pages** and **AI‑driven UX** to 
 ---
 
 ## 📁 Project Structure
-
+```
 aifa-v2.1/
 ├── app/
 │ ├── layout.tsx # Root parallel layout
@@ -145,7 +145,7 @@ aifa-v2.1/
 │ └── construct-metadata.ts # SEO helper
 └── public/
 └── images/ # Assets
-
+```
 
 ---
 
