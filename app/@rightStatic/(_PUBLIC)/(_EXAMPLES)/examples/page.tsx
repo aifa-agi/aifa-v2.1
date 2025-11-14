@@ -83,7 +83,7 @@ function buildCollectionPageJsonLd() {
 
 const PAGE_CONFIG: PageWrapperConfig = {
   topSpacing: 80,
-  
+  variant:"feature",
   breadcrumbs: [
     { name: 'Home', path: '/' },
     { name: 'Features', path: '/features' },

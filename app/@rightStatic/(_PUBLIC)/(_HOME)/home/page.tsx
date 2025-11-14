@@ -87,7 +87,7 @@ function buildWebSiteJsonLd() {
 
 export const HOME_PAGE_CONFIG: PageWrapperConfig = {
   topSpacing: 80,
-  
+  variant:"landing",
   breadcrumbs: [
     { name: 'Home', path: '/' },
   ],

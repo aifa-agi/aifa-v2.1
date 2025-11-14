@@ -5,7 +5,6 @@ import { META_THEME_COLORS, appConfig } from '@/config/app-config'
 import { fontVariables } from "@/lib/fonts"
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
 import './styles/globals.css'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
 import { Toaster } from "sonner";
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -176,7 +175,7 @@ export default async function RootLayout({
                     </div>
                   </div>
                 </div>
-                
+
 
 
 

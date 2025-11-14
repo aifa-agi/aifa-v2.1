@@ -141,7 +141,7 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
               {cta.secondary.text}
             </Link>
           </div>
-        </div>S
+        </div>
       </section>)
   }
 
