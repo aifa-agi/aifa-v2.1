@@ -223,44 +223,166 @@ NEXT_PUBLIC_ANDROID_PACKAGE=
 # Environment
 NEXT_PUBLIC_ENVIRONMENT=production
 ```
-📚 Documentation
-Full docs available at aifa.dev.
 
-Key articles:
+---
 
-Static Generation
+## 📚 Documentation
 
-Parallel Routing
+Full documentation and live examples available on our website.
 
-Dynamic Generation
+<table>
+<tr>
+<td align="center" width="33%">
+<a href="https://aifa-v2-1.vercel.app/features/static-generation">
+<img src="https://img.shields.io/badge/Static_Generation-⚡-brightgreen?style=for-the-badge" alt="Static Generation" />
+</a>
+<br />
+<sub><b>Lightning-Fast SEO Pages</b></sub>
+</td>
+<td align="center" width="33%">
+<a href="https://aifa-v2-1.vercel.app/features/parallel-routing">
+<img src="https://img.shields.io/badge/Parallel_Routing-🔀-blue?style=for-the-badge" alt="Parallel Routing" />
+</a>
+<br />
+<sub><b>Independent UI Flows</b></sub>
+</td>
+<td align="center" width="33%">
+<a href="https://aifa-v2-1.vercel.app/features/dynamic-generation">
+<img src="https://img.shields.io/badge/Dynamic_Generation-🔄-orange?style=for-the-badge" alt="Dynamic Generation" />
+</a>
+<br />
+<sub><b>On-Demand Rendering</b></sub>
+</td>
+</tr>
+</table>
 
-🤝 Contributing
-Contributions welcome! Open an issue or PR if you:
+---
 
-Find bugs or have feature requests
+## 🤝 Contributing
 
-Want to improve the template
-
-Have use cases or examples to share
-
-📝 License
-This project is open‑source under the AGPL‑3.0 License.
-See LICENSE for details.
-
-🌐 Links
-Live Demo: https://aifa-v2-1.vercel.app
-
-GitHub: https://github.com/aifa-agi/aifa-v2.1
-
-Website: https://aifa.dev
-
-Telegram: https://t.me/bolshiyanov
+We welcome contributions from the community! Here's how you can help:
 
 <div align="center">
-Made with ❤️ by the AIFA team
 
-Deploy with Vercel
+[![Contributors](https://img.shields.io/github/contributors/aifa-agi/aifa-v2.1?style=for-the-badge)](https://github.com/aifa-agi/aifa-v2.1/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/aifa-agi/aifa-v2.1?style=for-the-badge)](https://github.com/aifa-agi/aifa-v2.1/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/aifa-agi/aifa-v2.1?style=for-the-badge)](https://github.com/aifa-agi/aifa-v2.1/pulls)
 
-⭐ Star this repo to support the project!
+</div>
 
-</div> ```
+### Ways to Contribute
+
+- 🐛 **Report bugs** — Open an issue with reproduction steps
+- 💡 **Suggest features** — Share your ideas for improvements
+- 📝 **Improve docs** — Help us make the README better
+- 🔧 **Submit PRs** — Fix bugs or add features
+- ⭐ **Star the repo** — Show your support!
+
+### Get Started
+
+```
+
+
+# Fork the repo
+
+# Clone your fork
+
+git clone https://github.com/YOUR_USERNAME/aifa-v2.1.git
+cd aifa-v2.1
+
+# Create a branch
+
+git checkout -b feature/amazing-feature
+
+# Make your changes
+
+pnpm install
+pnpm dev
+
+# Commit and push
+
+git add .
+git commit -m "Add amazing feature"
+git push origin feature/amazing-feature
+
+# Open a PR!
+
+```
+
+---
+
+## 📝 License
+
+<div align="center">
+
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/agpl-3.0)
+
+This project is licensed under the **GNU Affero General Public License v3.0**.
+
+See [LICENSE](LICENSE) for full details.
+
+</div>
+
+---
+
+## 🌐 Links & Community
+
+<div align="center">
+
+### Official Resources
+
+[![Website](https://img.shields.io/badge/Website-aifa.dev-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://aifa.dev)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://aifa-v2-1.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-aifa--v2.1-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/aifa-agi/aifa-v2.1)
+
+### Connect with the Author
+
+[![Telegram](https://img.shields.io/badge/Telegram-@bolshiyanov-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/bolshiyanov)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Roman_Bolshiyanov-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/roman-bolshiyanov)
+[![Email](https://img.shields.io/badge/Email-bolshiyanov@gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:bolshiyanov@gmail.com)
+
+</div>
+
+---
+
+<div align="center">
+
+## 💫 Deploy Your Own
+
+Click the button below to deploy your own instance of AIFA v2.1 to Vercel:
+
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Faifa-agi%2Faifa-v2.1&project-name=aifa-v2-1&repository-name=aifa-v2.1">
+  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
+</a>
+
+### ⭐ Star History
+
+<a href="https://star-history.com/#aifa-agi/aifa-v2.1&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=aifa-agi/aifa-v2.1&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=aifa-agi/aifa-v2.1&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=aifa-agi/aifa-v2.1&type=Date" />
+  </picture>
+</a>
+
+---
+
+### 🎯 If this template helped you, please consider:
+
+<a href="https://github.com/aifa-agi/aifa-v2.1/stargazers">
+  <img src="https://img.shields.io/github/stars/aifa-agi/aifa-v2.1?style=social" alt="GitHub Stars" />
+</a>
+
+**⭐ Star this repository** — It helps others discover the project!
+
+---
+
+<sub>Built with ❤️ by the AIFA team</sub>
+
+<sub>© 2025 AIFA · Next.js 15 · App Router · AI-Ready Architecture</sub>
+
+</div>
+```
+
+
+
