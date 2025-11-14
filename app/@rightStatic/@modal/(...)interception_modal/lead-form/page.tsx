@@ -21,7 +21,7 @@ type ApiResponse = {
 };
 
 export default function LeadFormModal() {
-  console.log("(...)interception_modal/lead-form/page.tsx loaded");
+  console.log("(...)interception_modal/lead-form/page.tsx loaded"); 
 
   const router = useRouter();
   const { t } = getModalTranslation();
