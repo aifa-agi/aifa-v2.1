@@ -1,7 +1,8 @@
 // @/aifa-v2/types/page-types.ts
 import { Metadata } from "next";
-import { BadgeName } from "@/config/pages-config/badges/badge-config";
+
 import { UserType } from "./user-type";
+import { BadgeName } from "@/config/pages-config/badges /badge-config";
 
 
 export interface LinksData {
