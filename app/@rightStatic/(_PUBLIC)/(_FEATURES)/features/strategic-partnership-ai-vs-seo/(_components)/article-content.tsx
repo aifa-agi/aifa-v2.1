@@ -121,8 +121,8 @@ export default function Page() {
         variant: "feature",
         breadcrumbs: [
           { name: "Home", path: "/home" },
-          { name: "Docs", path: "/docs" },
-          { name: "Strategic Partnership AI || SEO", path: "/docs/strategic-partnership-ai-vs-seo" },
+          { name: "Docs", path: "/features" },
+          { name: "Strategic Partnership AI || SEO", path: "/features/strategic-partnership-ai-vs-seo" },
         ],
         badges: [
           { text: "Next.js 15" },
@@ -186,7 +186,7 @@ export default function ChatDrawerModal() {
 export const DOCS_PAGES = [
   {
     id: "news-002-partnership",
-    href: "/docs/strategic-partnership-ai-vs-seo",
+    href: "/features/strategic-partnership-ai-vs-seo",
     order: 2,
     title: "Strategic Partnership AI || SEO",
     description:

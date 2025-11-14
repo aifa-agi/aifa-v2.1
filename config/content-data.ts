@@ -211,7 +211,7 @@ export const contentData = {
           "roles": ["guest"],
           "hasBadge": true,
           "type": "feature",
-          "isPublished": false,
+          "isPublished": true,
           "isAddedToPrompt": false,
           "isVectorConnected": false,
           "isChatSynchronized": false,
