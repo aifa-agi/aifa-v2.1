@@ -153,7 +153,7 @@ const PAGE_CONFIG: PageWrapperConfig = {
   showTopFeatures: true,
 blockquote: {
     text:
-' Modern web development demands a delicate balance: blazing-fast performance for users and maximum visibility for search engines. <strong>Static Generation</strong> (SSG) solves this challenge by pre-rendering HTML at build time, delivering instant page loads while ensuring search engines see complete, crawlable content.'  
+' Modern web development demands a delicate balance: blazing-fast performance for users and maximum visibility for search engines. Static Generation (SSG) solves this challenge by pre-rendering HTML at build time, delivering instant page loads while ensuring search engines see complete, crawlable content.'  
 },
   faqs: [
     {
