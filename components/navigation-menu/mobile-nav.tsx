@@ -166,6 +166,8 @@ export function MobileNav({ categories, className }: MobileNavProps) {
                   width={96}
                   height={96}
                   className="h-24 w-24 object-cover rounded-md"
+                  priority={false}
+                  placeholder="blur"
                 />
               </div>
               <div className="mb-2 text-base font-medium text-left capitalize">

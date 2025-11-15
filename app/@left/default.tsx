@@ -31,7 +31,8 @@ export default function DefaultPage() {
             alt={appConfig.description}
             width={400}
             height={400}
-            priority
+           priority={false}
+                  placeholder="blur"
             className="rounded-lg object-cover dark:block hidden"
           />
         )}
@@ -43,7 +44,8 @@ export default function DefaultPage() {
             alt={appConfig.description}
             width={400}
             height={400}
-            priority
+            priority={false}
+                  placeholder="blur"
             className="rounded-lg object-cover dark:hidden block"
           />
         )}

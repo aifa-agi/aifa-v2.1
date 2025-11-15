@@ -87,6 +87,8 @@ export function MainNav({ items, className }: MainNavProps) {
                               width={128}
                               height={128}
                               className="h-[128px] w-[128px] object-cover"
+                              priority={false}
+                  placeholder="blur"
                             />
                           </div>
                           <div className="mb-2 text-lg font-medium text-left capitalize">

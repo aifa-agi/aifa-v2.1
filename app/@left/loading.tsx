@@ -23,7 +23,8 @@ export default function LoadingPage() {
           alt="Loading illustration"
           width={400}
           height={400}
-          priority
+         priority={false}
+                  placeholder="blur"
           className="pointer-events-none mb-5 mt-6 dark:block hidden"
         />
       )}
@@ -35,7 +36,8 @@ export default function LoadingPage() {
           alt="Loading illustration"
           width={400}
           height={400}
-          priority
+          priority={false}
+                  placeholder="blur"
           className="pointer-events-none mb-5 mt-6 dark:hidden block"
         />
       )}
