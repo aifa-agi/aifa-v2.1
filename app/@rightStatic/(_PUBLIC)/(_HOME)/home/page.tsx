@@ -213,7 +213,7 @@ export default function Page() {
             Lighthouse Performance Highlights
           </h2>
           <Card className='p-4'>
-          <Image src={"/images/seo-research-aifa.png"} alt="images/seo-research-aifa" width={800} height={450} priority={false}  />
+          <Image src={"/images/parallel-routing-aifa.png"} alt="images/seo-research-aifa" width={800} height={450} priority={false}  />
         </Card></section>
       </SeoPageWrapper>
     </>

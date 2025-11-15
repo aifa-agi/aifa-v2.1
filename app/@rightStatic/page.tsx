@@ -7,6 +7,8 @@ import HomePageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/home/(_compo
 import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
 import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 import { HOME_PAGE_CONFIG } from './(_PUBLIC)/(_HOME)/home/page';
+import { Card } from '@/components/ui/card';
+import Image from 'next/image';
 
 // ============================================================================
 // META CONFIGURATION
@@ -123,6 +125,13 @@ export default function Page() {
       {/* UI Wrapper Component */}
       <SeoPageWrapper config={HOME_PAGE_CONFIG}>
         <HomePageComponent />
+         <section className="mb-12" aria-labelledby="top-features-section">
+          <h2 id="top-features-section" className="text-2xl font-bold tracking-tight mb-2">
+            Lighthouse Performance Highlights
+          </h2>
+          <Card className='p-4'>
+          <Image src={"/images/parallel-routing-aifa.png"} alt="images/seo-research-aifa" width={800} height={450} priority={false}  />
+        </Card></section>
       </SeoPageWrapper>
     </>
   );
