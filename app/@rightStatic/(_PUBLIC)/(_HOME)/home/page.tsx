@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 import ArticleContent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/home/(_components)/article-content';
 import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
 import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
+import Image from 'next/image';
+import { Card } from '@/components/ui/card';
 
 // ============================================================================
 // META CONFIGURATION
@@ -87,11 +89,11 @@ function buildWebSiteJsonLd() {
 
 export const HOME_PAGE_CONFIG: PageWrapperConfig = {
   topSpacing: 80,
-  variant:"landing",
+  variant: "landing",
   breadcrumbs: [
     { name: 'Home', path: '/' },
   ],
-  
+
   badges: [
     { text: 'Advanced Routing' },
     { text: 'AIFA AI || SEO' },
@@ -108,7 +110,7 @@ export const HOME_PAGE_CONFIG: PageWrapperConfig = {
     { text: 'Cookie-banner' },
   ],
   showBadges: true,
-  
+
   hero: {
     title: `AI SEO Next.js Starter with Advanced App Router — ${appConfig.short_name}`,
     subtitle: 'Production-ready template combining AI chat capabilities with comprehensive advanced routing tutorial. Built with focus on maximum SEO optimization, PWA functionality, and hybrid rendering (Static + Dynamic generation) with role-based access control.',
@@ -153,14 +155,14 @@ export const HOME_PAGE_CONFIG: PageWrapperConfig = {
       title: 'PWA',
       description: 'Include',
     },
-    
+
   ],
 
-   blockquote: {
+  blockquote: {
     text:
       'This starter allows you to dive deep into the advanced routing capabilities of the Next.js App Router. With built-in support for parallel routes, you can now create what once seemed impossible: dynamic SPA interfaces can coexist alongside highly optimized SEO-friendly content that works even with JavaScript disabled. All core routing features are already configured and fine-tuned — all that’s left is to plug in your own components. In just a few minutes, you can build a unique application where artificial intelligence and search optimization work in perfect synergy, delivering maximum efficiency and a cutting-edge user experience.',
   },
-  
+
   faqs: [
     {
       question: 'Is this AIFA project the only AIFA template available?',
@@ -206,6 +208,13 @@ export default function Page() {
       {/* UI Wrapper Component */}
       <SeoPageWrapper config={HOME_PAGE_CONFIG}>
         <ArticleContent />
+        <section className="mb-12" aria-labelledby="top-features-section">
+          <h2 id="top-features-section" className="text-2xl font-bold tracking-tight mb-2">
+            Lighthouse Performance Highlights
+          </h2>
+          <Card className='p-4'>
+          <Image src={"/images/seo-research-aifa.png"} alt="images/seo-research-aifa" width={800} height={450} priority={false}  />
+        </Card></section>
       </SeoPageWrapper>
     </>
   );

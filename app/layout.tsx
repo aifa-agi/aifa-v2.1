@@ -214,15 +214,15 @@ export default async function RootLayout({
           </div>
         </noscript>
 
-        {/* <CookieBanner /> */}
+        <CookieBanner />
         {process.env.NODE_ENV === "development" && (
         <TailwindIndicator />)}
         <Toaster position="top-center" />
-        {/* {process.env.NODE_ENV === "production" && (
+        {process.env.NODE_ENV === "production" && (
           <GoogleAnalytics
             gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!}
           />
-        )} */}
+        )}
       </body>
     </html>
   )

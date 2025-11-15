@@ -24,7 +24,6 @@ export default function LoadingPage() {
           width={400}
           height={400}
          priority={false}
-                  placeholder="blur"
           className="pointer-events-none mb-5 mt-6 dark:block hidden"
         />
       )}
@@ -37,7 +36,6 @@ export default function LoadingPage() {
           width={400}
           height={400}
           priority={false}
-                  placeholder="blur"
           className="pointer-events-none mb-5 mt-6 dark:hidden block"
         />
       )}

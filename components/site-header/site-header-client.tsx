@@ -80,8 +80,7 @@ const PWAInstallPrompt = dynamic(
                   width={32}
                   height={32}
                   className="h-8 w-8 rounded-full"
-                  priority={false}
-                  placeholder="blur"
+                 
                 />
                 <span className="inline-block text-sm font-semibold text-white md:text-base">
                   {appConfig.short_name}
@@ -92,8 +91,6 @@ const PWAInstallPrompt = dynamic(
                   alt={`${appConfig.name} image`}
                   width={32}
                   height={32}
-                  priority={false}
-                  placeholder="blur"
                   className="h-8 w-8 rounded-full"
                 />
                 <span className="inline-block text-sm font-semibold text-white md:text-base">

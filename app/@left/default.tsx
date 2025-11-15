@@ -32,7 +32,6 @@ export default function DefaultPage() {
             width={400}
             height={400}
            priority={false}
-                  placeholder="blur"
             className="rounded-lg object-cover dark:block hidden"
           />
         )}
@@ -45,7 +44,6 @@ export default function DefaultPage() {
             width={400}
             height={400}
             priority={false}
-                  placeholder="blur"
             className="rounded-lg object-cover dark:hidden block"
           />
         )}
