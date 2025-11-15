@@ -14,7 +14,7 @@ export function GitHubLink() {
       variant="ghost"
       className="h-8 text-white/70 shadow-none hover:bg-white/10 hover:text-white"
     >
-      <Link href={appConfig.seo.social?.github || "/"} target="_blank" rel="noreferrer">
+      <Link href={appConfig.seo.social?.github || "/"}  aria-label="Visit the GitHub repository of AIFA project" target="_blank" rel="noreferrer">
         <Icons.gitHub />
         
       </Link>
