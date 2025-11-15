@@ -3,12 +3,14 @@
 import { constructMetadata } from '@/lib/construct-metadata';
 import { appConfig } from '@/config/app-config';
 import type { Metadata } from 'next';
-import HomePageComponent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/home/(_components)/article-content';
-import { PageWrapperConfig, SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
+import ArticleContent from '@/app/@rightStatic/(_PUBLIC)/(_HOME)/home/(_components)/article-content';
+import {  SeoPageWrapper } from '@/components/seo-page-wrapper/seo-page-wrapper';
 import { StructuredDataWrapper } from '@/components/seo-page-wrapper/structured-data-wrapper';
 import { HOME_PAGE_CONFIG } from './(_PUBLIC)/(_HOME)/home/page';
 import { Card } from '@/components/ui/card';
 import Image from 'next/image';
+import { AIFA_ROADMAP_ITEMS } from '@/config/pages-config/aifa-roadmap-data';
+import { AifaRoadmap } from '@/components/aifa-roadmap';
 
 // ============================================================================
 // META CONFIGURATION
@@ -124,14 +126,16 @@ export default function Page() {
 
       {/* UI Wrapper Component */}
       <SeoPageWrapper config={HOME_PAGE_CONFIG}>
-        <HomePageComponent />
-         <section className="mb-12" aria-labelledby="top-features-section">
+        <section className="mb-12" aria-labelledby="top-features-section">
           <h2 id="top-features-section" className="text-2xl font-bold tracking-tight mb-2">
             Lighthouse Performance Highlights
           </h2>
           <Card className='p-4'>
-          <Image src={"/images/parallel-routing-aifa.png"} alt="images/seo-research-aifa" width={800} height={450} priority={false}  />
-        </Card></section>
+            <Image src={"/images/parallel-routing-aifa.png"} alt="images/seo-research-aifa" width={800} height={450} priority={false} className='w-full'/>
+          </Card>
+        </section>
+        <ArticleContent />
+        <AifaRoadmap items={AIFA_ROADMAP_ITEMS} />
       </SeoPageWrapper>
     </>
   );
