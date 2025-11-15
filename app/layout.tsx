@@ -214,7 +214,7 @@ export default async function RootLayout({
           </div>
         </noscript>
 
-        <CookieBanner />
+        {/* <CookieBanner /> */}
         {process.env.NODE_ENV === "development" && (
         <TailwindIndicator />)}
         <Toaster position="top-center" />
