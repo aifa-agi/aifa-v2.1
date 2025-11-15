@@ -57,7 +57,7 @@ const PAGE_CONFIG: PageWrapperConfig = {
     },
     author: {
       name: "Roman Bolshiyanov (Armstrong)",
-      role: "AI / Web3 / Next Architect",
+      role: 'AI / Web3 / SEO / Next Architect',
       avatar: appConfig.logo
     },
     cta: {

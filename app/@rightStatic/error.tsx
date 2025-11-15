@@ -32,7 +32,8 @@ export default function Error({ error, reset }: ErrorProps) {
           width={400}
           height={300}
           className="h-auto w-full"
-          priority
+        priority={false}
+                  placeholder="blur"
         />
       </div>
 
