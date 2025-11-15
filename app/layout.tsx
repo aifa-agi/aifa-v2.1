@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { constructMetadata } from '@/lib/construct-metadata'
 import { META_THEME_COLORS, appConfig } from '@/config/app-config'
 import { fontVariables } from "@/lib/fonts"
-import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
 import './styles/globals.css'
 import { Toaster } from "sonner";
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
@@ -13,13 +12,17 @@ import { cn } from '@/lib/utils'
 import { ActiveThemeProvider } from '@/providers/active-theme'
 import { ThemeProvider } from '@/providers/theme-provider'
 import { LayoutProvider } from '@/hooks/use-layout'
-import { Analytics } from '@vercel/analytics/next'
 import { SiteHeader } from '@/components/site-header/site-header-wrapper'
 import AifaFooter from '@/components/aifa-footer'
+import dynamic from 'next/dynamic'
 
 export const metadata: Metadata = constructMetadata({
   pathname: '/',
 })
+const PWAInstallPrompt = dynamic(
+  () => import('@/components/pwa-install-prompt').then(mod => mod.PWAInstallPrompt),
+  { ssr: false } 
+)
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -116,55 +119,6 @@ export default async function RootLayout({
           }}
         />
 
-        {/**
-         * CRITICAL: Google Consent Mode V2 - Default Consent State
-         * 
-         * This script MUST be loaded BEFORE any Google tracking scripts (GoogleAnalytics, GTM, etc.)
-         * 
-         * How it works:
-         * 1. Initializes window.dataLayer array if it doesn't exist
-         *    - dataLayer is Google's communication layer between your site and Google services
-         * 
-         * 2. Defines gtag() function that pushes events to dataLayer
-         *    - gtag is a unified API for all Google measurement products
-         * 
-         * 3. Sets DEFAULT consent state to 'denied' for all categories
-         *    - This prevents Google from setting third-party cookies UNTIL user gives consent
-         *    - Required for GDPR/ePrivacy compliance in EU
-         * 
-         * Parameters explained:
-         * - analytics_storage: Controls cookies used for analytics (e.g., _ga, _gid)
-         * - ad_storage: Controls cookies used for advertising (e.g., conversion tracking)
-         * - ad_user_data: Controls sending user data to Google for advertising purposes
-         * - ad_personalization: Controls personalized advertising (remarketing, custom audiences)
-         * - wait_for_update: Waits 500ms for CMP (Cookie Banner) to load before firing tags
-         *   - Ensures consent is captured before any tags fire
-         *   - Prevents "race condition" where tags fire before consent banner loads
-         * 
-         * Why 'denied' by default:
-         * - Under GDPR, you MUST get explicit consent BEFORE setting non-essential cookies
-         * - Setting to 'denied' means Google Analytics will:
-         *   1. NOT set cookies
-         *   2. Use cookieless pings for basic measurement
-         *   3. Use conversion modeling instead of individual tracking
-         * - When user accepts cookies, CookieBanner will call gtag('consent', 'update', {analytics_storage: 'granted'})
-         *   and Google will then start setting cookies
-         * 
-         * Technical flow:
-         * 1. Page loads → this script runs → consent is 'denied'
-         * 2. CookieBanner loads (checks localStorage for existing consent)
-         * 3. If no consent exists, banner shows
-         * 4. User clicks "Accept" → CookieBanner calls gtag('consent', 'update') → consent changes to 'granted'
-         * 5. Google Analytics then sets cookies and starts full tracking
-         * 
-         * Production-only because:
-         * - In development, you don't need GDPR compliance
-         * - Avoids cluttering dev console with consent mode events
-         * 
-         * References:
-         * - https://developers.google.com/tag-platform/security/guides/consent
-         * - https://support.google.com/analytics/answer/9976101
-         */}
         {process.env.NODE_ENV === "production" && (
           <script
             dangerouslySetInnerHTML={{
@@ -235,25 +189,8 @@ export default async function RootLayout({
                 <AifaFooter />
               </div>
 
-              {/**
-               * Vercel Analytics
-               * 
-               * How it works:
-               * - Uses Vercel's built-in analytics (not Google Analytics)
-               * - Does NOT use cookies at all - completely cookieless
-               * - Uses browser's Navigator.sendBeacon() API to send analytics data
-               * - Tracks page views, Web Vitals (CLS, FID, LCP), and custom events
-               * - Data is sent to Vercel's servers, not third-party domains
-               * 
-               * Why it doesn't trigger cookie warnings:
-               * - No cookies means no third-party cookie issues
-               * - Data is sent as first-party requests to Vercel
-               * - Compliant with GDPR without requiring consent banner
-               * 
-               * Note: This is separate from Google Analytics
-               * You can have both running simultaneously
-               */}
-              <Analytics />
+             
+              
             </ActiveThemeProvider>
           </LayoutProvider>
         </ThemeProvider>
@@ -291,34 +228,7 @@ export default async function RootLayout({
         <CookieBanner />
         <TailwindIndicator />
         <Toaster position="top-center" />
-        
-        {/**
-         * Google Analytics via @next/third-parties
-         * 
-         * How it works:
-         * - Loads AFTER the consent mode default script above
-         * - Initially respects 'denied' consent state (no cookies set)
-         * - When user accepts cookies via CookieBanner:
-         *   1. CookieBanner calls gtag('consent', 'update', {analytics_storage: 'granted'})
-         *   2. This component receives the 'granted' signal
-         *   3. Google Analytics then starts setting cookies (_ga, _gid, etc.)
-         * 
-         * Why @next/third-parties instead of manual implementation:
-         * - Automatically handles script loading optimization
-         * - Uses Next.js Script component with 'afterInteractive' strategy
-         * - Defers loading until page is interactive (better performance)
-         * - Handles CSP (Content Security Policy) headers automatically
-         * 
-         * Integration with CookieBanner:
-         * - This component listens to consent state changes via dataLayer
-         * - CookieBanner updates consent → this component reacts automatically
-         * - No manual integration needed - works via Google's consent API
-         * 
-         * Production-only because:
-         * - No need to track analytics in development
-         * - Keeps development environment clean
-         * - Avoids inflating analytics data with dev traffic
-         */}
+       
         {process.env.NODE_ENV === "production" && (
           <GoogleAnalytics
             gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!}
