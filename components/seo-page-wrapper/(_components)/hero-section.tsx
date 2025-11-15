@@ -97,7 +97,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   width={800}
                   height={450}
                   className="h-full w-full object-contain"
-                  priority
+                priority={false}
+  placeholder="blur"
                 />
               </div>
             </div>
@@ -174,7 +175,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   width={800}
                   height={450}
                   className="h-full w-full object-contain"
-                  priority
+                 priority={false}
+  placeholder="blur"
                 />
               </div>
             </div>
@@ -189,7 +191,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                 fill
                 sizes="56px"
                 className="object-cover"
-                priority
+               priority={false}
+  placeholder="blur"
               />
             </div>
             <div className="flex flex-col">
@@ -245,7 +248,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   width={800}
                   height={450}
                   className="h-full w-full object-contain"
-                  priority
+                 priority={false}
+  placeholder="blur"
                 />
               </div>
             </div>
@@ -260,7 +264,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                 fill
                 sizes="56px"
                 className="object-cover"
-                priority
+                priority={false}
+  placeholder="blur"
               />
             </div>
             <div className="flex flex-col">
@@ -316,7 +321,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   fill
                   sizes="56px"
                   className="object-cover"
-                  priority
+                  priority={false}
+  placeholder="blur"
                 />
               </div>
               <div className="flex flex-col">
@@ -357,7 +363,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   width={450}
                   height={800}
                   className="h-full w-full object-contain"
-                  priority
+                  priority={false}
+  placeholder="blur"
                 />
               </div>
             </div>
@@ -389,7 +396,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   width={800}
                   height={450}
                   className="h-full w-full object-contain"
-                  priority
+                 priority={false}
+  placeholder="blur"
                 />
               </div>
             </div>
@@ -404,7 +412,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                 fill
                 sizes="56px"
                 className="object-cover"
-                priority
+              priority={false}
+  placeholder="blur"
               />
             </div>
             <div className="flex flex-col">
@@ -460,7 +469,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   fill
                   sizes="56px"
                   className="object-cover"
-                  priority
+                 priority={false}
+  placeholder="blur"
                 />
               </div>
               <div className="flex flex-col">
@@ -501,7 +511,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   width={450}
                   height={800}
                   className="h-full w-full object-contain"
-                  priority
+                 priority={false}
+  placeholder="blur"
                 />
               </div>
             </div>
@@ -533,7 +544,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   fill
                   sizes="56px"
                   className="object-cover"
-                  priority
+                  priority={false}
+  placeholder="blur"
                 />
               </div>
               <div className="flex flex-col">
@@ -574,7 +586,8 @@ export function HeroSection({ config, show = true, variant  }: HeroSectionProps)
                   width={800}
                   height={800}
                   className="h-full w-full object-contain"
-                  priority
+                  priority={false}
+  placeholder="blur"
                 />
               </div>
             </div>
