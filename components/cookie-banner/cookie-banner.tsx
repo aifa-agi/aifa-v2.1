@@ -1,8 +1,4 @@
-//components/cookie-banner/cookie-banner.tsx
-
 "use client";
-
-
 
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
@@ -72,23 +68,59 @@ export function CookieBanner() {
     }
   }, []);
 
+  /**
+   * Apply user consent preferences to Google Analytics and Facebook Pixel
+   * This function uses the Google Consent Mode V2 API to dynamically update
+   * the consent state for analytics and advertising based on user choice
+   * 
+   * @param consentData - The user's consent preferences object
+   * 
+   * Why this is needed:
+   * - Google Consent Mode V2 requires explicit consent signals for GDPR compliance
+   * - It allows Google tags to adjust behavior based on user consent
+   * - Prevents third-party cookies from being set without user permission
+   * - Supports conversion modeling even when cookies are denied
+   */
   const applyConsent = (consentData: CookieConsent) => {
     // Extra guard; in client components window is available at runtime.
     if (typeof window === "undefined") return;
 
-    // Analytics consent (Google)
+    /**
+     * Analytics consent (Google Analytics via @next/third-parties)
+     * 
+     * How it works:
+     * - If user grants analytics consent, we call gtag('consent', 'update', {...})
+     * - This updates the consent state from 'denied' (default) to 'granted'
+     * - Google Analytics then starts collecting full measurement data
+     * - The 'analytics_storage' parameter controls cookie creation for analytics
+     * 
+     * Reference: https://developers.google.com/tag-platform/security/guides/consent
+     */
     if (consentData.analytics) {
       if (window.gtag && process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID) {
-        window.gtag("consent", "update", { analytics_storage: "granted" });
+        window.gtag("consent", "update", { 
+          analytics_storage: "granted" 
+        });
         window.gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID);
       }
     } else {
       if (window.gtag) {
-        window.gtag("consent", "update", { analytics_storage: "denied" });
+        window.gtag("consent", "update", { 
+          analytics_storage: "denied" 
+        });
       }
     }
 
-    // Marketing consent (Facebook Pixel)
+    /**
+     * Marketing consent (Facebook Pixel)
+     * 
+     * How it works:
+     * - Facebook Pixel respects the 'consent' API similar to Google
+     * - 'grant' allows Facebook to set cookies and track conversions
+     * - 'revoke' prevents Facebook from setting tracking cookies
+     * 
+     * Note: This requires Facebook Pixel to be initialized separately
+     */
     if (consentData.marketing) {
       if (window.fbq && process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID) {
         window.fbq("consent", "grant");
@@ -100,16 +132,49 @@ export function CookieBanner() {
     }
   };
 
+  /**
+   * Save user consent preferences to a first-party cookie
+   * 
+   * How it works:
+   * - Uses js-cookie library to create a consent cookie on your domain
+   * - This is a FIRST-PARTY cookie (not third-party) so it's not blocked by browsers
+   * - The cookie stores user preferences and is read on subsequent visits
+   * 
+   * Cookie attributes explained:
+   * - expires: Cookie lifetime in days (180 days = 6 months)
+   * - secure: Cookie only sent over HTTPS in production (prevents man-in-the-middle attacks)
+   * - sameSite: 'lax' allows cookie to be sent on top-level navigation (e.g., clicking links)
+   *   - 'strict' would block the cookie even on legitimate navigation
+   *   - 'lax' is the best balance between security and usability
+   *   - 'none' would require 'secure: true' and is only needed for cross-site embeds
+   * - path: '/' makes cookie available across entire site
+   * 
+   * Why 'lax' instead of 'strict':
+   * - 'strict' would break user experience if they click a link from email or external site
+   * - 'lax' still protects against CSRF attacks for state-changing requests (POST, PUT, DELETE)
+   * - For a consent cookie (read-only data), 'lax' is the recommended setting
+   * 
+   * Reference: https://web.dev/samesite-cookies-explained/
+   */
   const saveConsent = (consentData: CookieConsent) => {
     Cookies.set(COOKIE_CONSENT_KEY, JSON.stringify(consentData), {
       expires: CONSENT_EXPIRY_DAYS,
-      secure: true,
-      sameSite: "strict",
+      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+      sameSite: 'lax', // CHANGED from 'strict' - allows top-level navigation
+      path: '/' // Available across entire site
     });
 
+    // Apply the consent to third-party services
     applyConsent(consentData);
+    
+    // Hide the banner
     setIsVisible(false);
 
+    /**
+     * Send consent event to Google Tag Manager dataLayer
+     * This allows you to track consent changes in Google Analytics
+     * and trigger specific tags based on consent state
+     */
     if (typeof window !== "undefined" && window.dataLayer) {
       window.dataLayer.push({
         event: "cookie_consent_updated",
@@ -318,10 +383,11 @@ export function CookieBanner() {
                         onClick={() =>
                           setConsent((prev) => ({ ...prev, analytics: !prev.analytics }))
                         }
-                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${consent.analytics
+                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                          consent.analytics
                             ? "bg-blue-600 justify-end"
                             : "bg-gray-300 dark:bg-gray-600 justify-start"
-                          } flex items-center px-1`}
+                        } flex items-center px-1`}
                         aria-pressed={consent.analytics}
                         aria-label="Toggle analytics cookies"
                       >
@@ -348,10 +414,11 @@ export function CookieBanner() {
                         onClick={() =>
                           setConsent((prev) => ({ ...prev, marketing: !prev.marketing }))
                         }
-                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${consent.marketing
+                        className={`w-12 h-6 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+                          consent.marketing
                             ? "bg-purple-600 justify-end"
                             : "bg-gray-300 dark:bg-gray-600 justify-start"
-                          } flex items-center px-1`}
+                        } flex items-center px-1`}
                         aria-pressed={consent.marketing}
                         aria-label="Toggle marketing cookies"
                       >

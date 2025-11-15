@@ -1,5 +1,4 @@
-// @ts-check
- 
+//next.config.mjs
 export default () => {
   /**
    * @type {import('next').NextConfig}
