@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { constructMetadata } from '@/lib/construct-metadata'
 import { META_THEME_COLORS, appConfig } from '@/config/app-config'
 import { fontVariables } from "@/lib/fonts"
-import { PWAInstallPrompt } from '@/components/pwa-install-prompt'
 import './styles/globals.css'
 import { Toaster } from "sonner";
 import { CookieBanner } from '@/components/cookie-banner/cookie-banner'
@@ -164,7 +163,7 @@ export default async function RootLayout({
          * - https://developers.google.com/tag-platform/security/guides/consent
          * - https://support.google.com/analytics/answer/9976101
          */}
-        {process.env.NODE_ENV === "production" && (
+        {/* {process.env.NODE_ENV === "production" && (
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -180,7 +179,7 @@ export default async function RootLayout({
               `,
             }}
           />
-        )}
+        )} */}
 
         {/* JSON-LD schemas for SEO - MOVED TO HEAD with native script tags */}
         <script
@@ -202,9 +201,7 @@ export default async function RootLayout({
           fontVariables
         )}
       >
-        {process.env.NODE_ENV === "production" && (
-          <PWAInstallPrompt />
-        )}
+       
 
         <ThemeProvider>
           <LayoutProvider>
