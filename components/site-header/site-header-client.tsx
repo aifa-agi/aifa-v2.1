@@ -14,6 +14,7 @@ import { contentData } from "@/config/content-data"
 import { initAuthState, useAuth } from "@/app/@left/(_AUTH)/login/(_client)/(_hooks)/use-auth-state"
 import { usePathname } from "next/navigation"
 import { MobailCloseChatButton } from "./mobail-close-chat-button"
+import dynamic from "next/dynamic"
 
 interface SiteHeaderClientProps {
   initialAuth: boolean
@@ -38,7 +39,10 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
   const { isAuthenticated } = useAuth()
   const pathname = usePathname()
   const [shouldShowCloseChat, setShouldShowCloseChat] = React.useState(false)
-
+const PWAInstallPrompt = dynamic(
+  () => import('@/components/pwa-install-prompt').then(mod => mod.PWAInstallPrompt),
+  { ssr: false } 
+)
   React.useEffect(() => {
   const update = () => {
     const current = typeof window !== 'undefined' ? window.location.pathname : pathname
@@ -131,6 +135,10 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
           </div>
         </div>
       </div>
+      {process.env.NODE_ENV === "production" && (
+                <PWAInstallPrompt />
+              )}
+      
     </header>
   )
 }

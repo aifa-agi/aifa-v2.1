@@ -19,10 +19,7 @@ import dynamic from 'next/dynamic'
 export const metadata: Metadata = constructMetadata({
   pathname: '/',
 })
-const PWAInstallPrompt = dynamic(
-  () => import('@/components/pwa-install-prompt').then(mod => mod.PWAInstallPrompt),
-  { ssr: false } 
-)
+
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -157,10 +154,7 @@ export default async function RootLayout({
           fontVariables
         )}
       >
-        {process.env.NODE_ENV === "production" && (
-          <PWAInstallPrompt />
-        )}
-
+        
         <ThemeProvider>
           <LayoutProvider>
             <ActiveThemeProvider>
