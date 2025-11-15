@@ -39,10 +39,10 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
   const { isAuthenticated } = useAuth()
   const pathname = usePathname()
   const [shouldShowCloseChat, setShouldShowCloseChat] = React.useState(false)
-// const PWAInstallPrompt = dynamic(
-//   () => import('@/components/pwa-install-prompt').then(mod => mod.PWAInstallPrompt),
-//   { ssr: false } 
-// )
+const PWAInstallPrompt = dynamic(
+  () => import('@/components/pwa-install-prompt').then(mod => mod.PWAInstallPrompt),
+  { ssr: false } 
+)
   React.useEffect(() => {
   const update = () => {
     const current = typeof window !== 'undefined' ? window.location.pathname : pathname
@@ -139,9 +139,9 @@ export function SiteHeaderClient({ initialAuth }: SiteHeaderClientProps) {
           </div>
         </div>
       </div>
-      {/* {process.env.NODE_ENV === "production" && (
+      {process.env.NODE_ENV === "production" && (
                 <PWAInstallPrompt />
-              )} */}
+              )}
       
     </header>
   )

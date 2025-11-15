@@ -179,7 +179,7 @@ export default async function RootLayout({
                 <AifaFooter />
               </div>
 
-              <Analytics />
+              
             </ActiveThemeProvider>
           </LayoutProvider>
         </ThemeProvider>
@@ -215,13 +215,14 @@ export default async function RootLayout({
         </noscript>
 
         <CookieBanner />
-        <TailwindIndicator />
+        {process.env.NODE_ENV === "development" && (
+        <TailwindIndicator />)}
         <Toaster position="top-center" />
-        {process.env.NODE_ENV === "production" && (
+        {/* {process.env.NODE_ENV === "production" && (
           <GoogleAnalytics
             gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!}
           />
-        )}
+        )} */}
       </body>
     </html>
   )
