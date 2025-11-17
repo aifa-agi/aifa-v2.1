@@ -100,6 +100,7 @@ export function SeoPageWrapper({ config, children }: SeoPageWrapperProps) {
       </main>
     </div>
   );
+  
 }
 
 // Re-export types for convenience
